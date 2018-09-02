@@ -72,6 +72,10 @@ Goals for Week 1 of class:
 **Team Goals for next week:**
 
 _Where do we want the project to be next week?_
+* Solicit advice and suggestions from professor and other teams
+* Determine project's Minimal Viable Product
+  * Identify features to include in first few sprints
+* Create first draft Development Plan
 
 **Individual Goals**
 
