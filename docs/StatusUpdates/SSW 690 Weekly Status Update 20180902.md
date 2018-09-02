@@ -1,7 +1,7 @@
 **SSW 690 Weekly Status Update (one submission per team)**
 **_Due at start of class each week for discussion in class_**
 
-**Team** : _Back Seat Drivers_         Team Vision (Team A)
+**Team** : Team _Back Seat Drivers_
 
 **Week Ending: 9/2/18 (Sun)** – Week 1 of class
 
@@ -60,6 +60,11 @@ Goals for Week 1 of class:
 **Issues, Risks, and Opportunities:**
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
+  * Raspberri Pi may not have sufficient processing power for this application
+  * Not all team members have Android devices
+    * Multiple configurations could make implementation and testing more difficult
+  * Team will have to become familiar with the development environment in a short time
+  * Need to take care when editing non-mergeable files, e.g. PowerPoint presentations
 * _What new opportunities did you discover, if any?_
 
 **Action Items/Goals for next week:**
