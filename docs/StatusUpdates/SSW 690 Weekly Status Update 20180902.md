@@ -50,7 +50,12 @@ Goals for Week 1 of class:
 **Rakshith:**
 
 * _What did I work on?_
+  * Familiarized with traffic video products in the market to understand potential features
+  * Updated slide on extensibility for team presentation
+  * Researched to get familiarization with raspberry pi development environment
 * _What did I accomplish?_
+  * Completed initial research on rasspberry pi development environment
+  * Updated team presentation slides
 
 **Issues, Risks, and Opportunities:**
 
@@ -80,6 +85,8 @@ _Where do we want the project to be next week?_
 **Rakshith:**
 
 - _What do you plan to work on and accomplish in the next week?_
+  * Help complete decision on what should be the target environment
+  * Order parts for the target environment
 
 **Other Comments:**
 
