@@ -31,13 +31,13 @@ _I pledge on my honor that I have not given or received any unauthorized assista
     * Adam
 
 2. Choose a project area that your team will deliver by the end of term.   We will discuss several alternatives in the first class but you may also choose your own topic.
-  * Project: Computer Vision Driving Aid
+  * Project: **Computer Vision Driving Aid**
 
 3. Create a project space on github.com for your team&#39;s project.
   * GitHub Repository: [https://github.com/Scarabyte/SSW690-Project/](https://github.com/Scarabyte/SSW690-Project/)
 
 4. Create a brief 10-15 minute presentation that describes your project including the topic, the customers, and a few of the impacts your software project will have on its customers, i.e. how does your project make the world a better place?   Each team will present their project proposal to the class at the second lecture.
-  * \&lt;Presentation in progress\&gt;
+  * Presentation is available at [Computer Vision Driving Aids Project Overview.pptx](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/Presentations/Computer%20Vision%20Driving%20Aids%20Project%20Overview.pptx)
 
 5. Identify how and when your team will interact and work together, e.g. will you meet in person on Monday evening at 8:00 PM or will you meet online with Slack, Google Hangouts, etc.?
 * Meeting schedule:
@@ -45,8 +45,9 @@ _I pledge on my honor that I have not given or received any unauthorized assista
     * Thursday - good for everyone (after 7 PM). 7 - 9 PM
     * Sunday - short &quot;standup&quot; type meeting. 7 to 7:30 PM
       * Complete the weekly status report.
-* Meeting room: [https://meet.google.com/gim-ikje-gcg](https://meet.google.com/gim-ikje-gcg)
+* Meeting room: SSW690 Google Meet room provided by Prof. Rowland
 * Whatsapp for messaging between meetings
+* Email for longer messages
 
 6. Add your presentation materials to your team&#39;s GitHub project repository.
-  * Presentation (draft) is on GitHub [https://github.com/Scarabyte/SSW690-Project/blob/master/docs/Presentations/Computer%20Vision%20Driving%20Aids%20Project%20Overview.pptx](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/Presentations/Computer%20Vision%20Driving%20Aids%20Project%20Overview.pptx)
+  * Presentation is on GitHub [https://github.com/Scarabyte/SSW690-Project/blob/master/docs/Presentations/](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/Presentations/)
