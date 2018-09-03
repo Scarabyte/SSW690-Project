@@ -1,28 +1,28 @@
-**SSW 690 Weekly Status Update (one submission per team)**
-**_Due at start of class each week for discussion in class_**
+## SSW 690 Weekly Status Update
 
-**Team** : Team _Back Seat Drivers_
+### Team : _Back Seat Drivers_
 
-**Week Ending: 9/2/18 (Sun)** – Week 1 of class
+### Week Ending: 9/2/18 (Sun) – Week 1 of class
 
-**Project Status: (Green, yellow, red)**
+### Project Status: (Green, yellow, red)
 
 _One word assessment of how is the team doing relative to the schedule?_
 
 Green
 
-**Team Status Summary:**  **Where are we now?**
+### Team Status Summary: Where are we now?
 
 _One or two sentences describing high level project status and progress._
 
 Goals for Week 1 of class:
 * Brainstorm project ideas, identify high-level features and functionality
+* Investigate feasibility of Android and Raspberry Pi platforms
 * Research tools to use for project management
 * Develop initial presentation for next class
 
-**Last week&#39;s activities by team member:**
+### Last week&#39;s activities by team member:
 
-**Adam:**
+#### Adam:
 
 * _What did I work on?_
   * Team set up
@@ -35,7 +35,7 @@ Goals for Week 1 of class:
   * Researched Raspberry Pi and Android app development environment
   * Work on initial presentation
 
-**Sapana:**
+#### Sapana:
 
 * _What did I work on?_
   * Reached out to remote students to form a team
@@ -48,14 +48,26 @@ Goals for Week 1 of class:
   * Created Team A on Canvas 
   * Updated Customer, Stakeholders and Impact slides of week 1 presentation
 
-**Keith:**
+#### Keith:
 
 * _What did I work on?_
-  * (AB: For development tools, I believe you found and proposed the ZenHub tool)
+  * Researched project management tools
+    * ZenHub extension for GitHub (currently in use)
+    * Polarion ALM for broader capabilities (alternate)
+  * Evaluation of Android platform and development tools
+  * Researched OpenCV
+  * Researched ADAS classifications and techniques
+  * Project Proposal Presentation
 * _What did I accomplish?_
-  * (AB: You had the main idea for the computer vision system; created first draft of the initial presentation)
+  * Communicated with Siemens for a dedicated/free project space in Polarion ALM for the project
+  * Android feasibility
+    * Loaded Android Studio
+    * Performed the "My First App" tutorial and ran the Android App on my phone
+    * Downloaded and integrated OpenCV library (app failed to run, though)
+  * Drafted framework of project proposal presentation
+    * Documented system block diagram, safety & reliability slides
 
-**Rakshith:**
+#### Rakshith:
 
 * _What did I work on?_
   * Familiarized with traffic video products in the market to understand potential features
@@ -65,20 +77,21 @@ Goals for Week 1 of class:
   * Completed initial research on raspberry pi development environment
   * Updated team presentation slides
 
-**Issues, Risks, and Opportunities:**
+### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
   * Raspberri Pi may not have sufficient processing power for this application
   * Not all team members have Android devices
     * Multiple configurations could make implementation and testing more difficult
   * Team will have to become familiar with the development environment in a short time
+    * Initial integration of OpenCV library with Android app failed
   * Need to take care when editing non-mergeable files, e.g. PowerPoint presentations
 * _What new opportunities did you discover, if any?_
   * Both proposed targets will be new development environments for the team
 
-**Action Items/Goals for next week:**
+### Action Items/Goals for next week:
 
-**Team Goals for next week:**
+#### Team Goals for next week:
 
 _Where do we want the project to be next week?_
 * Solicit advice and suggestions from professor and other teams
@@ -87,33 +100,37 @@ _Where do we want the project to be next week?_
   * Identify features to include in first few sprints
 * Create first draft Development Plan
 
-**Individual Goals**
+#### Individual Goals
 
-**Adam:**
+##### Adam:
 
 - _What do you plan to work on and accomplish in the next week?_
   * Help team make final decision about target environment
   * Identify initial set of user stories and requirements
   * Work on development plan
 
-**Sapana:**
+##### Sapana:
 
 - _What do you plan to work on and accomplish in the next week?_
   * Download Android studio environment and start playing with it
   * Identify high level user stories and requirements
   * Help with development plan
 
-**Keith:**
+##### Keith:
 
 - _What do you plan to work on and accomplish in the next week?_
+  * Continue exploring and advancing Android development
+  * Research ADAS algorithms
+  * Develop user requirements/stories
+  * Assist with development plan
 
-**Rakshith:**
+##### Rakshith:
 
 - _What do you plan to work on and accomplish in the next week?_
   * Help complete decision on what should be the target environment
   * Order parts for the target environment
 
-**Other Comments:**
+### Other Comments:
 
 _Any other relevant information to help us to manage the project and keep our customer informed and happy._
   * Likely not enough time in the semester to complete all three major functions identified in the intial presentation;
