@@ -33,7 +33,7 @@ Goals for Week 1 of class:
   * Created GitHub respository, shared with team; arranged team meetings
   * Discussed Computer Vision project proposal with team
   * Researched Raspberry Pi and Android app development environment
-  * Work on initial presentation (assigned Issues #4 and #5)
+  * Work on initial presentation
 
 **Sapana:**
 
@@ -54,7 +54,7 @@ Goals for Week 1 of class:
   * Updated slide on extensibility for team presentation
   * Researched to get familiarization with raspberry pi development environment
 * _What did I accomplish?_
-  * Completed initial research on rasspberry pi development environment
+  * Completed initial research on raspberry pi development environment
   * Updated team presentation slides
 
 **Issues, Risks, and Opportunities:**
@@ -66,6 +66,7 @@ Goals for Week 1 of class:
   * Team will have to become familiar with the development environment in a short time
   * Need to take care when editing non-mergeable files, e.g. PowerPoint presentations
 * _What new opportunities did you discover, if any?_
+  * Both proposed targets will be new development environments for the team
 
 **Action Items/Goals for next week:**
 
@@ -73,6 +74,7 @@ Goals for Week 1 of class:
 
 _Where do we want the project to be next week?_
 * Solicit advice and suggestions from professor and other teams
+  * Identify target environment - Android or R-Pi?
 * Determine project's Minimal Viable Product
   * Identify features to include in first few sprints
 * Create first draft Development Plan
@@ -82,6 +84,9 @@ _Where do we want the project to be next week?_
 **Adam:**
 
 - _What do you plan to work on and accomplish in the next week?_
+  * Help team make final decision about target environment
+  * Identify initial set of user stories and requirements
+  * Work on development plan
 
 **Sapana:**
 
@@ -100,3 +105,5 @@ _Where do we want the project to be next week?_
 **Other Comments:**
 
 _Any other relevant information to help us to manage the project and keep our customer informed and happy._
+  * Likely not enough time in the semester to complete all three major functions identified in the intial presentation;
+    may have to settle for just one or two (customer feedback: which is the most important?)
