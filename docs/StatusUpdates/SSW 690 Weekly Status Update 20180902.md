@@ -1,4 +1,4 @@
-## SSW 690 Weekly Status Update
+## SSW 690 Weekly Status Update 
 
 ### Team : _Back Seat Drivers_
 
@@ -8,7 +8,7 @@
 
 _One word assessment of how is the team doing relative to the schedule?_
 
-Green
+![Green](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/StatusUpdates/status_green.png) Green
 
 ### Team Status Summary: Where are we now?
 
