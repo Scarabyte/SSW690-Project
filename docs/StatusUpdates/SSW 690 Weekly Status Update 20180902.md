@@ -38,7 +38,15 @@ Goals for Week 1 of class:
 **Sapana:**
 
 * _What did I work on?_
+  * Reached out to remote students to form a team
+  * Started reaserch on computer vision applications 
+  * Initial presentation
+  * Attended all team meetings
 * _What did I accomplish?_
+  * Set up WhatsApp account for quick team communication
+  * Created project/swimlanes in Github
+  * Created Team A on Canvas 
+  * Updated Customer, Stakeholders and Impact slides of week 1 presentation
 
 **Keith:**
 
@@ -91,6 +99,9 @@ _Where do we want the project to be next week?_
 **Sapana:**
 
 - _What do you plan to work on and accomplish in the next week?_
+  * Download Android studio environment and start playing with it
+  * Identify high level user stories and requirements
+  * Help with development plan
 
 **Keith:**
 
