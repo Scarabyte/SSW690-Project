@@ -2,10 +2,11 @@
 Author
 
 Team
-Belorkar, Sapana
-Burbidge, Adam
-Roseberry, Keith
-Varadaraju, Rakshith
+
+* Belorkar, Sapana
+* Burbidge, Adam
+* Roseberry, Keith
+* Varadaraju, Rakshith
 
 Issue Date of Baselined Document
 
@@ -69,9 +70,9 @@ These are unique to software development, although there may be some overlap.
 It is great to have a project room, it is also great to use a wiki or some document repository system so long as it is private.  
 Google docs is not private but may be sufficient for a class or university project.
 
-  GitHub
-  Google Doc
-  Team A Canvas space
+  * GitHub
+  * Google Doc
+  * Team A Canvas space
 
 ### COMMUNICATION PLAN (required)
 #### _“Heartbeat” meetings_
