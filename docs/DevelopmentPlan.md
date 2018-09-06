@@ -13,10 +13,16 @@ Issue Date of Baselined Document
 Subsequent issue dates listed earliest to latest
 
 ### INTRODUCTION (required)
-This is a brief description of the project, at most 2 paragraphs.  
+The project will develop an Android application that continuously evaluates the video feed from the camera to identify driving hazards and notify the operator of one or more of 1) traffic sign recognition and speed violation; 2) lane detection and departure; and 3) obstacle and collision imminence. The software will utilize the Android operating system facilities to interface with the camera, display and speaker. The camera will provide the needed video input at a suitable rate to support processing, the display will provide output information in a visual format to the vehicle operator, and the speaker will provide audial notification in the case of a detected event.
+
+The development will be performed using agile methods, particularly scrum. The requirements will be captured as user stories, sprints will be executed each week of the semester, and output evaluated at the end of each sprint in a retrospective. The team will perform as much prototyping as is possible to vet ideas and algorithms, and evolve the prototype into working software as the project progresses. Status reports will be provided weekly, including burn-down charts, highest priority items in the backlog, and information pertaining to completed and planned work.
+
+*TBD: Original text to be deleted before publishing:*
+
+*This is a brief description of the project, at most 2 paragraphs.  
 You should point to key documents, e.g., requirements documents, architecture review documents, 
 state the problem you are trying to solve and state success criteria. 
-Briefly state what is the problem you are trying to solve and perhaps a user story of how it will be used.
+Briefly state what is the problem you are trying to solve and perhaps a user story of how it will be used.*
 
 ### ROLES AND RESPONSIBILITIES (required)
 These vary for each type of product and, for small projects, folks may serve multiple roles.  
