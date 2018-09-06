@@ -18,4 +18,4 @@ References/Links:
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Lane_departure_warning_system): A lane detection system uses the principle of [Hough transform](https://en.wikipedia.org/wiki/Hough_transform) and [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector) to detect lane lines from realtime camera images fed from the front-end camera of the automobile.
 
-[Flowchart]: https://en.wikipedia.org/wiki/Lane_departure_warning_system#/media/File:Lane_Detection_Algorithm.jpg
+![LDWS Flowchart](Lane_Detection_Algorithm.jpg)
