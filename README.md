@@ -13,6 +13,7 @@ References/Links:
 * [OpenCV on Raspberry Pi](https://www.pyimagesearch.com/2017/09/04/raspbian-stretch-install-opencv-3-python-on-your-raspberry-pi/)
 * Article: [Three Sensor Types Drive Autonomous Vehicles](https://www.sensorsmag.com/components/three-sensor-types-drive-autonomous-vehicles)
 * Article: [Smartphone based mass traffic sign recognition for real-time navigation maps enhancement](https://ieeexplore.ieee.org/document/7975125/)
+* Article: [Lane Departure and Obstacle Detection Algorithm for use in an Automotive Environment](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.140.4306&rep=rep1&type=pdf)
 
 ### Lane Departure Warning System (LDWS) Functionality
 
