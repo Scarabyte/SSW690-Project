@@ -27,21 +27,23 @@ Briefly state what is the problem you are trying to solve and perhaps a user sto
 ### ROLES AND RESPONSIBILITIES (required)
 These vary for each type of product and, for small projects, folks may serve multiple roles.  
 This is a list of common roles we have used for software development:
-* Development Lead (only 1 name)
-* Buildmeister (only 1 name)
-* Architect (only 1 name)
-* Developers (multiple)
-* Test Lead (only 1 name)
-* Testers (multiple)
-* Documentation (multiple, usually ALL)
-* Documentation Editor (only 1 name)
-* Designer (only 1 name)
-* User advocate (only 1 name)
+* Development Lead (Adam)
+* Architect (Keith)
+* Developers (Adam, Keith, Rak)
+* Test Lead (Sapana)
+* Testers (All)
+* Documentation (All)
+* Documentation Editor (Rak)
+* Designer (Keith)
+* Customer Representative (All)
+
+#### Roles not needed/excluded due to team size
+* Buildmeister (???) - manages pull requests and builds the "official" application
+* User advocate (only 1 name) -- not needed
+* Modification Request Board (1 leader, multiple representatives) -- not needed
 * Risk Management (only 1 name)
 * System Administrator (only 1 name)
-* Modification Request Board (1 leader, multiple representatives)
 * Requirements Resource (usually 1 name)
-* Customer Representative (multiple)
 * Customer responsible for acceptance testing
 
 ### METHOD (required)
