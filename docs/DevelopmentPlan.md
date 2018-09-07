@@ -46,7 +46,7 @@ This is a list of common roles we have used for software development:
 * Requirements Resource (usually 1 name)
 * Customer responsible for acceptance testing
 
-### METHOD (required)
+### METHOD (required) - Assigned:Adam
 These are unique to software development, although there may be some overlap.
 * Software:
   * Language(s) with version number including the compiler if appropriate
@@ -59,6 +59,7 @@ These are unique to software development, although there may be some overlap.
   * Target/Deployment Hardware
 * Back up plan (individual and project)
 * Review Process:
+  * Leverage the sprint retrospective - review contributions from the past week/sprint.
   * Will you do architecture, usability, design, security, privacy or code reviews?
   * What approach will you use for the reviews (formal, informal, corporate standard)?
   * Who is responsible for the reviews and resolving any issues uncovered by the reviews?
@@ -70,11 +71,12 @@ These are unique to software development, although there may be some overlap.
   * Multiplicity of builds
   * Regression test process – see test plan
 * Modification Request Process:
+  * Use issues in GitHub/ZenHub, marked as "bug" and "enhancement"
   * MR tool
   * Decision process (board – if more than paragraph should point to alternate description)
   * State whether there will be two process streams one during development and one after development
 
-### Virtual and Real Work Space
+### Virtual and Real Work Space - Assigned:Keith
 It is great to have a project room, it is also great to use a wiki or some document repository system so long as it is private.  
 Google docs is not private but may be sufficient for a class or university project.
 
@@ -82,7 +84,7 @@ Google docs is not private but may be sufficient for a class or university proje
   * Google Doc
   * Team A Canvas space
 
-### COMMUNICATION PLAN (required)
+### COMMUNICATION PLAN (required) - Assigned:Rak
 #### _“Heartbeat” meetings_
 This section describes the operation of the “heartbeat” meetings, meetings that take the pulse of the project.  
 Usually these meetings are weekly and I prefer to have them early in the day before folks get into their regular routine, 
@@ -103,7 +105,7 @@ If a problem does arise, never surprise your manager.  Schedule a meeting at his
 This section describes how alerts will arise and the governance of when to trigger an alert – usually after a 
 discussion at the heartbeat meeting.
 
-### TIMELINE AND MILESTONES (required)
+### TIMELINE AND MILESTONES (required) - Assigned:Sapana
 This section should be crisp containing 4-10 milestones for the duration of the project, each of which would 
 trigger a re-issuing of this document to report on progress.  Each milestone should define a 100% complete item, 
 should list the critical participants and list begin time and end time.  Each time you re-issue this document 
@@ -117,19 +119,19 @@ Note that for this project we have a few time boxes.  They are:
 * Week of April 6th fourth demo, description of final product
 * Week of April 27th final product
 
-### TESTING POLICY/PLAN (optional–software relevant)
+### TESTING POLICY/PLAN (optional–software relevant) - Assigned:Adam
 This should probably point to a plan or the document would get unwieldy.  
 At the very least it should describe when testing begins.
 
-### RISKS (required)
+### RISKS (required) - Assigned:Keith
 Ideally it occurs because of an established risk management program.  If that does not exist, do the best you can to 
 enumerate the risks and explain how they will be track and monitored.
 
-### ASSUMPTIONS (required)
+### ASSUMPTIONS (required) - Assigned:Rak
 It may be clear to the project insiders what assumptions are being made about staffing, hardware, vacations, rewards, ... 
 but make it clear to everyone else and to the other half of the project that cannot read your thoughts.
 
-### DISTRIBUTION LIST
+### DISTRIBUTION LIST - Assigned:Sapana
 Who receives this document? 
 
 ### MORE OPTIONAL SECTIONS:
