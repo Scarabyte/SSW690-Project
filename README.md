@@ -15,6 +15,7 @@ References/Links:
 * Article: [Smartphone based mass traffic sign recognition for real-time navigation maps enhancement](https://ieeexplore.ieee.org/document/7975125/)
 * Article: [Lane Departure and Obstacle Detection Algorithm for use in an Automotive Environment](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.140.4306&rep=rep1&type=pdf)
 * Book: [Learning OpenCV 3](https://universalflowuniversity.com/Books/Computer%20Programming/CPlusPlus%20and%20C%20Programming/Learning%20OpenCV%203_%20Computer%20Vision%20in%20C++%20With%20the%20OpenCV%20Library.pdf)
+* Book: [A Practical Introduction to Computer Vision with OpenCV](https://universalflowuniversity.com/Books/Computer%20Programming/Computer%20Vision%20and%20Image%20Processing/A%20Practical%20Introduction%20to%20Computer%20Vision%20with%20OpenCV.pdf)
 
 ### Lane Departure Warning System (LDWS) Functionality
 
