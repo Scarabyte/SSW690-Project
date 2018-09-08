@@ -50,14 +50,26 @@ This is a list of common roles we have used for software development:
 These are unique to software development, although there may be some overlap.
 * Software:
   * Language(s) with version number including the compiler if appropriate
+    * Android Studio 3.1.4
+    * JRE: 1.8.0_152-release-1024-b02 amd64
+    * JVM: OpenJDK 64-Bit Server VM by JetBrains s.r.o.
   * Operating System(s) with release number
+    * Windows 10 64-bit
   * Software packages/libraries used with release/version number
+    * OpenCV Andoid Library on Android Studio Version 3.4.3
   * Code conventions – this should preferably be a pointer to a document agreed to and followed by everyone
+    * [https://source.android.com/setup/contribute/code-style](https://source.android.com/setup/contribute/code-style)
 * Hardware:
   * Development Hardware
+    * Moto Z Play, Android 8.0.0
   * Test Hardware
+    * Samsung Galaxy S5
   * Target/Deployment Hardware
+    * Consumer Android device (multiple) running Android Marshmallow (6.0.0) or higher
 * Back up plan (individual and project)
+  * Android Virtual Device using AVD Manager in Android Studio
+  * Platform-independent groundwork using desktop PCs (e.g. algorithm development, model training, etc)
+  * Switch target to Raspberry Pi if an insurmountable difficulty is encountered (note: becomes riskier as project progresses)
 * Review Process:
   * Leverage the sprint retrospective - review contributions from the past week/sprint.
   * Will you do architecture, usability, design, security, privacy or code reviews?
