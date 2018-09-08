@@ -1,5 +1,5 @@
 ## Name of project
-Author
+Author - All team members
 
 Team
 
@@ -133,6 +133,8 @@ but make it clear to everyone else and to the other half of the project that can
 
 ### DISTRIBUTION LIST - Assigned:Sapana
 Who receives this document? 
+
+All team members who are playing different roles in the project, product owner, Project Manager. It should also go on the shared resource such as wiki/Sharepoint where other stakeholders have access if needed.
 
 ### MORE OPTIONAL SECTIONS:
 These should be self-explanatory.
