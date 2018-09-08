@@ -21,7 +21,7 @@ References/Links:
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Lane_departure_warning_system): A lane detection system uses the principle of [Hough transform](https://en.wikipedia.org/wiki/Hough_transform) and [Canny edge detector](https://en.wikipedia.org/wiki/Canny_edge_detector) to detect lane lines from realtime camera images fed from the front-end camera of the automobile.
 
-![LDWS Flowchart](Lane_Detection_Algorithm.jpg)
+[![LDWS Flowchart](Lane_Detection_Algorithm.jpg)](https://en.wikipedia.org/wiki/File:Lane_Detection_Algorithm.jpg)
 
 ### Obstacle Detection Functionality
 
@@ -33,5 +33,5 @@ From [ExtremeTech](https://www.extremetech.com/extreme/189486-how-googles-self-d
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Traffic-sign_recognition): There are diverse algorithms for traffic-sign recognition. Common ones are those based on the shape of the sign board. Typical sign board shapes like hexagons, circles, and rectangles define different types of signs, which can be used for classification. Other major algorithms for character recognition includes [Haar-like features](https://en.wikipedia.org/wiki/Haar-like_feature), Freeman [Chain code](https://en.wikipedia.org/wiki/Chain_code), AdaBoost detection and deep learning neural networks methods. Haar-like features can be used to create cascaded classifiers which can then help detect the sign board characters. Polygonal approximation of digital curves using [Ramer–Douglas–Peucker algorithm](https://en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm) can be used to detect the shape of the sign boards and methods like [Support Vector Machines](https://en.wikipedia.org/wiki/Support_Vector_Machines) and Byte-MCT with an [AdaBoost](https://en.wikipedia.org/wiki/AdaBoost) classifier has been used in one of the methods to detect traffic signs.
 
-![Traffic Sign Detection Flowchart](Traffic_Sign_Detection_Algorithm.jpg)
+[![Traffic Sign Detection Flowchart](Traffic_Sign_Detection_Algorithm.jpg)](https://en.wikipedia.org/wiki/File:Traffic_Sign_Detection_Algorithm.jpg)
 
