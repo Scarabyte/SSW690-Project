@@ -78,14 +78,18 @@ These are unique to software development, although there may be some overlap.
   * Code readings?
 * Build Plan:
   * Revision control system and repository used
+    * GitHub repository located at https://github.com/Scarabyte/SSW690-Project/
+    * Includes issue tracking and project management with the ZenHub extension
   * Regularity of the builds – daily
+    * AB: Suggest weekly?
   * Deadlines for the builds – deadline for source updates
+    * AB: Suggest Sunday evenings; build on Mondays
   * Multiplicity of builds
   * Regression test process – see test plan
 * Modification Request Process:
   * Use issues in GitHub/ZenHub, marked as "bug" and "enhancement"
-  * MR tool
   * Decision process (board – if more than paragraph should point to alternate description)
+    * Team agrees on issue status and assignments during sprint planning meetings
   * State whether there will be two process streams one during development and one after development
 
 ### Virtual and Real Work Space - Assigned:Keith
@@ -134,6 +138,16 @@ Note that for this project we have a few time boxes.  They are:
 ### TESTING POLICY/PLAN (optional–software relevant) - Assigned:Adam
 This should probably point to a plan or the document would get unwieldy.  
 At the very least it should describe when testing begins.
+
+Testing covers multiple levels of project development:
+* Unit Testing
+  * New functions are tested as they are created. May be linked to the closure of a specific issue, with the test results as evidence.
+* Integration Testing
+  * Unit testing on a single module uses simulated inputs; when two or more related modules are completed, they will be tested together to ensure proper integration.
+* System Testing
+  * This testing will begin roughly midway through development when a significant portion of the project has been completed, and continuing on to the end of the lifecycle. The objective is to verify that the overall system performs correctly under known conditions. (The stated goal for the initial prototype is to perform correctly in normal daylight driving conditions, i.e. excluding nighttime, adverse weather and bright sunlight/glare conditions.)
+* Acceptance Testing
+  * Once the developers are satisfied with the system performance, the customers and end-users determine whether the product is acceptable, i.e. that the given requirements have been met to the satisfaction of the customer. With an Agile approach, this occurs multiple times during development, at the end of each sprint.
 
 ### RISKS (required) - Assigned:Keith
 Ideally it occurs because of an established risk management program.  If that does not exist, do the best you can to 
