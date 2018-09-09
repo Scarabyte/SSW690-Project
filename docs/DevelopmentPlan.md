@@ -1,4 +1,4 @@
-## Name of project
+## Team Back Seat Drivers: Computer vision driving aids
 Author - All team members
 
 Team
@@ -11,6 +11,10 @@ Team
 Issue Date of Baselined Document
 
 Subsequent issue dates listed earliest to latest
+
+| Revision    | Issue Date  |
+| ----------- |:-----------:|
+| First Draft | 11-Sep-2018 |
 
 ### INTRODUCTION (required)
 The project will develop an Android application that continuously evaluates the video feed from the camera to identify driving hazards and notify the operator of one or more of 1) traffic sign recognition and speed violation; 2) lane detection and departure; and 3) obstacle and collision imminence. The software will utilize the Android operating system facilities to interface with the camera, display and speaker. The camera will provide the needed video input at a suitable rate to support processing, the display will provide output information in a visual format to the vehicle operator, and the speaker will provide audial notification in the case of a detected event.
@@ -62,6 +66,7 @@ _These are unique to software development, although there may be some overlap._
 * Hardware:
   * Development Hardware
     * Moto Z Play, Android 8.0.0
+    * HTC One M8, Android 6.0
   * Test Hardware
     * Samsung Galaxy S5
   * Target/Deployment Hardware
@@ -80,17 +85,24 @@ _These are unique to software development, although there may be some overlap._
   * Revision control system and repository used
     * GitHub repository located at https://github.com/Scarabyte/SSW690-Project/
     * Includes issue tracking and project management with the ZenHub extension
-  * Regularity of the builds – daily
-    * AB: Suggest weekly?
+  * Regularity of the builds
+    * Once work on sprints begins, informal builds should be completed by the team member for each new feature/issue addressed (i.e. to the extent possible, do not commit code that does not produce a working build)
+    * Official build should be produced at the midpoint and the end of the sprint (i.e. weekly, for a 2-week sprint duration) to confirm the project continues to perform correctly
   * Deadlines for the builds – deadline for source updates
-    * AB: Suggest Sunday evenings; build on Mondays
+    * New code should be committed by Sunday evening, with a build on Monday to allow time for testing and, if necessary, debugging or raising new issues to be addressed
   * Multiplicity of builds
+    * Each team member has access to the repository to download and test the project on their own device
+      * An issue should be raised in GitHub if one team member encounters an issue that the others did not (See Target Hardware above; the end-users will represent a wide range of devices and configurations)
   * Regression test process – see test plan
+    * Tests should be automated whenever possible so that a significant portion can be executed against each build
+      * Any failing test that previously passed should trigger an issue in GitHub
 * Modification Request Process:
-  * Use issues in GitHub/ZenHub, marked as "bug" and "enhancement"
+  * Use issues in GitHub/ZenHub, marked as "bug" and "enhancement" as appropriate
   * Decision process (board – if more than paragraph should point to alternate description)
-    * Team agrees on issue status and assignments during sprint planning meetings
+    * Team will agree on issue status and assignments during sprint planning meetings
   * State whether there will be two process streams one during development and one after development
+    * For a project of this size and scope (small team, limited time frame to complete the initial prototype), a single process stream for modification requests should be sufficient; the team will agree on the request status during regular meetings (note that some requests may fall outside the scope of work planned)
+      * This plan could be revised as the needs of the project change
 
 ### Virtual and Real Work Space - Assigned:Keith
 The project team are geographically dispersed and have significant limiations on time during which the entire team can meet in person. To support the remote nature of the project team, the GitHub repository and system will be the primary method used as a workspace. There are some trade-offs in this approach, which must be considered by the project team when contributing to the project.
@@ -150,8 +162,9 @@ At the very least it should describe when testing begins._
 Testing covers multiple levels of project development:
 * Unit Testing
   * New functions are tested as they are created. May be linked to the closure of a specific issue, with the test results as evidence.
+  * Unit testing will be performed as discussed in SSW-567 for each new function or modification introduced
 * Integration Testing
-  * Unit testing on a single module uses simulated inputs; when two or more related modules are completed, they will be tested together to ensure proper integration.
+  * Unit testing on a single module uses simulated inputs; when two or more related modules are completed, they will be tested together to ensure proper integration, with the "real" output of one function serving as the input to the other.
 * System Testing
   * This testing will begin roughly midway through development when a significant portion of the project has been completed, and continuing on to the end of the lifecycle. The objective is to verify that the overall system performs correctly under known conditions. (The stated goal for the initial prototype is to perform correctly in normal daylight driving conditions, i.e. excluding nighttime, adverse weather and bright sunlight/glare conditions.)
 * Acceptance Testing
