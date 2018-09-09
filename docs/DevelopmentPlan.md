@@ -93,12 +93,18 @@ _These are unique to software development, although there may be some overlap._
   * State whether there will be two process streams one during development and one after development
 
 ### Virtual and Real Work Space - Assigned:Keith
-_It is great to have a project room, it is also great to use a wiki or some document repository system so long as it is private.  
-Google docs is not private but may be sufficient for a class or university project._
+The project team are geographically dispersed and have significant limiations on time during which the entire team can meet in person. To support the remote nature of the project team, the GitHub repository and system will be the primary method used as a workspace. There are some trade-offs in this approach, which must be considered by the project team when contributing to the project.
 
-  * GitHub
-  * Google Doc
-  * Team A Canvas space
+* Document Formatting Restrictions: The MarkDown (MD) method of documenting in GitHub is limited in its ability to format text and doesn't include built-in diagramming or editing tools. Word processing systems such as Microsoft Word and Google Docs are superior in this manner, but the project team is unable to utilize these systems due to security restrictions at their workplaces. Therefore, the use of the MarkDown documents in GitHub will be the preferred approach. Project team members will work around any formatting limitations accordingly.
+
+* Lack of Concurrent Editing of Documents: The ability to work in a single document at the same time is a huge benefit to using Google Docs, but due to the security restrictions of the project team's workplaces the use of Google Docs is prohibited. Therefore, the project team will utilize the MarkDown facility of GitHub and will need to carefully manage editing of the documentation. For small, quick changes editing the MD document in the master branch may suffice. For more significant changes, the project team should create a branch and a subsequent pull request to merge the changes back into the master in a controlled manner.
+
+An extension to the GitHub system to manage user stories, backlog and sprint execution will be utilized. The ZenHub extension will provide a higher level of data and information management that GitHub alone cannot provide. Since ZenHub is integrated with GitHub, the data is also visible in the GitHub repository (user stories, enhancements, etc. in ZenHub are stored as GitHub issues). The project team will develop user stories and track issues and enhancements with the ZenHub extension.
+
+GitHub Repository Location: https://github.com/Scarabyte/SSW690-Project
+ZenHub Extension Location: https://app.zenhub.com/workspace/o/scarabyte/ssw690-project/boards?repos=146369608
+
+An alternative that may be invoked if needed is the Polarion ALM web-based agile management application. This system supports tracking and execution of agile projects and includes functionality for online documentation generation and maintenance, backlog management, team collaboration and more. The system can be connected to the GitHub repository in order to manage repository-based assets such as source code and build scripts. While the Polarion ALM system can be used for all of these features it is an enterprise-class tool that requires a certain amount of learning to use effectively. Due to this, the project team will only invoke the use of the Polarion ALM tool if the GitHub and ZenHub combination are not satisfying the project needs.
 
 ### COMMUNICATION PLAN (required) - Assigned:Rak
 #### _“Heartbeat” meetings_
