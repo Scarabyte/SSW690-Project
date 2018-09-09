@@ -192,7 +192,7 @@ but make it clear to everyone else and to the other half of the project that can
 ### DISTRIBUTION LIST - Assigned:Sapana
 _Who receives this document?_
 
-All team members who are playing different roles in the project, product owner, Project Manager. It should also go on the shared resource such as wiki/Sharepoint where other stakeholders have access if needed.
+All team members who are playing different roles in the project, product owner, Project Manager. It should also saved on the shared resource such as Wiki/Sharepoint where other shareholders can access the document if needed.
 
 ### MORE OPTIONAL SECTIONS:
 _These should be self-explanatory._
