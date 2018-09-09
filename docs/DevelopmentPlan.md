@@ -147,9 +147,9 @@ should list the critical participants and list begin time and end time.  Each ti
 you should highlight changes with italics or bold – colors will not show up on a photocopy._
 
 Note that for this project we have a few time boxes.  They are:
-* Week of September 25th – In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
-* Week of October 9th first demo, In second demo, team will present research done so far and features/stories developed in Sprint 1 and 2
-* Week of October 23rd second demo, In third demo, team will present features/stories developed in Sprint 3
+* Week of September 11th – In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
+* Week of September 18th first demo, In second demo, team will present research done so far and features/stories developed in Sprint 1 and 2
+* Week of October 16th second demo, In third demo, team will present features/stories developed in Sprint 3
 * Week of November 6th third demo, In fourth demo, team will present features/stories developed in Sprint 4
 * Week of November 27th fourth demo, In final 20 to 30 min presentation, team will describe the project, explain major features, challenges team encountered along the way, lessons learned and live demonstration of deployed project  
 * Week of December 10th final product
