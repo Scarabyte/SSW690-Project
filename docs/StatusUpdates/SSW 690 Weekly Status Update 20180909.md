@@ -8,7 +8,7 @@
 
 _One word assessment of how is the team doing relative to the schedule?_
 
-![Green](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/StatusUpdates/status_green.png) Green
+![Green](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/StatusUpdates/status_green.png?raw=true) Green
 
 ### Team Status Summary: Where are we now?
 
@@ -26,7 +26,13 @@ Goals for Week 2 of class:
 #### Adam:
 
 * _What did I work on?_
+  * Draft development plan
+  * Assignment 2 response
+  * First sample app
 * _What did I accomplish?_
+  * Team agreed on Android as the target platform
+  * Team agreed on Lane Departure Warning System as the Minimal Viable Product for the project
+    * General consensus is that this is something we believe we can accomplish by the end of the semester
 
 #### Sapana:
 
@@ -46,19 +52,27 @@ Goals for Week 2 of class:
 ### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
+  * Need to make sure we continue to use all the communication channels we've opened to keep everyone informed
+  * Some project risks are identified in 
 * _What new opportunities did you discover, if any?_
+  * Not every team member has to do the full setup of Android studio; it should be possible to download the sample app (currently in sb_opencv branch) and run it with few or no additional changes.
 
 ### Action Items/Goals for next week:
 
 #### Team Goals for next week:
 
 _Where do we want the project to be next week?_
+  * Prepare Architecture and Design as discussed in the Week 3 assignment
+  * User stories classified (story points) and first set of stories/issues targeted for Sprint 1 identified
 
 #### Individual Goals
 
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Help with Architecture and Design presentation
+  * Continue to identify/classify user stories
+  * Try to advance the sample app based on stories identified for Spint 1
 
 ##### Sapana:
 
@@ -75,3 +89,5 @@ _Where do we want the project to be next week?_
 ### Other Comments:
 
 _Any other relevant information to help us to manage the project and keep our customer informed and happy._
+* Team elected to focus initially on LDWS; summary of decision is discussed in Week 2 assignment response
+  * Some additional research and study by the team may be needed to learn about the details of implementing the function
