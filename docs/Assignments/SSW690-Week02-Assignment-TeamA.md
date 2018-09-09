@@ -46,7 +46,7 @@ Therefore, based on the initial research, the team decided to prioritize first t
 3. Identify the features in your project&#39;s Minimal Viable Product
 
 As discussed in Item 2 above, the Minimal Viable Product for this project will be an initial version of the LDWS Functionality.
-The specific features needed to provide this functionality, as well as the acceptance criteria, will be documented in the project's storyboards.
+The specific features needed to provide this functionality, as well as the acceptance criteria, will be documented in the project's storyboards. Also, as mentioned in the project's Overview presentation, in the first iteration we will initially exclude nighttime, adverse weather and bright sunlight/glare conditions, in order to concentrate first on producing a working system under "sunny day" conditions.
 
 4. Create a GitHub milestone to define the issues to be addressed in the first sprint
 
@@ -54,4 +54,4 @@ Milestones have been created for Sprint 1, as well as the Architecture & Design 
 
 5. Create the first draft of your Development Plan using the Dev Plan Template
 
-The development plan is created in [https://github.com/Scarabyte/SSW690-Project/blob/master/docs/DevelopmentPlan.md](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/DevelopmentPlan.md). Note that as stated in the assignment text, this is still only the "first draft" of the development plan, and so may evelove over time as the needs of the project change.
+The development plan is created in [https://github.com/Scarabyte/SSW690-Project/blob/master/docs/DevelopmentPlan.md](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/DevelopmentPlan.md). Note that as stated in the assignment text, this is still only the "first draft" of the development plan, and so may evolve over time as the needs of the project change.
