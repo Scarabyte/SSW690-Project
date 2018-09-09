@@ -47,7 +47,7 @@ This is a list of common roles we have used for software development:
 * Customer responsible for acceptance testing
 
 ### METHOD (required) - Assigned:Adam
-These are unique to software development, although there may be some overlap.
+_These are unique to software development, although there may be some overlap._
 * Software:
   * Language(s) with version number including the compiler if appropriate
     * Android Studio 3.1.4
@@ -93,8 +93,8 @@ These are unique to software development, although there may be some overlap.
   * State whether there will be two process streams one during development and one after development
 
 ### Virtual and Real Work Space - Assigned:Keith
-It is great to have a project room, it is also great to use a wiki or some document repository system so long as it is private.  
-Google docs is not private but may be sufficient for a class or university project.
+_It is great to have a project room, it is also great to use a wiki or some document repository system so long as it is private.  
+Google docs is not private but may be sufficient for a class or university project._
 
   * GitHub
   * Google Doc
@@ -102,30 +102,30 @@ Google docs is not private but may be sufficient for a class or university proje
 
 ### COMMUNICATION PLAN (required) - Assigned:Rak
 #### _“Heartbeat” meetings_
-This section describes the operation of the “heartbeat” meetings, meetings that take the pulse of the project.  
+_This section describes the operation of the “heartbeat” meetings, meetings that take the pulse of the project.  
 Usually these meetings are weekly and I prefer to have them early in the day before folks get into their regular routine, 
 but this is not necessary.  
 The meeting should include only necessary individuals – no upper level management or lurkers.  
 It should have a set agenda, with the last part of the meeting reviewing open issues and risks.  
 It should be SHORT, thirty minutes or less is ideal.  
-Notes should be provided after the meeting and issues should be tracked and reviewed each meeting, usually at the end.
+Notes should be provided after the meeting and issues should be tracked and reviewed each meeting, usually at the end._
 
 #### _Status meetings_
-Status meetings have management as their target and should be held less frequently than heartbeat meetings, 
+_Status meetings have management as their target and should be held less frequently than heartbeat meetings, 
 preferably biweekly, monthly or quarterly depending on the duration of the project.  It is solely to provide 
 status for the project.  If issues arise, they should be addressed at a separate meeting (see next item). 
-These should be short.  This section should describe the format and periodicity.
+These should be short.  This section should describe the format and periodicity._
 
 #### _Issues meetings_
-If a problem does arise, never surprise your manager.  Schedule a meeting at his or her earliest convenience.  
+_If a problem does arise, never surprise your manager.  Schedule a meeting at his or her earliest convenience.  
 This section describes how alerts will arise and the governance of when to trigger an alert – usually after a 
-discussion at the heartbeat meeting.
+discussion at the heartbeat meeting._
 
 ### TIMELINE AND MILESTONES (required) - Assigned:Sapana
-This section should be crisp containing 4-10 milestones for the duration of the project, each of which would 
+_This section should be crisp containing 4-10 milestones for the duration of the project, each of which would 
 trigger a re-issuing of this document to report on progress.  Each milestone should define a 100% complete item, 
 should list the critical participants and list begin time and end time.  Each time you re-issue this document 
-you should highlight changes with italics or bold – colors will not show up on a photocopy.
+you should highlight changes with italics or bold – colors will not show up on a photocopy._
 
 Note that for this project we have a few time boxes.  They are:
 * Week of September 25th – In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
@@ -137,8 +137,8 @@ Note that for this project we have a few time boxes.  They are:
 
 
 ### TESTING POLICY/PLAN (optional–software relevant) - Assigned:Adam
-This should probably point to a plan or the document would get unwieldy.  
-At the very least it should describe when testing begins.
+_This should probably point to a plan or the document would get unwieldy.  
+At the very least it should describe when testing begins._
 
 Testing covers multiple levels of project development:
 * Unit Testing
@@ -151,20 +151,20 @@ Testing covers multiple levels of project development:
   * Once the developers are satisfied with the system performance, the customers and end-users determine whether the product is acceptable, i.e. that the given requirements have been met to the satisfaction of the customer. With an Agile approach, this occurs multiple times during development, at the end of each sprint.
 
 ### RISKS (required) - Assigned:Keith
-Ideally it occurs because of an established risk management program.  If that does not exist, do the best you can to 
-enumerate the risks and explain how they will be track and monitored.
+_Ideally it occurs because of an established risk management program.  If that does not exist, do the best you can to 
+enumerate the risks and explain how they will be track and monitored._
 
 ### ASSUMPTIONS (required) - Assigned:Rak
-It may be clear to the project insiders what assumptions are being made about staffing, hardware, vacations, rewards, ... 
-but make it clear to everyone else and to the other half of the project that cannot read your thoughts.
+_It may be clear to the project insiders what assumptions are being made about staffing, hardware, vacations, rewards, ... 
+but make it clear to everyone else and to the other half of the project that cannot read your thoughts._
 
 ### DISTRIBUTION LIST - Assigned:Sapana
-Who receives this document? 
+_Who receives this document?_
 
 All team members who are playing different roles in the project, product owner, Project Manager. It should also go on the shared resource such as wiki/Sharepoint where other stakeholders have access if needed.
 
 ### MORE OPTIONAL SECTIONS:
-These should be self-explanatory.
+_These should be self-explanatory._
 
 #### _Worry beads_
 I add this section to describe the things as manager I am most worried about at the time of latest document issue.  
