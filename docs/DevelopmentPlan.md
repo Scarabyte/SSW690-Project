@@ -128,12 +128,13 @@ should list the critical participants and list begin time and end time.  Each ti
 you should highlight changes with italics or bold – colors will not show up on a photocopy.
 
 Note that for this project we have a few time boxes.  They are:
-* Week of February 2nd – description of first demo
-* Week of February 16th first demo, description of second demo
-* Week of March 2nd second demo, description of third demo
-* Week of March 23rd third demo, description of fourth demo
-* Week of April 6th fourth demo, description of final product
-* Week of April 27th final product
+* Week of September 25th – In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
+* Week of October 9th first demo, In second demo, team will present research done so far and features/stories developed in Sprint 1 and 2
+* Week of October 23rd second demo, In third demo, team will present features/stories developed in Sprint 3
+* Week of November 6th third demo, In fourth demo, team will present features/stories developed in Sprint 4
+* Week of November 27th fourth demo, In final 20 to 30 min presentation, team will describe the project, explain major features, challenges team encountered along the way, lessons learned and live demonstration of deployed project  
+* Week of December 10th final product
+
 
 ### TESTING POLICY/PLAN (optional–software relevant) - Assigned:Adam
 This should probably point to a plan or the document would get unwieldy.  
