@@ -102,6 +102,7 @@ The project team are geographically dispersed and have significant limiations on
 An extension to the GitHub system to manage user stories, backlog and sprint execution will be utilized. The ZenHub extension will provide a higher level of data and information management that GitHub alone cannot provide. Since ZenHub is integrated with GitHub, the data is also visible in the GitHub repository (user stories, enhancements, etc. in ZenHub are stored as GitHub issues). The project team will develop user stories and track issues and enhancements with the ZenHub extension.
 
 GitHub Repository Location: https://github.com/Scarabyte/SSW690-Project
+
 ZenHub Extension Location: https://app.zenhub.com/workspace/o/scarabyte/ssw690-project/boards?repos=146369608
 
 An alternative that may be invoked if needed is the Polarion ALM web-based agile management application. This system supports tracking and execution of agile projects and includes functionality for online documentation generation and maintenance, backlog management, team collaboration and more. The system can be connected to the GitHub repository in order to manage repository-based assets such as source code and build scripts. While the Polarion ALM system can be used for all of these features it is an enterprise-class tool that requires a certain amount of learning to use effectively. Due to this, the project team will only invoke the use of the Polarion ALM tool if the GitHub and ZenHub combination are not satisfying the project needs.
@@ -157,8 +158,19 @@ Testing covers multiple levels of project development:
   * Once the developers are satisfied with the system performance, the customers and end-users determine whether the product is acceptable, i.e. that the given requirements have been met to the satisfaction of the customer. With an Agile approach, this occurs multiple times during development, at the end of each sprint.
 
 ### RISKS (required) - Assigned:Keith
-_Ideally it occurs because of an established risk management program.  If that does not exist, do the best you can to 
-enumerate the risks and explain how they will be track and monitored._
+Risk management is an integral activity to all development processes and proper risk management allows for the identification and effective responses to project risks. Risks may impact many dimensions associated with a development project, including technical, personnel, cost and schedule, and environmental. Risks typically affect more than one dimension, but are identified with a primary dimension.
+
+All risks will be scored based on their probability of occurrence and the impact on the project if they do occur. Both probability and impact will be scored as follows:
+
+* 1 = Low
+* 3 = Medium
+* 9 = High
+
+The total score of a risk is the product of the probability and impact scores. Risks that have a total score of 27 and higher will require one or more responses in order to manage the impact of the risk. Risks that have a total score of less than 27 will be monitored and addressed accordingly if their scores change. A separate GitHub MD document will be used to track and manage the risks of the project. The MD document will include a risk register (enumeration of all project risks and scores) and a risk dashboard that displays the counts of the risks in each score value.
+
+Once a risk is identified, an appropriate response is formulated. The responses include mitigation, transferrance, elimination and acceptance. Most risks are typically mitigated to reduce their impact upon realization. However, some risks may be eliminated entirely or transferred to another organization. Although rare, it is possible that the project team may choose to accept a risk since either the probability of the risk occuring or the impact if it does occur is small enough to absorb on the project.
+
+Risks will be managed at each Sprint Retrospective/Weekly Status Meeting (see the Communication Plan section above).
 
 ### ASSUMPTIONS (required) - Assigned:Rak
 _It may be clear to the project insiders what assumptions are being made about staffing, hardware, vacations, rewards, ... 
