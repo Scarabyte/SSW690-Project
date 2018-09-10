@@ -19,7 +19,7 @@ Subsequent issue dates listed earliest to latest
 ### INTRODUCTION (required)
 The project will develop an Android application that continuously evaluates the video feed from the camera to identify driving hazards and notify the operator of one or more of 1) traffic sign recognition and speed violation; 2) lane detection and departure; and 3) obstacle and collision imminence. The software will utilize the Android operating system facilities to interface with the camera, display and speaker. The camera will provide the needed video input at a suitable rate to support processing, the display will provide output information in a visual format to the vehicle operator, and the speaker will provide audial notification in the case of a detected event.
 
-The development will be performed using agile methods, particularly scrum. The requirements will be captured as user stories, sprints will be executed each week of the semester, and output evaluated at the end of each sprint in a retrospective. The team will perform as much prototyping as is possible to vet ideas and algorithms, and evolve the prototype into working software as the project progresses. Status reports will be provided weekly, including burn-down charts, highest priority items in the backlog, and information pertaining to completed and planned work.
+The development will be performed using agile methods, particularly scrum. The requirements will be captured as user stories, sprints will be executed each week of the semester, and output evaluated at the end of each sprint in a retrospective. The team will perform as much prototyping as is possible to vet ideas and algorithms, and evolve the prototype into working software as the project progresses. Status reports will be provided weekly, including as appropriate burn-down charts, highest priority items in the backlog, and information pertaining to completed and planned work.
 
 *TBD: Original text to be deleted before publishing:*
 
@@ -42,7 +42,7 @@ This is a list of common roles we have used for software development:
 * Customer Representative (All)
 
 #### Roles not needed/excluded due to team size
-* Buildmeister (???) - manages pull requests and builds the "official" application
+* Buildmeister (not assigned/not needed for this project) - manages pull requests and builds the "official" application
 * User advocate (only 1 name) -- not needed
 * Modification Request Board (1 leader, multiple representatives) -- not needed
 * Risk Management (only 1 name)
@@ -61,7 +61,7 @@ _These are unique to software development, although there may be some overlap._
     * Windows 10 64-bit
   * Software packages/libraries used with release/version number
     * OpenCV Andoid Library on Android Studio Version 3.4.3
-  * Code conventions – this should preferably be a pointer to a document agreed to and followed by everyone
+  * Code conventions – _this should preferably be a pointer to a document agreed to and followed by everyone_
     * [https://source.android.com/setup/contribute/code-style](https://source.android.com/setup/contribute/code-style)
 * Hardware:
   * Development Hardware
@@ -74,16 +74,18 @@ _These are unique to software development, although there may be some overlap._
 * Back up plan (individual and project)
   * Android Virtual Device using AVD Manager in Android Studio
   * Platform-independent groundwork using desktop PCs (e.g. algorithm development, model training, etc)
-  * Switch target to Raspberry Pi if an insurmountable difficulty is encountered (note: becomes riskier as project progresses)
+  * Switch target to Raspberry Pi if an insurmountable difficulty is encountered (note: becomes riskier as project progresses; mitigated by leveraging the platform-independent groundwork)
 * Review Process:
   * Leverage the sprint retrospective - review contributions from the past week/sprint.
   * Will you do architecture, usability, design, security, privacy or code reviews?
+    * Architecture and design review will be completed as part of the Week 3 assignments
   * What approach will you use for the reviews (formal, informal, corporate standard)?
+    * Given the small size of the team and the time constraints of the semester, reviews when needed will be conducted 'live' with the team members so that issues can be resolved quickly
   * Who is responsible for the reviews and resolving any issues uncovered by the reviews?
-  * Code readings?
+    * The team member will present their work to the group for discussion and approval; whenever possible, comments raised should be resolved within the meeting itself so as not to delay approval or closure of related issues.
 * Build Plan:
   * Revision control system and repository used
-    * GitHub repository located at https://github.com/Scarabyte/SSW690-Project/
+    * GitHub repository located at [https://github.com/Scarabyte/SSW690-Project/](https://github.com/Scarabyte/SSW690-Project/)
     * Includes issue tracking and project management with the ZenHub extension
   * Regularity of the builds
     * Once work on sprints begins, informal builds should be completed by the team member for each new feature/issue addressed (i.e. to the extent possible, do not commit code that does not produce a working build)
@@ -105,7 +107,7 @@ _These are unique to software development, although there may be some overlap._
       * This plan could be revised as the needs of the project change
 
 ### Virtual and Real Work Space - Assigned:Keith
-The project team are geographically dispersed and have significant limiations on time during which the entire team can meet in person. To support the remote nature of the project team, the GitHub repository and system will be the primary method used as a workspace. There are some trade-offs in this approach, which must be considered by the project team when contributing to the project.
+The project team are geographically dispersed and have significant limitations on time during which the entire team can meet in person. To support the remote nature of the project team, the GitHub repository and system will be the primary method used as a workspace. There are some trade-offs in this approach, which must be considered by the project team when contributing to the project.
 
 * Document Formatting Restrictions: The MarkDown (MD) method of documenting in GitHub is limited in its ability to format text and doesn't include built-in diagramming or editing tools. Word processing systems such as Microsoft Word and Google Docs are superior in this manner, but the project team is unable to utilize these systems due to security restrictions at their workplaces. Therefore, the use of the MarkDown documents in GitHub will be the preferred approach. Project team members will work around any formatting limitations accordingly.
 
@@ -121,24 +123,13 @@ An alternative that may be invoked if needed is the Polarion ALM web-based agile
 
 ### COMMUNICATION PLAN (required) - Assigned:Rak
 #### _“Heartbeat” meetings_
-_This section describes the operation of the “heartbeat” meetings, meetings that take the pulse of the project.  
-Usually these meetings are weekly and I prefer to have them early in the day before folks get into their regular routine, 
-but this is not necessary.  
-The meeting should include only necessary individuals – no upper level management or lurkers.  
-It should have a set agenda, with the last part of the meeting reviewing open issues and risks.  
-It should be SHORT, thirty minutes or less is ideal.  
-Notes should be provided after the meeting and issues should be tracked and reviewed each meeting, usually at the end._
+The team has a weekly "heartbeat" meeting every Thursday. The team leader sends an agenda before the meeting that usually comprises upcoming deadlines and tasks that are due in the current week. The meeting is used to discuss advancements made by each team member for the given week. The meeting usually lasts about 30 minutes. The minutes of the meeting are then distributed after the meeting.
 
 #### _Status meetings_
-_Status meetings have management as their target and should be held less frequently than heartbeat meetings, 
-preferably biweekly, monthly or quarterly depending on the duration of the project.  It is solely to provide 
-status for the project.  If issues arise, they should be addressed at a separate meeting (see next item). 
-These should be short.  This section should describe the format and periodicity._
+The team has a weekly status meeting every Sunday. This meeting is used to quickly go over the kanban board that the team is maintaining. This meeting is also used to get each individuals feedback on tasks completed that week and tasks to be done over the next week. This meeting is usually less than 15 minutes.
 
 #### _Issues meetings_
-_If a problem does arise, never surprise your manager.  Schedule a meeting at his or her earliest convenience.  
-This section describes how alerts will arise and the governance of when to trigger an alert – usually after a 
-discussion at the heartbeat meeting._
+No official issues meetings are setup on a calendar. The team communicates on a daily basis using whatsapp messenger and raise issues as they come up.
 
 ### TIMELINE AND MILESTONES (required) - Assigned:Sapana
 _This section should be crisp containing 4-10 milestones for the duration of the project, each of which would 
@@ -147,12 +138,12 @@ should list the critical participants and list begin time and end time.  Each ti
 you should highlight changes with italics or bold – colors will not show up on a photocopy._
 
 Note that for this project we have a few time boxes.  They are:
-* Week of September 25th – In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
-* Week of October 9th first demo, In second demo, team will present research done so far and features/stories developed in Sprint 1 and 2
-* Week of October 23rd second demo, In third demo, team will present features/stories developed in Sprint 3
-* Week of November 6th third demo, In fourth demo, team will present features/stories developed in Sprint 4
-* Week of November 27th fourth demo, In final 20 to 30 min presentation, team will describe the project, explain major features, challenges team encountered along the way, lessons learned and live demonstration of deployed project  
-* Week of December 10th final product
+* Week of September 11th – Description of first demo: In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
+* Week of September 18th Present first demo. Description of second demo: In second demo, team will present research done so far and features/stories developed in Sprint 1 and 2
+* Week of October 16th Present second demo. Description of third demo: In third demo, team will present features/stories developed in Sprint 3
+* Week of November 6th Present third demo. Description of fourth demo: In fourth demo, team will present features/stories developed in Sprint 4
+* Week of November 27th Present fourth demo. Description of final product: In final 20 to 30 min presentation, team will describe the project, explain major features, challenges team encountered along the way, lessons learned and live demonstration of deployed project  
+* Week of December 10th Present final product
 
 
 ### TESTING POLICY/PLAN (optional–software relevant) - Assigned:Adam
@@ -179,7 +170,7 @@ All risks will be scored based on their probability of occurrence and the impact
 * 3 = Medium
 * 9 = High
 
-The total score of a risk is the product of the probability and impact scores. Risks that have a total score of 27 and higher will require one or more responses in order to manage the impact of the risk. Risks that have a total score of less than 27 will be monitored and addressed accordingly if their scores change. A separate GitHub MD document [Risks](Risks.md) will be used to track and manage the risks of the project. The MD document will include a risk register (enumeration of all project risks and scores) and a risk dashboard that displays the counts of the risks in each score value.
+The total score of a risk is the product of the probability and impact scores. Risks that have a total score of 27 and higher will require one or more responses in order to manage the impact of the risk. Risks that have a total score of less than 27 will be monitored and addressed accordingly if their scores change. A separate GitHub MD document [Risks](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/Risks.md) will be used to track and manage the risks of the project. The MD document will include a risk register (enumeration of all project risks and scores) and a risk dashboard that displays the counts of the risks in each score value.
 
 Once a risk is identified, an appropriate response is formulated. The responses include mitigation, transferrance, elimination and acceptance. Most risks are typically mitigated to reduce their impact upon realization. However, some risks may be eliminated entirely or transferred to another organization. Although rare, it is possible that the project team may choose to accept a risk since either the probability of the risk occuring or the impact if it does occur is small enough to absorb on the project.
 
@@ -192,7 +183,7 @@ but make it clear to everyone else and to the other half of the project that can
 ### DISTRIBUTION LIST - Assigned:Sapana
 _Who receives this document?_
 
-All team members who are playing different roles in the project, product owner, Project Manager. It should also go on the shared resource such as wiki/Sharepoint where other stakeholders have access if needed.
+All team members who are playing different roles in the project, product owner, Project Manager. It should also be saved on a shared resource such as Wiki/Sharepoint where other shareholders can access the document if needed.
 
 ### MORE OPTIONAL SECTIONS:
 _These should be self-explanatory._

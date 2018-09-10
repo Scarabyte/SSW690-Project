@@ -37,12 +37,30 @@ Goals for Week 2 of class:
 #### Sapana:
 
 * _What did I work on?_
+  * Draft Development Plan
+  * Android Application development with OpenCV Library
+  * User Stories/Tasks
+  * Reaserch on how LDWS works
 * _What did I accomplish?_
+  * Installed and ran sample app on Android Studio with OpenCV, chceked in code and instructions in GitHub
+  * Added high level tasks in backlog
+  * Worked on assigned sections of the development plan draft
 
 #### Keith:
 
 * _What did I work on?_
+  * Draft Development Plan
+  * Android Application Development
+  * Architecture Research
+  * User Stories
 * _What did I accomplish?_
+  * Wrote assigned sections of the draft development plan
+    * Workspace Description
+    * Risks
+  * Added Risk tracking page
+  * More discovery via source code of Android application development
+  * Researched pipe and filter architecture design
+  * Generated a set of user stories
 
 #### Rakshith:
 
@@ -77,10 +95,15 @@ _Where do we want the project to be next week?_
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Assist in identifying Sprint 1 stories, add more stories/sub tasks if needed
+  * Reaserch on testing android applications
 
 ##### Keith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Develop detailed architecture using pipe and filter pattern
+  * Develop high level design
+  * Create architecture and design presentation
 
 ##### Rakshith:
 
