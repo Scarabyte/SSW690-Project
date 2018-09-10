@@ -123,24 +123,13 @@ An alternative that may be invoked if needed is the Polarion ALM web-based agile
 
 ### COMMUNICATION PLAN (required) - Assigned:Rak
 #### _“Heartbeat” meetings_
-_This section describes the operation of the “heartbeat” meetings, meetings that take the pulse of the project.  
-Usually these meetings are weekly and I prefer to have them early in the day before folks get into their regular routine, 
-but this is not necessary.  
-The meeting should include only necessary individuals – no upper level management or lurkers.  
-It should have a set agenda, with the last part of the meeting reviewing open issues and risks.  
-It should be SHORT, thirty minutes or less is ideal.  
-Notes should be provided after the meeting and issues should be tracked and reviewed each meeting, usually at the end._
+The team has a weekly "heartbeat" meeting every Thursday. The team leader sends an agenda before the meeting that usually comprises upcoming deadlines and tasks that are due in the current week. The meeting is used to discuss advancements made by each team member for the given week. The meeting usually lasts about 30 minutes. The minutes of the meeting are then distributed after the meeting.
 
 #### _Status meetings_
-_Status meetings have management as their target and should be held less frequently than heartbeat meetings, 
-preferably biweekly, monthly or quarterly depending on the duration of the project.  It is solely to provide 
-status for the project.  If issues arise, they should be addressed at a separate meeting (see next item). 
-These should be short.  This section should describe the format and periodicity._
+The team has a weekly status meeting every Sunday. This meeting is used to quickly go over the kanban board that the team is maintaining. This meeting is also used to get each individuals feedback on tasks completed that week and tasks to be done over the next week. This meeting is usually less than 15 minutes.
 
 #### _Issues meetings_
-_If a problem does arise, never surprise your manager.  Schedule a meeting at his or her earliest convenience.  
-This section describes how alerts will arise and the governance of when to trigger an alert – usually after a 
-discussion at the heartbeat meeting._
+No official issues meetings are setup on a calendar. The team communicates on a daily basis using whatsapp messenger and raise issues as they come up.
 
 ### TIMELINE AND MILESTONES (required) - Assigned:Sapana
 _This section should be crisp containing 4-10 milestones for the duration of the project, each of which would 
