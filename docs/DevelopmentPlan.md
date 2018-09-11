@@ -137,7 +137,7 @@ trigger a re-issuing of this document to report on progress.  Each milestone sho
 should list the critical participants and list begin time and end time.  Each time you re-issue this document 
 you should highlight changes with italics or bold – colors will not show up on a photocopy._
 
-Note that for this project we have a few time boxes.  They are:
+Each milestone includes, as applicable, a demonstration of work completed up to that point, and a description of expectations for the next milestone. Note that for this project we have a few time boxes.  They are:
 * Week of September 11th – Description of first demo: In first demo, present Architecture and design. Architect along with team members will finalize and present finalized version of Architecture and design of lane departure warning system
 * Week of September 18th Present first demo. Description of second demo: In second demo, team will present research done so far and features/stories developed in Sprint 1 and 2
 * Week of October 16th Present second demo. Description of third demo: In third demo, team will present features/stories developed in Sprint 3
