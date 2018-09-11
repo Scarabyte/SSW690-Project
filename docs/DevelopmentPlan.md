@@ -177,8 +177,9 @@ Once a risk is identified, an appropriate response is formulated. The responses 
 Risks will be managed at each Sprint Retrospective/Weekly Status Meeting (see the Communication Plan section above).
 
 ### ASSUMPTIONS (required) - Assigned:Rak
-_It may be clear to the project insiders what assumptions are being made about staffing, hardware, vacations, rewards, ... 
-but make it clear to everyone else and to the other half of the project that cannot read your thoughts._
+1) The project will be complished by a team of 4 people
+2) The project assumes a minimum android version of V 7.0 (Nougat)
+3) The project assumes there is no rain or fog for the operation of the app
 
 ### DISTRIBUTION LIST - Assigned:Sapana
 _Who receives this document?_
