@@ -65,7 +65,11 @@ Goals for Week 2 of class:
 #### Rakshith:
 
 * _What did I work on?_
+  * Draft Development Plan
+  * Android Application Development
 * _What did I accomplish?_
+  * Completed the Communication and Assumption sections of the draft development plan
+  * Installed Android Studio and ran application committed by Sapana into the project space
 
 ### Issues, Risks, and Opportunities:
 
@@ -108,6 +112,10 @@ _Where do we want the project to be next week?_
 ##### Rakshith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Figure out how to change the image that the virtual phone displays in the camera
+  * Research how offline trainer works with openCV
+  * Figure out how to build android studio app
+
 
 ### Other Comments:
 
