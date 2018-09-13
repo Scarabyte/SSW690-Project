@@ -11,7 +11,32 @@ The architecture is largely constrained by the Android operating system and appl
   * __Performance__: The architecture should optimize performance above other quality characteristics. This is because a poor performing application will fail to achieve the desired functionality, regardless of whether extensibility and modularity have been achieved.
 
 ## 3. Logical Architecture
-TBD: Assigned to Keith
+In Progress: Assigned to Keith
+
+The following diagram depicts the logical architecture of the software that operates the Back Seat Driver and LDWS functionality. The system utilizes a layered architecture where interaction among the architectural elements are strictly with the layers above and below. The architecture significantly leverages the standard Android application environment and the services provided by the OpenCV library. These services in libraries, then, execute on top of the Android operating system. Coupled with the Android operating system are specific drivers for hardware devices, in particular the speaker for audio notifications, the screen for visual output, the touchpad for user interaction, storage for capturing log messages and functional data, and the camera for video input.
+
+<img src="Software Architecture Block Diagram.png">
+
+### 3.1 Back Seat Driver Application Architecture
+
+The following diagram depicts the internal architecture of the Back Seat Driver application.
+
+<center><img src="Back Seat Driver App Architecture.png" width="500px"></center>
+
+#### 3.1.1 MainActivity Class
+
+The MainActivity class is derived from the android.app.Activity class and provides the application framework and fundamental operation. This includes initializing the services and libraries needed to perform processing, establishing application run-time characteristics such as "keep screen on" and ensuring that everything is shut down correctly when the application is terminated. The MainActivity class will vector processing to the LDWSProcessor class in order to invoke the lane departure warning functionality.
+
+#### 3.1.2 LDWSProcessor Class
+
+The LDWSProcessor class is the main controller for the Lane Departure Warning function. It contains the main algorithms to determine the lane of travel and whether the vehicle is on a trajectory to depart the lane of travel. It is invoked by the MainActivity class upon application startup or activation by the user and is responsible for intializing the appropriate resources to perform the function. This includes initializing the OpenCV library modules, activating the device's camera and establishing a logging mechanism. The LDWSProcessorClass leverages two additional classes for complete functionality - the LaneDetector class, which processes images to determine the lane of travel and the DepartureNotifier class, which audibly and possibly visually notifies the driver of a lane departure warning.
+
+#### 3.1.3 LaneDetector Class
+
+#### 3.1.4 DepartureNotifier Class
+
+### 3.2 Correlation of Architecture to Goals
+
 
 ## 4. Process Architecture
 TBD: Assigned to Adam
