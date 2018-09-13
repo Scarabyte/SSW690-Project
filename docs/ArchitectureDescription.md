@@ -21,7 +21,7 @@ The following diagram depicts the logical architecture of the software that oper
 
 The following diagram depicts the internal architecture of the Back Seat Driver application.
 
-<center><img src="Back Seat Driver App Architecture.png" width="500px"></center>
+<p align="center"><img src="Back Seat Driver App Architecture.png" width="500px"></p>
 
 #### 3.1.1 MainActivity Class
 
@@ -33,7 +33,11 @@ The LDWSProcessor class is the main controller for the Lane Departure Warning fu
 
 #### 3.1.3 LaneDetector Class
 
+The LaneDetector class is responsible for performing image and algorithmic processing in order to detect the lane markers or boundaries of the travel lane. This class leverages the OpenCV library modules to perform filtering and processing such as applying a Gaussian filter, Hough transformation and invoking a Canny Edge Detector. The LaneDetector class is invoked by the LDWSProcessor class when a new frame of video is ready for processing. The output provided back to the LaneDetector class is a set of data structures that represent the detected lane of travel.
+
 #### 3.1.4 DepartureNotifier Class
+
+The DepartureNotifier class is the function that performs audible and possibly visual notification of a lane departure warning. The class interfaces with the Android's speaker device interface to issue the audible warning. If a visual notification is implemented, the class will invoke another Activity to overlay the visual warning on the application window. The DepartureNotifier class is invoked by the LDWSProcessor class when a warning needs to be issued; it is otherwise idle.
 
 ### 3.2 Correlation of Architecture to Goals
 
