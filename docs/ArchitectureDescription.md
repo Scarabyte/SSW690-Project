@@ -13,7 +13,7 @@ The architecture is largely constrained by the Android operating system and appl
 ## 3. Logical Architecture
 TBD: Assigned to Keith
 
-[![Software Architecture Block Diagram](Software Architecture Block Diagram.png)]
+<img src="Software Architecture Block Diagram.png">
 
 ## 4. Process Architecture
 TBD: Assigned to Adam
