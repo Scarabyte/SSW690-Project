@@ -11,17 +11,14 @@ The architecture is largely constrained by the Android operating system and appl
   * __Performance__: The architecture should optimize performance above other quality characteristics. This is because a poor performing application will fail to achieve the desired functionality, regardless of whether extensibility and modularity have been achieved.
 
 ## 3. Logical Architecture
-TBD: Assigned to TBD
+TBD: Assigned to Keith
 
 ## 4. Process Architecture
-TBD: Assigned to TBD
+TBD: Assigned to Adam
 
 ## 5. Development Architecture
-TBD: Assigned to TBD
+TBD: Assigned to Sapana
 
-## 6. Physical Architecture
-TBD: Assigned to TBD
-
-## 7. Scenarios
-TBD: Assigned to TBD
+## 6. Scenarios
+TBD: Assigned to Rak
 
