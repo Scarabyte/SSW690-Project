@@ -21,7 +21,7 @@ The following diagram depicts the logical architecture of the software that oper
 
 The following diagram depicts the internal architecture of the Back Seat Driver application.
 
-<center><img src="Back Seat Driver App Architecture.png" width="500px"></center>
+<p align="center"><img src="Back Seat Driver App Architecture.png" width="500px"></p>
 
 #### 3.1.1 MainActivity Class
 
@@ -33,10 +33,19 @@ The LDWSProcessor class is the main controller for the Lane Departure Warning fu
 
 #### 3.1.3 LaneDetector Class
 
+The LaneDetector class is responsible for performing image and algorithmic processing in order to detect the lane markers or boundaries of the travel lane. This class leverages the OpenCV library modules to perform filtering and processing such as applying a Gaussian filter, Hough transformation and invoking a Canny Edge Detector. The LaneDetector class is invoked by the LDWSProcessor class when a new frame of video is ready for processing. The output provided back to the LaneDetector class is a set of data structures that represent the detected lane of travel.
+
 #### 3.1.4 DepartureNotifier Class
+
+The DepartureNotifier class is the function that performs audible and possibly visual notification of a lane departure warning. The class interfaces with the Android's speaker device interface to issue the audible warning. If a visual notification is implemented, the class will invoke another Activity to overlay the visual warning on the application window. The DepartureNotifier class is invoked by the LDWSProcessor class when a warning needs to be issued; it is otherwise idle.
 
 ### 3.2 Correlation of Architecture to Goals
 
+__Extensibility__ is accomlished by allowing the MainActivity to invoke additional "processor" classes, operating in parallel to the LDWSProcess class. For example, if a traffic sign recognition function is desired to be added, a new TrafficSignProcessor class (and associated classes) can be created. The MainActivity would then be extended to invoke the TrafficSignalProcessor class in addition to the LDWSProcessor class.
+
+__Modularity__ is accomlished by partitioning the major sub-functions of the application functionality into separate classes. It is possible to have separate team members working independently on the LDWSProcessor, LaneDetector and DepartureNotifier classes without signficant impact to each other, as long as the public interfaces to the classes are well-designed and strictly enforced.
+
+__Performance__ is accomplished by streamlining the processing into a serial/pipeline methodology whereby the MainActivity invokes the LDWSProcessor class, which then invokes the LaneDeparture class and when necessary the DepartureNotifier class. Performance of each of these sub-functions may then be easily measured and corrective action taken if needed to optimize their execution.
 
 ## 4. Process Architecture
 TBD: Assigned to Adam
