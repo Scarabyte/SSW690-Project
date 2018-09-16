@@ -53,6 +53,9 @@ TBD: Assigned to Adam
 ## 5. Development Architecture
 TBD: Assigned to Sapana
 
+The following diagram depicts the components involved in the Back Seat Driver application.
+<p align="center"><img src="ComponentDiagram.png" width="500px"></p>
+
 ## 6. Scenarios
 TBD: Assigned to Rak
 
