@@ -26,7 +26,10 @@ TBD
 
 ### 2.4 MainActivity
 
-The MainActivity class is derived from the android.app.Activity class and provides the application framework and fundamental operation. This includes initializing the services and libraries needed to perform processing, establishing application run-time characteristics such as "keep screen on" and ensuring that everything is shut down correctly when the application is terminated. The MainActivity class will vector processing to the LDWSProcessor class in order to invoke the lane departure warning functionality.
+Responsibilities:
+  * Start up and shut down the Back Seat Driver application.
+  * Load and initialize the OpenCV library and touch/camera interfaces.
+  * Invoke the LDWSProcessor to perform lane departure warning.
 
 The following diagram depicts the design of the MainActivity class.
 
