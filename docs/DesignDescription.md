@@ -18,7 +18,10 @@ TBD
 
 ### 2.2 LaneDetector
 
-TBD
+Responsibilities:
+  * Leverage the OpenCV library modules to apply Gaussian filter, Hough transformation and invoking Canny Edge detector
+  * Invoked by the LDWSProcessor when new frame of video is ready for processing
+  
 
 ### 2.3 DepartureNotifier
 
