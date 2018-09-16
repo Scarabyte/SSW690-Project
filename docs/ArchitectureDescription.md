@@ -50,6 +50,10 @@ __Performance__ is accomplished by streamlining the processing into a serial/pip
 ## 4. Process Architecture
 TBD: Assigned to Adam
 
+The following diagram the high-level process architecture of the Back Seat Driver application: a set of independently-executing processes that invoke each other in response to _events_ in the application space. The processes themselves contain sets of independent _tasks_ that can be scheduled individually, and combine to produce an executable unit of the respective function.
+
+
+
 ## 5. Development Architecture
 TBD: Assigned to Sapana
 
