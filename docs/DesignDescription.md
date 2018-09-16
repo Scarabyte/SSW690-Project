@@ -2,7 +2,7 @@
 
 This document presents the high level design of the Back Seat Driver application. The intent is to provide sufficient details such that consistency and organization is established for the implementation to be successful.
 
-<div style="color:#997000;background-color:#FEEEBB;">Warning: This document is a "living" document and will be updated as the Back Seat Driver application prototype evolves."</div>
+<div style="color:#997000;background-color:#FEEEBB;border=1px;">Warning: This document is a "living" document and will be updated as the Back Seat Driver application prototype evolves.</div>
 
 ## 1. References
 
