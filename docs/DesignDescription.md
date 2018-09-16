@@ -14,7 +14,11 @@ The design of the Back Seat Driver application is a decomposition of the archite
 
 ### 2.1 LDWSProcessor
 
-TBD
+Responsibilities:
+  * Main Controller for the Lane Departure Warning function
+  * Contains the algorithms to determine the lane of travel and whether the vehicle is about to depart the lane of travel
+  * Invoked by MainActivity class when activated by the user or upon start up of the application
+  * Responsible for activating device's camera and establishing logging mechanism by initializing the OpenCV Library modules
 
 ### 2.2 LaneDetector
 
@@ -25,7 +29,7 @@ Responsibilities:
 
 ### 2.3 DepartureNotifier
 
-TBD
+  * 
 
 ### 2.4 MainActivity
 
