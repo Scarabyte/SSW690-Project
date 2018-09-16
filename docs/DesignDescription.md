@@ -16,20 +16,21 @@ The design of the Back Seat Driver application is a decomposition of the archite
 
 Responsibilities:
   * Main Controller for the Lane Departure Warning function
-  * Contains the algorithms to determine the lane of travel and whether the vehicle is about to depart the lane of travel
-  * Invoked by MainActivity class when activated by the user or upon start up of the application
+  * Contains the algorithms to determine the lane of travel and whether the vehicle is about to depart the lane of travel  
   * Responsible for activating device's camera and establishing logging mechanism by initializing the OpenCV Library modules
+  * Invoked by MainActivity class when activated by the user or upon start up of the application
 
 ### 2.2 LaneDetector
 
 Responsibilities:
   * Leverage the OpenCV library modules to apply Gaussian filter, Hough transformation and invoking Canny Edge detector
-  * Invoked by the LDWSProcessor when new frame of video is ready for processing
+  * Invoked by the LDWSProcessor class when new frame of video is ready for processing
   
 
 ### 2.3 DepartureNotifier
 
-  * 
+  * Performs function to notify user of a lane departure by providing audible and possibly visual warning message
+  * Invoked by the LDWSProcessor class when vehicle departs the lane, otherwise stays idle 
 
 ### 2.4 MainActivity
 
