@@ -57,5 +57,14 @@ The following diagram shows the components involved in the Back Seat Driver appl
 <p align="center"><img src="ComponentDiagram.png" width="600px"></p>
 
 ## 6. Scenarios
-TBD: Assigned to Rak
+Scenario 1 : Normal Operation
+   - Launch the application from an android phone
+   - Application processes inputs from camera looking for lane lines
+   - Application alerts user when car is driven close to a lane
+   - User closes application when destination is reached
 
+Scenario 2 : Lane Departure Alert
+   - Launch the application from an android phone
+   - Application detects from camera that vehicle is leaving lane
+   - Application alerts user with audio and visual cues that vehicle is leaving the lane
+   - Application continues to monitor for next lane departure
