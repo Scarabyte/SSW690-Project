@@ -50,6 +50,26 @@ __Performance__ is accomplished by streamlining the processing into a serial/pip
 ## 4. Process Architecture
 TBD: Assigned to Adam
 
+The following diagram the high-level process architecture of the Back Seat Driver application: a set of independently-executing processes that invoke each other in response to _events_ in the application space. The processes themselves contain sets of independent _tasks_ that can be scheduled individually, and combine to produce an executable unit of the respective function.
+
+<p align="center"><img src="SSW690ProcessArchitecture.png" width="500px"></p>
+
+### 4.1 Main Activity Process
+
+This process is invoked by android.app.Activity when the user starts the application. It first initiates the resources required to run the application, and then executes the Run-Time tasks periodically until the application is terminated, at which time the Shut down task is executed. While executing, the Run-Time task will itself invoke the LDWS Processor process, which will capture and analyze data from the device camera.
+
+### 4.2 LDWS Processor Process
+
+This process initiates the camera input, which will feed into the Image Capture task. It also initializes the OpenCV library, which will be used to analyze data captured by the camera. The Image Capture task runs periodically while the application is active, and invokes the Lane Detection process to determine when there is a lane departure event. Upon being notified of an event, the Notification task invokes the Departure Notification process to inform the user, and invokes the logging task to record the data. When relevant, the logging task may also exchange data with the run-time task, such as when an error occurs that requires corrective action.
+
+### 4.3 Lane Detection Process
+
+The Lane Detection process executes a periodic Image Processing task to analyze the camera data. In order to extract the relevant information, the image is passed through a series of filters: a Gaussian filter, Hough transformation, and Canny edge detector. The output of these filters is then passed from the Image Filtering task to the Lane Determination task, which will process the filtered image to determine when a lane departure event has occurred. This task will also run periodically whenever there is new image data to be processed, and upon detection of an event will invoke the Notification Task LDWS Processor Process.
+
+### 4.4 Departure Notification Process
+
+This process is invoked by the Notification task when a lane departure event has been detected. It comprises an Audible Warning task which interfaces with the device speakers and, if enabled, a Visual Warning task that interfaces with the application window interface to provice visual feedback.
+
 ## 5. Development Architecture
 TBD: Assigned to Sapana
 
