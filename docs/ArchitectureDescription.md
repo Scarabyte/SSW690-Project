@@ -11,7 +11,6 @@ The architecture is largely constrained by the Android operating system and appl
   * __Performance__: The architecture should optimize performance above other quality characteristics. This is because a poor performing application will fail to achieve the desired functionality, regardless of whether extensibility and modularity have been achieved.
 
 ## 3. Logical Architecture
-In Progress: Assigned to Keith
 
 The following diagram depicts the logical architecture of the software that operates the Back Seat Driver and LDWS functionality. The system utilizes a layered architecture where interaction among the architectural elements are strictly with the layers above and below. The architecture significantly leverages the standard Android application environment and the services provided by the OpenCV library. These services in libraries, then, execute on top of the Android operating system. Coupled with the Android operating system are specific drivers for hardware devices, in particular the speaker for audio notifications, the screen for visual output, the touchpad for user interaction, storage for capturing log messages and functional data, and the camera for video input.
 
@@ -48,7 +47,6 @@ __Modularity__ is accomlished by partitioning the major sub-functions of the app
 __Performance__ is accomplished by streamlining the processing into a serial/pipeline methodology whereby the MainActivity invokes the LDWSProcessor class, which then invokes the LaneDeparture class and when necessary the DepartureNotifier class. Performance of each of these sub-functions may then be easily measured and corrective action taken if needed to optimize their execution.
 
 ## 4. Process Architecture
-TBD: Assigned to Adam
 
 The following diagram the high-level process architecture of the Back Seat Driver application: a set of independently-executing processes that invoke each other in response to _events_ in the application space. The processes themselves contain sets of independent _routines_ that can be called individually, and combine to produce an executable unit of the respective function.
 
@@ -71,7 +69,6 @@ The Lane Detection process executes a periodic Image Processing routine to analy
 This process is invoked by the Notification routine when a lane departure event has been detected. It comprises an Audible Warning routine which interfaces with the device speakers and, if enabled, a Visual Warning routine that interfaces with the application window interface to provide visual feedback.
 
 ## 5. Development Architecture
-TBD: Assigned to Sapana
 
 The following diagram shows the high-level components involved in the Back Seat Driver application.
 <p align="center"><img src="ComponentDiagram.png" width="600px"></p>
@@ -85,7 +82,6 @@ LDWSProcessor.java will include the methods to activate the camera input, to cap
 In LaneDetection.java class, image filtering and processing is being done to determine when a lane departure occurred. Function GaussianBlur() from Imgproc package of OpenCV libaray will be used on an image.  Lane edges in the image is performed by calling canny edge detector function [g, t]= edge(f, 'canny', parameters);. In the output, g is a logical array with 1's at the locations where edge points were detected in f and 0's elsewhere. Parameter t is optional, it gives the threshold used by edge to determine which gradient values are strong enough to be called edge points. And finally, call Hough Transform function to find lines in the image. 
 
 In DepartureNotifier.java, Android API MediaPlayer will be used to play media file as a warning message when driver departs the lane. 
-
 
 ## 6. Scenarios
 Scenario 1 : Normal Operation
