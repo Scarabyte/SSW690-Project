@@ -18,3 +18,7 @@ Each team will present their architecture and design in class during Week 4 and 
 One presentation per team.
 
 # **Response**
+
+Draft architecture and presentation have been created and are available in the GitHub repository.
+
+The documents discuss the planned high level design from a number of perspectives.
