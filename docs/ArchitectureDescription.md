@@ -73,8 +73,19 @@ This process is invoked by the Notification routine when a lane departure event 
 ## 5. Development Architecture
 TBD: Assigned to Sapana
 
-The following diagram shows the components involved in the Back Seat Driver application.
+The following diagram shows the high-level components involved in the Back Seat Driver application.
 <p align="center"><img src="ComponentDiagram.png" width="600px"></p>
+
+The Back Seat Driver application will be build mostly leveraging already available Android and OpenCV libraries. It is developed using leading mobile Android OS. User interface used for camera video input could be latest Android device, most likely device which Android OS 7 or higher.  
+
+MainActivity.java will include methods to start the application, pause and stop the application. 
+
+LDWSProcessor.java will include the methods to activate the camera input, to capture the image. It also calls LaneDetector.java and DepartureNotifier.java classes when the application is active. Logging is achieved in this class using Android Util package.
+
+In LaneDetection.java class, image filtering and processing is being done to determine when a lane departure occurred. Function GaussianBlur() from Imgproc package of OpenCV libaray will be used on an image.  Lane edges in the image is performed by calling canny edge detector function [g, t]= edge(f, 'canny', parameters);. In the output, g is a logical array with 1's at the locations where edge points were detected in f and 0's elsewhere. Parameter t is optional, it gives the threshold used by edge to determine which gradient values are strong enough to be called edge points. And finally, call Hough Transform function to find lines in the image. 
+
+In DepartureNotifier.java, Android API MediaPlayer will be used to play media file as a warning message when driver departs the lane. 
+
 
 ## 6. Scenarios
 Scenario 1 : Normal Operation
