@@ -37,7 +37,12 @@ Goals for Week 3 of class:
 #### Keith:
 
 * _What did I work on?_
+  * Architecture Description
+  * Design Description
 * _What did I accomplish?_
+  * Drafted the architecture description and documented the logical view.
+  * Constructed a design framework and documented the MainActivity class design.
+  * Built and executed the prototype application on my phone.
 
 #### Rakshith:
 
@@ -75,6 +80,8 @@ _Where do we want the project to be next week?_
 ##### Keith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Construct the software framework (class structure) in accordance with the architecture and design.
+  * Research lane detection techniques - beyond the image processing. How does the app know what a "lane" is?
 
 ##### Rakshith:
 
