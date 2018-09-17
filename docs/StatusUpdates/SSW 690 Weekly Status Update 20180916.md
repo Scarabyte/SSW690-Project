@@ -32,7 +32,7 @@ Goals for Week 3 of class:
 * _What did I work on?_
   * Draft development architecture
  * _What did I accomplish?_
-  * More understanding of application to be built 
+   * More understanding of the application to be built 
 
 #### Keith:
 
@@ -69,8 +69,8 @@ _Where do we want the project to be next week?_
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
- * Collect image datasets to use for testing
- * Sprint 1 work
+   * Collect image datasets to use for testing
+   * Sprint 1 work
 
 ##### Keith:
 
