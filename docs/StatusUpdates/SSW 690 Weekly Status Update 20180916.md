@@ -47,7 +47,11 @@ Goals for Week 3 of class:
 #### Rakshith:
 
 * _What did I work on?_
+  * Updated scenarios for design presentation
+  * Tried to read up on more tutorials related to android app development
 * _What did I accomplish?_
+  * Updated scenarios for design presentation
+
 
 ### Issues, Risks, and Opportunities:
 
@@ -86,7 +90,8 @@ _Where do we want the project to be next week?_
 ##### Rakshith:
 
 * _What do you plan to work on and accomplish in the next week?_
-
+  * Get sample application to run on the phone
+  * Continue researching how to get offline algorithm to work
 
 ### Other Comments:
 
