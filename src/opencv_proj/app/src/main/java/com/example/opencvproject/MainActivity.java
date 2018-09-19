@@ -186,6 +186,7 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
+        Mat outputImage = new Mat();
 
         // TODO: Remove ColorBlob stuff.
         if (mIsColorSelected && false) {
@@ -205,9 +206,10 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
            Send the image to the LDWSProcessor to process a travel lane and detect
            whether the vehicle is leaving the travel lane.
          */
-        mLDWSProcessor.process(inputFrame);
+        mLDWSProcessor.process(inputFrame, outputImage);
 
-        return mRgba;
+//        return mRgba;
+        return outputImage;
     }
 
     private Scalar converScalarHsv2Rgba(Scalar hsvColor) {

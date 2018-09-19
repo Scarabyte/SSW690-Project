@@ -6,6 +6,7 @@ package com.example.opencvproject;
  */
 
 import org.opencv.android.CameraBridgeViewBase;
+import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 
 import java.util.List;
@@ -23,10 +24,10 @@ public class LDWSProcessor {
 
     }
 
-    public void process(CameraBridgeViewBase.CvCameraViewFrame image) {
+    public void process(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage) {
 
         /* Process an image here. */
-        List<MatOfPoint> lanePoints = mLaneDetector.detect(image);
+        List<MatOfPoint> lanePoints = mLaneDetector.detect(image, outputImage);
         if (check_lane_departure(lanePoints)) {
             /* Notify the operator of a potential lane departure. */
             mDepartureNotifier.notifyOperator();
