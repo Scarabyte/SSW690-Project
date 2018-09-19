@@ -53,6 +53,8 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
+    private LDWSProcessor mLDWSProcessor;
+
     private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -125,6 +127,7 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
         mBlobColorHsv = new Scalar(255);
         SPECTRUM_SIZE = new Size(200, 64);
         CONTOUR_COLOR = new Scalar(255,0,0,255);
+        mLDWSProcessor = new LDWSProcessor();
     }
 
     public void onCameraViewStopped() {
@@ -184,7 +187,8 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         mRgba = inputFrame.rgba();
 
-        if (mIsColorSelected) {
+        // TODO: Remove ColorBlob stuff.
+        if (mIsColorSelected && false) {
             mDetector.process(mRgba);
             List<MatOfPoint> contours = mDetector.getContours();
             Log.e(TAG, "Contours count: " + contours.size());
@@ -196,6 +200,12 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
             Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
             mSpectrum.copyTo(spectrumLabel);
         }
+
+        /*
+           Send the image to the LDWSProcessor to process a travel lane and detect
+           whether the vehicle is leaving the travel lane.
+         */
+        mLDWSProcessor.process(inputFrame);
 
         return mRgba;
     }
