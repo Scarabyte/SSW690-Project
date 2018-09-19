@@ -8,7 +8,8 @@
 
 _One word assessment of how is the team doing relative to the schedule?_
 
-<table border='0'><tr><td><img src=status_green.png></td><td>Green</td></tr></table>
+| ![Green](https://github.com/Scarabyte/SSW690-Project/blob/master/docs/StatusUpdates/status_green.png?raw=true) | Green  |
+| ----------- |:-----------:|
 
 ### Team Status Summary: Where are we now?
 
