@@ -27,6 +27,7 @@ public class LaneDetector {
 
         /* Process the image and detect a lane. Return the points that identify the lane. */
         Imgproc.GaussianBlur(image.gray(), outputImage, new Size(5,5), 3, 3);
+        Imgproc.Canny(outputImage, outputImage, 10, 100);
 
         return lanePoints;
     }
