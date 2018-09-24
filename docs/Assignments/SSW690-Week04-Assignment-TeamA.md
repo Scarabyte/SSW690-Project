@@ -16,3 +16,8 @@ Weeks 4-12 are dedicated to building, testing, documenting, and deploying your p
 Each team will meet weekly with faculty to discuss current status, issues, and concerns.  We&#39;ll also review the issues in your GitHub repository so be sure to keep GitHub up to date.
 
 # **Response**
+
+### Sprint 1 Week 1
+* Initial estimates for all open defects (as of the Week 4 team meeting date) have been added with the ZenHub plugin.
+* Defects targetted for Sprint 1 have been identified and assigned.
+* Work on Sprint 1 is ongoing; current state of the project can be seen in GitHub.
