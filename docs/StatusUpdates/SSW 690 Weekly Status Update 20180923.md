@@ -34,7 +34,11 @@ Goals for Week 4 of class:
 #### Sapana:
 
 * _What did I work on?_
+  * Estimated story points, went through stories and added comments
+  * Sprint 1 task : application name change
 * _What did I accomplish?_
+  * Found and uploaded few single lane and multi lane road images to use during development
+  * Updated application name from 'OpenCVProject' to 'BackSeatDrivers'. Testing in progress before pushing changes to gitgub
 
 #### Keith:
 
@@ -78,6 +82,8 @@ Goals for Week 4 of class:
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Complete Sprint 1 work
+  * Research Android application testing 
 
 ##### Keith:
 
