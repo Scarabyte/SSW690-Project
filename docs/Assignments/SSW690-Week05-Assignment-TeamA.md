@@ -1,7 +1,7 @@
-# Assignment Week 4
+# Assignment Week 5
 ## Build, test, document, deploy your project
 
-24 September 2018
+1 October 2018
 
 **Team Members / Honor pledge**
 
@@ -17,7 +17,4 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 # **Response**
 
-### Sprint 1 Week 1
-* Initial estimates for all open defects (as of the Week 4 team meeting date) have been added with the ZenHub plugin.
-* Defects targetted for Sprint 1 have been identified and assigned.
-* Work on Sprint 1 is ongoing; current state of the project can be seen in GitHub.
+### Sprint 1 Week 2
