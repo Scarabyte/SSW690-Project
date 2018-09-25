@@ -1,4 +1,4 @@
-package com.example.opencvproject;
+package com.example.backseatdrivers;
 
 /*
    The LaneDetector class performs image processing and algorithmic functionality

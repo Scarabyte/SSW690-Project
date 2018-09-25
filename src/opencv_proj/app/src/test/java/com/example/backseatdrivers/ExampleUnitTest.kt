@@ -1,4 +1,4 @@
-package com.example.opencvproject
+package com.example.backseatdrivers
 
 import org.junit.Test
 
