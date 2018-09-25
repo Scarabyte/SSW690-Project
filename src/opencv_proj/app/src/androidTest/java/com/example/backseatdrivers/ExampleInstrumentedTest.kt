@@ -1,4 +1,4 @@
-package com.example.opencvproject
+package com.example.backseatdrivers
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("com.example.opencvproject", appContext.packageName)
+        assertEquals("com.example.backseatdrivers", appContext.packageName)
     }
 }

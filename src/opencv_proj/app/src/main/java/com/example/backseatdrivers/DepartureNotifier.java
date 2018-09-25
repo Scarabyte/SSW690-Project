@@ -1,4 +1,4 @@
-package com.example.opencvproject;
+package com.example.backseatdrivers;
 
 /*
    The DepartureNotifier class informs the operator that a lane departure event

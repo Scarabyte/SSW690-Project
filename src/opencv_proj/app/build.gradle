@@ -7,7 +7,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.opencvproject"
+        applicationId "com.example.backseatdrivers"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

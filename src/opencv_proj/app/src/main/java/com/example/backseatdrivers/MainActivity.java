@@ -1,4 +1,4 @@
-package com.example.opencvproject;
+package com.example.backseatdrivers;
 
 /*
 import android.support.v7.app.AppCompatActivity
