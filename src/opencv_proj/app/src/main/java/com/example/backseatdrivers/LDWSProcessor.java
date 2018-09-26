@@ -1,4 +1,4 @@
-package com.example.opencvproject;
+package com.example.backseatdrivers;
 
 /*
    The LDWSProcessor class processes an image (either a frame of a video
