@@ -35,7 +35,7 @@ public class LaneDetector {
         Imgproc.GaussianBlur(image.gray(), tempImage, new Size(5,5), 3, 3);
 
         Imgproc.Canny(tempImage, tempImage, 10, 100);
-        Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 5, 1);
+        Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 100, 10);
         Point pt1 = new Point();
         Point pt2 = new Point();
         for (int x = 0; x < linesHough.rows(); x++) {
