@@ -24,9 +24,12 @@ Goals for Week 5 of class:
 #### Adam:
 
 * _What did I work on?_
-  * 
+  * Completed Sprint 1 tasks
+  * Team Lead / Project Management housekeeping tasks
 * _What did I accomplish?_
-  * 
+  * Completed first iteration of Hough Lines tasks - it needs some adjustments, but the function itself works
+  * Reviewed team member's work as available and kept GitHub up to date
+  * Kept team members informed about all discussions with professor; met with Rak individually since he was not able to attend the group meeting this week
 
 #### Sapana:
 
@@ -67,14 +70,17 @@ Goals for Week 5 of class:
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
-  * 
+  * Estimates and stories for Sprint 2 identified
+  * Preliminary testing framework
+  * Continue any supporting research as needed
 
 #### Individual Goals
 
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
-  * 
+  * Review the new issues / tasks opened for the lane detection; make estimates and assignments for Sprint 2
+  * Start working on Sprint 2 tasks assigned to me
 
 ##### Sapana:
 
@@ -88,7 +94,7 @@ Goals for Week 5 of class:
   * Work on Sprint 2 backlog items.
   * Continue research to find any way we can optimize our software.
   
-Note: I'm on travel for three weeks beginning 10/08. I'll be able to work while traveling but my responsses may be delayed and my attendance in group meetings/classes may be impacted.
+Note: I'm on travel for three weeks beginning 10/08. I'll be able to work while traveling but my responses may be delayed and my attendance in group meetings/classes may be impacted.
 
 ##### Rakshith:
 
@@ -97,4 +103,5 @@ Note: I'm on travel for three weeks beginning 10/08. I'll be able to work while 
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
-  * 
+  * In terms of the project management aspects our team is currently doing very well. The professor (customer) asked how our application performs the lane detection, which has been the primary focus of our research and will be a big part of the Sprint 2 tasks. We will continue to keep the professor updated with our current progress during the weekly class meetings.
+  
