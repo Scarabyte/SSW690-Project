@@ -58,7 +58,10 @@ Goals for Week 5 of class:
 #### Rakshith:
 
 * _What did I work on?_
+  * Sprint 1 Tasks
+  * Researched on how others are accomplishing the lane detector problem online  
 * _What did I accomplish?_
+  * Progressed sprint 1 tasks to completed. Keith had already completed the work in the baseline  
 
 
 ### Issues, Risks, and Opportunities:
@@ -104,6 +107,9 @@ Note: I'm on travel for three weeks beginning 10/08. I'll be able to work while 
 ##### Rakshith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Estimate sprint 2 stories
+  * Continue research on lane detection and help add detail to the steps that Keith has laid out for the lane detection problem  
+
 
 ### Other Comments:
 
