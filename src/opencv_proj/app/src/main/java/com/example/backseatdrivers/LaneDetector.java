@@ -28,20 +28,19 @@ public class LaneDetector {
 
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
+        Mat tempImage = new Mat();
 
         /* Process the image and detect a lane. Return the points that identify the lane. */
-        Imgproc.GaussianBlur(image.gray(), outputImage, new Size(5,5), 3, 3);
-        Imgproc.Canny(outputImage, outputImage, 10, 100);
-        Imgproc.HoughLinesP(outputImage, linesHough, 1, Math.PI / 180, 5, 5, 1);
+        Imgproc.GaussianBlur(image.rgba(), outputImage, new Size(5,5), 3, 3);
+        Imgproc.GaussianBlur(image.gray(), tempImage, new Size(5,5), 3, 3);
+
+        Imgproc.Canny(tempImage, tempImage, 10, 100);
+        Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 100, 10);
         Point pt1 = new Point();
         Point pt2 = new Point();
-        for(int i = 0; i < linesHough.cols(); i++) {
-            double[] val = linesHough.get(0, i);
-            pt1.x = val[0];
-            pt1.y = val[1];
-            pt2.x = val[2];
-            pt2.y = val[3];
-            Imgproc.line(outputImage, pt1, pt2, new Scalar(0, 0, 255), 10);
+        for (int x = 0; x < linesHough.rows(); x++) {
+            double[] l = linesHough.get(x, 0);
+            Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]), new Scalar(255, 0, 0), 1, Imgproc.LINE_AA, 0);
         }
 
         return lanePoints;

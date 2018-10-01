@@ -88,6 +88,7 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
         setContentView(R.layout.color_blob_detection_surface_view);
 
         mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);
+        mOpenCvCameraView.setMaxFrameSize(900,900);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
     }
