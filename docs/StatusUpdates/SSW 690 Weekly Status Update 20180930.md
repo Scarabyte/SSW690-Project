@@ -34,9 +34,12 @@ Goals for Week 5 of class:
 #### Sapana:
 
 * _What did I work on?_
-  * 
+  * [Sprint 1 story](https://github.com/Scarabyte/SSW690-Project/issues/24) 
+  * Research on Android application unit testing 
 * _What did I accomplish?_
-  * 
+  * Completed Sprint 1 task to update application name and added steps in the story
+  * Documenting Testing Approach - in progress
+  * Researched on Hough Transform, went through some online tutorial
 
 #### Keith:
 
@@ -85,7 +88,9 @@ Goals for Week 5 of class:
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
-  * 
+  * Continue research on android testing
+  * Set up couple emulators for testing purposes
+  * Sprint 2 tasks - non development
 
 ##### Keith:
 
