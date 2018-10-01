@@ -1,4 +1,4 @@
-## SSW 690 Weekly Status Update 
+﻿## SSW 690 Weekly Status Update 
 
 ### Team : _Back Seat Drivers_
 
@@ -14,6 +14,8 @@ _One word assessment of how is the team doing relative to the schedule?_
 ### Team Status Summary: Where are we now?
 
 _One or two sentences describing high level project status and progress._
+
+The initial prototype is progressing well; all Sprint 1 stories have been completed in first draft (some adjustments to the input parameters might still be necessary). The app is functional after Sprint 1, and is starting to show the basic framework needed for the lane detection feature.
 
 Goals for Week 5 of class:
 * Complete Sprint 1 stories
