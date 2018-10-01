@@ -17,5 +17,5 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 # **Response**
 
-### Sprint 1 Week 2
+### Sprint 2 Week 1
 
