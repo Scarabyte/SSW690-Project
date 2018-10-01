@@ -67,6 +67,7 @@ _These are unique to software development, although there may be some overlap._
   * Development Hardware
     * Moto Z Play, Android 8.0.0
     * HTC One M8, Android 6.0
+    * Samsung Galaxy S5
   * Test Hardware
     * Samsung Galaxy S5
   * Target/Deployment Hardware
