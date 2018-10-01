@@ -15,7 +15,11 @@ _One word assessment of how is the team doing relative to the schedule?_
 
 _One or two sentences describing high level project status and progress._
 
+The initial prototype is progressing well; all Sprint 1 stories have been completed in first draft (some adjustments to the input parameters might still be necessary). The app is functional after Sprint 1, and is starting to show the basic framework needed for the lane detection feature.
+
 Goals for Week 6 of class:
+* Plan Sprint 2: determine which issues in the backlog to tackle and make assignments
+* Start working on Sprint 2 tasks
 
 ### Last week&#39;s activities by team member:
 
