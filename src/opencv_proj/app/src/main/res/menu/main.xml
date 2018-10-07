@@ -2,28 +2,41 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single" >
-        <item
-            android:id="@+id/calibrate"
-            android:title="@string/action_calibrate" />
-        <item
-            android:id="@+id/preview_mode"
-            android:checked="true"
-            android:title="@string/preview_mode">
-            <menu>
-                <group android:checkableBehavior="single">
-                    <item
-                        android:id="@+id/calibration"
-                        android:checked="true"
-                        android:title="@string/calibration" />
-                    <item
-                        android:id="@+id/undistortion"
-                        android:title="@string/undistortion" />
-                    <item
-                        android:id="@+id/comparison"
-                        android:title="@string/comparison" />
-                </group>
-            </menu>
-        </item>
-    </group>
+    <item
+        android:id="@+id/mode"
+        android:title="@string/mode" >
+        <menu >
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/mode_lane_departure"
+                    android:checked="true"
+                    android:title="@string/lane_departure" />
+                <item
+                    android:id="@+id/mode_calibration"
+                    android:title="@string/calibration" />
+            </group>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/calibrate"
+        android:title="@string/action_calibrate" />
+    <item
+        android:id="@+id/preview_mode"
+        android:checked="false"
+        android:title="@string/preview_mode">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/calibration"
+                    android:checked="true"
+                    android:title="@string/calibration" />
+                <item
+                    android:id="@+id/undistortion"
+                    android:title="@string/undistortion" />
+                <item
+                    android:id="@+id/comparison"
+                    android:title="@string/comparison" />
+            </group>
+        </menu>
+    </item>
 </menu>

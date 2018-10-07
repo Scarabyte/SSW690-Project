@@ -1,17 +1,5 @@
 package com.example.backseatdrivers;
 
-/*
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
-
-class MainActivity : AppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
-} */
-
 import java.util.List;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -47,25 +35,23 @@ import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity implements OnTouchListener, CvCameraViewListener2 {
     private static final String  TAG              = "MainActivity";
 
-//    private boolean              mIsColorSelected = false;
-    private Mat                  mRgba;
-//    private Scalar               mBlobColorRgba;
-//    private Scalar               mBlobColorHsv;
-//    private ColorBlobDetector    mDetector;
-//    private Mat                  mSpectrum;
- //   private Size                 SPECTRUM_SIZE;
- //   private Scalar               CONTOUR_COLOR;
     private int                  mWidth;
     private int                  mHeight;
     private Mat                  mOutputImage;
+    private Menu                 mMenu;
 
     private CameraBridgeViewBase mOpenCvCameraView;
     private CameraCalibrator     mCalibrator;
     private OnCameraFrameRender  mOnCameraFrameRender;
     private LDWSProcessor        mLDWSProcessor;
+
+    private static final int     MODE_LDWS = 0;
+    private static final int     MODE_CALIBRATION = 1;
+    private int                  mMode = MODE_LDWS;
 
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -139,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
+        mMenu = menu;
         return true;
     }
 
@@ -154,26 +141,33 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.mode_calibration:
+                mMode = MODE_CALIBRATION;
+                item.setChecked(true);
+                return true;
+            case R.id.mode_lane_departure:
+                mMode = MODE_LDWS;
+                item.setChecked(true);
+                return true;
             case R.id.calibration:
                 mOnCameraFrameRender =
-                        new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
-                item.setChecked(true);
+                    new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
                 return true;
             case R.id.undistortion:
                 mOnCameraFrameRender =
-                        new OnCameraFrameRender(new UndistortionFrameRender(mCalibrator));
+                    new OnCameraFrameRender(new UndistortionFrameRender(mCalibrator));
                 item.setChecked(true);
                 return true;
             case R.id.comparison:
                 mOnCameraFrameRender =
-                        new OnCameraFrameRender(new ComparisonFrameRender(mCalibrator, mWidth, mHeight, getResources()));
+                    new OnCameraFrameRender(new ComparisonFrameRender(mCalibrator, mWidth, mHeight, getResources()));
                 item.setChecked(true);
                 return true;
             case R.id.calibrate:
                 final Resources res = getResources();
                 if (mCalibrator.getCornersBufferSize() < 2) {
                     (Toast.makeText(this, res.getString(R.string.more_samples), Toast.LENGTH_SHORT)).show();
-                    return true;
+                    return super.onOptionsItemSelected(item);
                 }
 
                 mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
@@ -213,19 +207,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                     }
                 }.execute();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        return super.onOptionsItemSelected(item);
     }
 
     public void onCameraViewStarted(int width, int height) {
-        mRgba = new Mat(height, width, CvType.CV_8UC4);
-//        mDetector = new ColorBlobDetector();
-//        mSpectrum = new Mat();
-//        mBlobColorRgba = new Scalar(255);
-//        mBlobColorHsv = new Scalar(255);
-//        SPECTRUM_SIZE = new Size(200, 64);
-//        CONTOUR_COLOR = new Scalar(255,0,0,255);
         mLDWSProcessor = new LDWSProcessor();
         if (mWidth != width || mHeight != height) {
             mWidth = width;
@@ -239,75 +225,28 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
     public void onCameraViewStopped() {
-        mRgba.release();
+        return;
     }
 
     public boolean onTouch(View v, MotionEvent event) {
-    /*
-        int cols = mRgba.cols();
-        int rows = mRgba.rows();
-
-        int xOffset = (mOpenCvCameraView.getWidth() - cols) / 2;
-        int yOffset = (mOpenCvCameraView.getHeight() - rows) / 2;
-
-        int x = (int)event.getX() - xOffset;
-        int y = (int)event.getY() - yOffset;
-
-        Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
-
-        if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
-
-        Rect touchedRect = new Rect();
-
-        touchedRect.x = (x>4) ? x-4 : 0;
-        touchedRect.y = (y>4) ? y-4 : 0;
-
-        touchedRect.width = (x+4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
-        touchedRect.height = (y+4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
-
-        Mat touchedRegionRgba = mRgba.submat(touchedRect);
-
-        Mat touchedRegionHsv = new Mat();
-        Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
-
-        // Calculate average color of touched region
-        mBlobColorHsv = Core.sumElems(touchedRegionHsv);
-        int pointCount = touchedRect.width*touchedRect.height;
-        for (int i = 0; i < mBlobColorHsv.val.length; i++)
-            mBlobColorHsv.val[i] /= pointCount;
-
-        mBlobColorRgba = convertScalarHsv2Rgba(mBlobColorHsv);
-
-        Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
-                ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
-
-        mDetector.setHsvColor(mBlobColorHsv);
-
-        Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE, 0, 0, Imgproc.INTER_LINEAR_EXACT);
-
-        mIsColorSelected = true;
-
-        touchedRegionRgba.release();
-        touchedRegionHsv.release();
-*/
-        mCalibrator.addCorners();
+        if (mMode == MODE_CALIBRATION) {
+            mCalibrator.addCorners();
+        }
         return false; // don't need subsequent touch events
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         /* Send the image to the LDWSProcessor to process a travel lane and detect
            whether the vehicle is leaving the travel lane. */
-        return mOnCameraFrameRender.render(inputFrame);
-//        Mat outputImage = new Mat();
-//        mLDWSProcessor.process(inputFrame, outputImage);
-//        return outputImage;
+        Mat outputImage = new Mat();
+        Mat frame = outputImage;
+        if (mMode == MODE_CALIBRATION) {
+            frame = mOnCameraFrameRender.render(inputFrame);
+        }
+        if (mMode == MODE_LDWS) {
+            mLDWSProcessor.process(inputFrame, outputImage);
+        }
+        return frame;
     }
 
-    private Scalar convertScalarHsv2Rgba(Scalar hsvColor) {
-        Mat pointMatRgba = new Mat();
-        Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
-        Imgproc.cvtColor(pointMatHsv, pointMatRgba, Imgproc.COLOR_HSV2RGB_FULL, 4);
-
-        return new Scalar(pointMatRgba.get(0, 0));
-    }
 }
