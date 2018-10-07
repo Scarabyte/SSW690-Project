@@ -38,7 +38,9 @@ Goals for Week 6 of class:
 #### Keith:
 
 * _What did I work on?_
+  * Sprint activity - Camera Calibration
 * _What did I accomplish?_
+  * Camera calibration
 
 #### Rakshith:
 
@@ -74,6 +76,8 @@ Goals for Week 6 of class:
 ##### Keith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Sprint activity: Correct image distortion.
+  * Research: Adding sliders to dynamically adjust image processing parameters in real-time.
 
 ##### Rakshith:
 
