@@ -30,34 +30,44 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.imgproc.Imgproc;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements OnTouchListener, CvCameraViewListener2 {
     private static final String  TAG              = "MainActivity";
 
-    private boolean              mIsColorSelected = false;
+//    private boolean              mIsColorSelected = false;
     private Mat                  mRgba;
-    private Scalar               mBlobColorRgba;
-    private Scalar               mBlobColorHsv;
-    private ColorBlobDetector    mDetector;
-    private Mat                  mSpectrum;
-    private Size                 SPECTRUM_SIZE;
-    private Scalar               CONTOUR_COLOR;
+//    private Scalar               mBlobColorRgba;
+//    private Scalar               mBlobColorHsv;
+//    private ColorBlobDetector    mDetector;
+//    private Mat                  mSpectrum;
+ //   private Size                 SPECTRUM_SIZE;
+ //   private Scalar               CONTOUR_COLOR;
+    private int                  mWidth;
+    private int                  mHeight;
+    private Mat                  mOutputImage;
 
     private CameraBridgeViewBase mOpenCvCameraView;
+    private CameraCalibrator     mCalibrator;
+    private OnCameraFrameRender  mOnCameraFrameRender;
+    private LDWSProcessor        mLDWSProcessor;
 
-    private LDWSProcessor mLDWSProcessor;
-
-    private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
+    private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
             switch (status) {
@@ -125,15 +135,107 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             mOpenCvCameraView.disableView();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu (Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        menu.findItem(R.id.preview_mode).setEnabled(true);
+        if (!mCalibrator.isCalibrated())
+            menu.findItem(R.id.preview_mode).setEnabled(false);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.calibration:
+                mOnCameraFrameRender =
+                        new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+                item.setChecked(true);
+                return true;
+            case R.id.undistortion:
+                mOnCameraFrameRender =
+                        new OnCameraFrameRender(new UndistortionFrameRender(mCalibrator));
+                item.setChecked(true);
+                return true;
+            case R.id.comparison:
+                mOnCameraFrameRender =
+                        new OnCameraFrameRender(new ComparisonFrameRender(mCalibrator, mWidth, mHeight, getResources()));
+                item.setChecked(true);
+                return true;
+            case R.id.calibrate:
+                final Resources res = getResources();
+                if (mCalibrator.getCornersBufferSize() < 2) {
+                    (Toast.makeText(this, res.getString(R.string.more_samples), Toast.LENGTH_SHORT)).show();
+                    return true;
+                }
+
+                mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
+                new AsyncTask<Void, Void, Void>() {
+                    private ProgressDialog calibrationProgress;
+
+                    @Override
+                    protected void onPreExecute() {
+                        calibrationProgress = new ProgressDialog(MainActivity.this);
+                        calibrationProgress.setTitle(res.getString(R.string.calibrating));
+                        calibrationProgress.setMessage(res.getString(R.string.please_wait));
+                        calibrationProgress.setCancelable(false);
+                        calibrationProgress.setIndeterminate(true);
+                        calibrationProgress.show();
+                    }
+
+                    @Override
+                    protected Void doInBackground(Void... arg0) {
+                        mCalibrator.calibrate();
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void result) {
+                        calibrationProgress.dismiss();
+                        mCalibrator.clearCorners();
+                        mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+                        String resultMessage = (mCalibrator.isCalibrated()) ?
+                                res.getString(R.string.calibration_successful)  + " " + mCalibrator.getAvgReprojectionError() :
+                                res.getString(R.string.calibration_unsuccessful);
+                        (Toast.makeText(MainActivity.this, resultMessage, Toast.LENGTH_SHORT)).show();
+
+                        if (mCalibrator.isCalibrated()) {
+                            CalibrationResult.save(MainActivity.this,
+                                    mCalibrator.getCameraMatrix(), mCalibrator.getDistortionCoefficients());
+                        }
+                    }
+                }.execute();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     public void onCameraViewStarted(int width, int height) {
         mRgba = new Mat(height, width, CvType.CV_8UC4);
-        mDetector = new ColorBlobDetector();
-        mSpectrum = new Mat();
-        mBlobColorRgba = new Scalar(255);
-        mBlobColorHsv = new Scalar(255);
-        SPECTRUM_SIZE = new Size(200, 64);
-        CONTOUR_COLOR = new Scalar(255,0,0,255);
+//        mDetector = new ColorBlobDetector();
+//        mSpectrum = new Mat();
+//        mBlobColorRgba = new Scalar(255);
+//        mBlobColorHsv = new Scalar(255);
+//        SPECTRUM_SIZE = new Size(200, 64);
+//        CONTOUR_COLOR = new Scalar(255,0,0,255);
         mLDWSProcessor = new LDWSProcessor();
+        if (mWidth != width || mHeight != height) {
+            mWidth = width;
+            mHeight = height;
+            mCalibrator = new CameraCalibrator(mWidth, mHeight);
+            if (CalibrationResult.tryLoad(this, mCalibrator.getCameraMatrix(), mCalibrator.getDistortionCoefficients())) {
+                mCalibrator.setCalibrated();
+            }
+            mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+        }
     }
 
     public void onCameraViewStopped() {
@@ -141,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
     public boolean onTouch(View v, MotionEvent event) {
+    /*
         int cols = mRgba.cols();
         int rows = mRgba.rows();
 
@@ -173,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         for (int i = 0; i < mBlobColorHsv.val.length; i++)
             mBlobColorHsv.val[i] /= pointCount;
 
-        mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
+        mBlobColorRgba = convertScalarHsv2Rgba(mBlobColorHsv);
 
         Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
                 ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
@@ -186,39 +289,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
         touchedRegionRgba.release();
         touchedRegionHsv.release();
-
+*/
+        mCalibrator.addCorners();
         return false; // don't need subsequent touch events
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        mRgba = inputFrame.rgba();
-        Mat outputImage = new Mat();
-
-        // TODO: Remove ColorBlob stuff.
-        if (mIsColorSelected && false) {
-            mDetector.process(mRgba);
-            List<MatOfPoint> contours = mDetector.getContours();
-            Log.e(TAG, "Contours count: " + contours.size());
-            Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
-
-            Mat colorLabel = mRgba.submat(4, 68, 4, 68);
-            colorLabel.setTo(mBlobColorRgba);
-
-            Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
-            mSpectrum.copyTo(spectrumLabel);
-        }
-
-        /*
-           Send the image to the LDWSProcessor to process a travel lane and detect
-           whether the vehicle is leaving the travel lane.
-         */
-        mLDWSProcessor.process(inputFrame, outputImage);
-
-//        return mRgba;
-        return outputImage;
+        /* Send the image to the LDWSProcessor to process a travel lane and detect
+           whether the vehicle is leaving the travel lane. */
+        return mOnCameraFrameRender.render(inputFrame);
+//        Mat outputImage = new Mat();
+//        mLDWSProcessor.process(inputFrame, outputImage);
+//        return outputImage;
     }
 
-    private Scalar converScalarHsv2Rgba(Scalar hsvColor) {
+    private Scalar convertScalarHsv2Rgba(Scalar hsvColor) {
         Mat pointMatRgba = new Mat();
         Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
         Imgproc.cvtColor(pointMatHsv, pointMatRgba, Imgproc.COLOR_HSV2RGB_FULL, 4);
