@@ -31,6 +31,8 @@ import org.opencv.imgproc.Imgproc;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -39,7 +41,7 @@ import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
 
-public class MainActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
+public class MainActivity extends AppCompatActivity implements OnTouchListener, CvCameraViewListener2 {
     private static final String  TAG              = "MainActivity";
 
     private boolean              mIsColorSelected = false;
@@ -91,6 +93,9 @@ public class MainActivity extends Activity implements OnTouchListener, CvCameraV
         mOpenCvCameraView.setMaxFrameSize(900,900);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
     }
 
     @Override
