@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     private int                  mWidth;
     private int                  mHeight;
-    private Mat                  mOutputImage;
     private Menu                 mMenu;
 
     private CameraBridgeViewBase mOpenCvCameraView;
