@@ -33,8 +33,11 @@ Goals for Week 6 of class:
 #### Sapana:
 
 * _What did I work on?_
+ * Attempted to install and configure couple emulators
+ * Research on Sprint 2 stories
+ * Configured Logcat for debugging  
 * _What did I accomplish?_
-
+ 
 #### Keith:
 
 * _What did I work on?_
@@ -72,6 +75,7 @@ Goals for Week 6 of class:
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+ * continue working on testing current code with atleast two iamges (frames)
 
 ##### Keith:
 
