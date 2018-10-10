@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     private static final int     MODE_LDWS = 0;
     private static final int     MODE_CALIBRATION = 1;
-    private int                  mMode = MODE_LDWS;
+    private static final int     MODE_STOCKIMAGE = 2;
+    private int                  mMode = MODE_STOCKIMAGE;
 
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -148,6 +149,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 mMode = MODE_LDWS;
                 item.setChecked(true);
                 return true;
+            case R.id.mode_stock_image:
+                mMode = MODE_STOCKIMAGE;
+                item.setChecked(true);
+                return true;
             case R.id.calibration:
                 mOnCameraFrameRender =
                     new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
@@ -235,6 +240,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
+        /* Disable the camera immediately since we want to process only a single image. */
+        mOpenCvCameraView.disableView();
         /* Send the image to the LDWSProcessor to process a travel lane and detect
            whether the vehicle is leaving the travel lane. */
         Mat outputImage = new Mat();
@@ -244,6 +251,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
         if (mMode == MODE_LDWS) {
             mLDWSProcessor.process(inputFrame, outputImage);
+        }
+        if (mMode == MODE_STOCKIMAGE) {
+            /* Read the stock image and display it on the view. */
+            frame = inputFrame.rgba();
         }
         return frame;
     }
