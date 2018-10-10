@@ -144,14 +144,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;
                 item.setChecked(true);
+                mOpenCvCameraView.enableView();
                 return true;
             case R.id.mode_lane_departure:
                 mMode = MODE_LDWS;
                 item.setChecked(true);
+                mOpenCvCameraView.enableView();
                 return true;
             case R.id.mode_stock_image:
                 mMode = MODE_STOCKIMAGE;
                 item.setChecked(true);
+                /* Disable the camera immediately since we want to process only a single image. */
+                mOpenCvCameraView.disableView();
                 return true;
             case R.id.calibration:
                 mOnCameraFrameRender =
@@ -240,23 +244,18 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        /* Disable the camera immediately since we want to process only a single image. */
-        mOpenCvCameraView.disableView();
         /* Send the image to the LDWSProcessor to process a travel lane and detect
            whether the vehicle is leaving the travel lane. */
-        Mat outputImage = new Mat();
-        Mat frame = outputImage;
-        if (mMode == MODE_CALIBRATION) {
-            frame = mOnCameraFrameRender.render(inputFrame);
-        }
+        Mat outputImage = inputFrame.rgba();
         if (mMode == MODE_LDWS) {
+            outputImage = new Mat();
             mLDWSProcessor.process(inputFrame, outputImage);
         }
-        if (mMode == MODE_STOCKIMAGE) {
-            /* Read the stock image and display it on the view. */
-            frame = inputFrame.rgba();
+        else if (mMode == MODE_CALIBRATION) {
+            outputImage = mOnCameraFrameRender.render(inputFrame);
         }
-        return frame;
+
+        return outputImage;
     }
 
 }

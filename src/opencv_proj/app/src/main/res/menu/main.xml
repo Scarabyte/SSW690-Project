@@ -9,14 +9,14 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/mode_lane_departure"
-                    android:checked="false"
+                    android:checked="true"
                     android:title="@string/lane_departure" />
                 <item
                     android:id="@+id/mode_calibration"
                     android:title="@string/calibration" />
                 <item
                     android:id="@+id/mode_stock_image"
-                    android:checked="true"
+                    android:checked="false"
                     android:title="@string/stock_image" />
             </group>
         </menu>
