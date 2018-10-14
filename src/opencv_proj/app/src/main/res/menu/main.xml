@@ -14,13 +14,12 @@
                 <item
                     android:id="@+id/mode_calibration"
                     android:title="@string/calibration" />
-                <item
-                    android:id="@+id/mode_stock_image"
-                    android:checked="false"
-                    android:title="@string/stock_image" />
             </group>
         </menu>
     </item>
+    <item
+        android:id="@+id/stock_image"
+        android:title="@string/stock_image" />
     <item
         android:id="@+id/calibrate"
         android:title="@string/action_calibrate" />

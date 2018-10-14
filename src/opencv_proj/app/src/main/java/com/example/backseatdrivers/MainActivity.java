@@ -1,27 +1,13 @@
 package com.example.backseatdrivers;
 
-import java.io.IOException;
-import java.util.List;
-
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.android.Utils;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -53,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     private static final int     MODE_LDWS = 0;
     private static final int     MODE_CALIBRATION = 1;
-    private static final int     MODE_STOCKIMAGE = 2;
     private int                  mMode = MODE_LDWS;
 
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
@@ -154,8 +139,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 item.setChecked(true);
                 mOpenCvCameraView.enableView();
                 return true;
-            case R.id.mode_stock_image:
-                mMode = MODE_STOCKIMAGE;
+            case R.id.stock_image:
                 item.setChecked(true);
                 mOpenCvCameraView.disableView();
                 Intent intent = new Intent(this, DisplayStockImageActivity.class);
@@ -255,9 +239,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
         else if (mMode == MODE_CALIBRATION) {
             outputImage = mOnCameraFrameRender.render(inputFrame);
-        }
-        else if (mMode == MODE_STOCKIMAGE) {
-            outputImage = inputFrame.gray();
         }
 
         return outputImage;
