@@ -23,6 +23,7 @@ import org.opencv.imgproc.Imgproc;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -157,6 +158,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 mMode = MODE_STOCKIMAGE;
                 item.setChecked(true);
                 mOpenCvCameraView.disableView();
+                Intent intent = new Intent(this, DisplayStockImageActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.calibration:
                 mOnCameraFrameRender =
