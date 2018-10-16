@@ -42,7 +42,9 @@ Goals for Week 7 of class:
 #### Rakshith:
 
 * _What did I work on?_
+  * Continued trying to figure out how to create a mask to figure out area of interest
 * _What did I accomplish?_
+  * Was not able to complete the Sprint 2 task to figure out the area of interest. Found lots of algorithms implemented in python, will need to find out what the equivalent function calls are in java version of opencv.
 
 ### Issues, Risks, and Opportunities:
 
@@ -75,6 +77,7 @@ Goals for Week 7 of class:
 ##### Rakshith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Will work on finishing up Sprint 2 task which is past due.
 
 ### Other Comments:
 
