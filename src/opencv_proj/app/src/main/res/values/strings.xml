@@ -14,4 +14,6 @@
     <string name="undistorted">Undistorted</string>
     <string name="mode">Mode</string>
     <string name="lane_departure">Lane Departure</string>
+    <string name="stock_image">Stock Image</string>
+    <string name="loading_stock_image">Loading Stock Image</string>
 </resources>

@@ -18,6 +18,9 @@
         </menu>
     </item>
     <item
+        android:id="@+id/stock_image"
+        android:title="@string/stock_image" />
+    <item
         android:id="@+id/calibrate"
         android:title="@string/action_calibrate" />
     <item
