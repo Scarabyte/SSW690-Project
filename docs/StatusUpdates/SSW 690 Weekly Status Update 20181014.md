@@ -19,12 +19,15 @@ Goals for Week 7 of class:
 * Plan Sprint 3: determine which stories in the backlog to work in Sprint 3 and make assignments
 * Start working on Sprint 3 tasks
 
-### Last week&#39;s activities by team member:
+### Last week's activities by team member:
 
 #### Adam:
 
 * _What did I work on?_
+  * Research for sky view
+  * Project management tasks
 * _What did I accomplish?_
+  * Generally better understanding of the sky view distortion; this will be used in Sprint 3 as part of the next step in identifying lane markings
 
 #### Sapana:
 
@@ -58,12 +61,15 @@ Goals for Week 7 of class:
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
+  * Progressing with the Identify Road Features epic
+  * Progressing with the testing framework to use our stock images
 
 #### Individual Goals
 
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Implementation of sky view and region of interest
 
 ##### Sapana:
 
@@ -82,3 +88,5 @@ Goals for Week 7 of class:
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
+  * With the progress made in the first two sprints, currently it seems that we're on track to deliver the initial commitment by the end of the semester.
+  
