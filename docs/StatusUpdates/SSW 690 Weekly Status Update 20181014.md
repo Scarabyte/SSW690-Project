@@ -16,8 +16,8 @@ _One word assessment of how is the team doing relative to the schedule?_
 _One or two sentences describing high level project status and progress._
 
 Goals for Week 7 of class:
-* Plan Sprint 3: determine which stories in the backlog to work in Sprint 3 and make assignments
-* Start working on Sprint 3 tasks
+* Complete Sprint 2 tasks
+* Start planning for Sprint 3 tasks
 
 ### Last week's activities by team member:
 
@@ -61,8 +61,10 @@ Goals for Week 7 of class:
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
-  * Progressing with the Identify Road Features epic
-  * Progressing with the testing framework to use our stock images
+  * Plan Sprint 3: determine which stories in the backlog to work in Sprint 3 and make assignments
+  * Start working on Sprint 3 tasks; In particular:
+    * Progressing with the Identify Road Features epic
+    * Progressing with the testing framework to use our stock images
 
 #### Individual Goals
 
