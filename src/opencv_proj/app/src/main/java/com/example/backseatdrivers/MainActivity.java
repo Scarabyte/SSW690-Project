@@ -1,24 +1,15 @@
 package com.example.backseatdrivers;
 
-import java.util.List;
-
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
-import org.opencv.core.Core;
-import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
-import org.opencv.imgproc.Imgproc;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,13 +26,11 @@ import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity implements OnTouchListener, CvCameraViewListener2 {
     private static final String  TAG              = "MainActivity";
 
     private int                  mWidth;
     private int                  mHeight;
-    private Menu                 mMenu;
 
     private CameraBridgeViewBase mOpenCvCameraView;
     private CameraCalibrator     mCalibrator;
@@ -124,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.main, menu);
-        mMenu = menu;
         return true;
     }
 
@@ -139,14 +127,23 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        final Resources res = getResources();
         switch (item.getItemId()) {
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;
                 item.setChecked(true);
+                mOpenCvCameraView.enableView();
                 return true;
             case R.id.mode_lane_departure:
                 mMode = MODE_LDWS;
                 item.setChecked(true);
+                mOpenCvCameraView.enableView();
+                return true;
+            case R.id.stock_image:
+                item.setChecked(true);
+                mOpenCvCameraView.disableView();
+                Intent intent = new Intent(this, DisplayStockImageActivity.class);
+                startActivity(intent);
                 return true;
             case R.id.calibration:
                 mOnCameraFrameRender =
@@ -163,12 +160,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 item.setChecked(true);
                 return true;
             case R.id.calibrate:
-                final Resources res = getResources();
                 if (mCalibrator.getCornersBufferSize() < 2) {
                     (Toast.makeText(this, res.getString(R.string.more_samples), Toast.LENGTH_SHORT)).show();
                     return super.onOptionsItemSelected(item);
                 }
-
                 mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
                 new AsyncTask<Void, Void, Void>() {
                     private ProgressDialog calibrationProgress;
@@ -237,15 +232,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         /* Send the image to the LDWSProcessor to process a travel lane and detect
            whether the vehicle is leaving the travel lane. */
-        Mat outputImage = new Mat();
-        Mat frame = outputImage;
-        if (mMode == MODE_CALIBRATION) {
-            frame = mOnCameraFrameRender.render(inputFrame);
-        }
+        Mat outputImage = inputFrame.rgba();
         if (mMode == MODE_LDWS) {
             mLDWSProcessor.process(inputFrame, outputImage, mCalibrator);
         }
-        return frame;
+        else if (mMode == MODE_CALIBRATION) {
+            outputImage = mOnCameraFrameRender.render(inputFrame);
+        }
+
+        return outputImage;
     }
 
 }
