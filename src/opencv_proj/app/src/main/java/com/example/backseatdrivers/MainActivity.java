@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             frame = mOnCameraFrameRender.render(inputFrame);
         }
         if (mMode == MODE_LDWS) {
-            mLDWSProcessor.process(inputFrame, outputImage);
+            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator);
         }
         return frame;
     }

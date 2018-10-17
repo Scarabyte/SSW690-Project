@@ -24,10 +24,10 @@ public class LDWSProcessor {
 
     }
 
-    public void process(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage) {
+    public void process(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage, CameraCalibrator calibrator) {
 
         /* Process an image here. */
-        List<MatOfPoint> lanePoints = mLaneDetector.detect(image, outputImage);
+        List<MatOfPoint> lanePoints = mLaneDetector.detect(image, outputImage, calibrator);
         if (check_lane_departure(lanePoints)) {
             /* Notify the operator of a potential lane departure. */
             mDepartureNotifier.notifyOperator();
