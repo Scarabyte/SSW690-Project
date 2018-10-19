@@ -234,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
            whether the vehicle is leaving the travel lane. */
         Mat outputImage = inputFrame.rgba();
         if (mMode == MODE_LDWS) {
+            outputImage = new Mat();
             mLDWSProcessor.process(inputFrame, outputImage, mCalibrator);
         }
         else if (mMode == MODE_CALIBRATION) {
