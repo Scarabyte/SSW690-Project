@@ -8,6 +8,7 @@ import org.opencv.core.Mat;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -23,7 +24,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -184,20 +184,19 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         MyTask(MainActivity context) {
             activityReference = new WeakReference<>(context);
         }
-        private ProgressBar calibrationProgress;
+        private ProgressDialog calibrationProgress;
 
         @Override
         protected void onPreExecute() {
-            calibrationProgress = new ProgressBar(activityReference.get());
+            calibrationProgress = new ProgressDialog(activityReference.get());
             //calibrationProgress.setTitle(res.getString(R.string.calibrating));
             //calibrationProgress.setMessage(res.getString(R.string.please_wait));
             // TODO: Don't want to use hardcoded strings. Should be from strings.xml
-            //calibrationProgress.setTitle("Calibrating...");
-            ////calibrationProgress.setTooltipText("Please wait"); //Requires API 26
-            //calibrationProgress.setMessage("Please wait");
-            //calibrationProgress.setCancelable(false);
+            calibrationProgress.setTitle("Calibrating...");
+            calibrationProgress.setMessage("Please wait");
+            calibrationProgress.setCancelable(false);
             calibrationProgress.setIndeterminate(true);
-            //calibrationProgress.show();
+            calibrationProgress.show();
         }
 
         @Override
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
         @Override
         protected void onPostExecute(Void result) {
-            //calibrationProgress.dismiss();
+            calibrationProgress.dismiss();
             mCalibrator.clearCorners();
             mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
             //String resultMessage = (mCalibrator.isCalibrated()) ?
@@ -216,8 +215,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             //        res.getString(R.string.calibration_unsuccessful);
             // TODO: Don't want to use hardcoded strings. Should be from strings.xml
             String resultMessage = (mCalibrator.isCalibrated()) ?
-                    "Unsuccessful calibration.\nTry again"  + " " + mCalibrator.getAvgReprojectionError() :
-                    "Successfully calibrated!\nAvg. re-projection error:";
+                    "Successfully calibrated!\nAvg. re-projection error:"  + " " + mCalibrator.getAvgReprojectionError() :
+                    "Unsuccessful calibration.\nTry again";
             Toast.makeText(activityReference.get(), resultMessage, Toast.LENGTH_SHORT).show();
 
             if (mCalibrator.isCalibrated()) {
