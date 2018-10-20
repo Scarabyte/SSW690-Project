@@ -8,7 +8,6 @@ import org.opencv.core.Mat;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
@@ -24,6 +23,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
@@ -184,19 +184,20 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         MyTask(MainActivity context) {
             activityReference = new WeakReference<>(context);
         }
-        private ProgressDialog calibrationProgress;
+        private ProgressBar calibrationProgress;
 
         @Override
         protected void onPreExecute() {
-            calibrationProgress = new ProgressDialog(activityReference.get());
+            calibrationProgress = new ProgressBar(activityReference.get());
             //calibrationProgress.setTitle(res.getString(R.string.calibrating));
             //calibrationProgress.setMessage(res.getString(R.string.please_wait));
             // TODO: Don't want to use hardcoded strings. Should be from strings.xml
-            calibrationProgress.setTitle("Calibrating...");
-            calibrationProgress.setMessage("Please wait");
-            calibrationProgress.setCancelable(false);
+            //calibrationProgress.setTitle("Calibrating...");
+            ////calibrationProgress.setTooltipText("Please wait"); //Requires API 26
+            //calibrationProgress.setMessage("Please wait");
+            //calibrationProgress.setCancelable(false);
             calibrationProgress.setIndeterminate(true);
-            calibrationProgress.show();
+            //calibrationProgress.show();
         }
 
         @Override
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
         @Override
         protected void onPostExecute(Void result) {
-            calibrationProgress.dismiss();
+            //calibrationProgress.dismiss();
             mCalibrator.clearCorners();
             mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
             //String resultMessage = (mCalibrator.isCalibrated()) ?
