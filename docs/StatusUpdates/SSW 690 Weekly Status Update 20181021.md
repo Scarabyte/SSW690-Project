@@ -51,6 +51,7 @@ Goals for Week 8 of class:
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
+  * Advanced lane detection algorithm and testing framework
 
 #### Individual Goals
 
