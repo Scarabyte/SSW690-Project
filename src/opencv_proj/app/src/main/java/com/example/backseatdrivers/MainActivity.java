@@ -26,6 +26,8 @@ import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
+
 public class MainActivity extends AppCompatActivity implements OnTouchListener, CvCameraViewListener2 {
     private static final String  TAG              = "MainActivity";
 
@@ -33,8 +35,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private int                  mHeight;
 
     private CameraBridgeViewBase mOpenCvCameraView;
-    private CameraCalibrator     mCalibrator;
-    private OnCameraFrameRender  mOnCameraFrameRender;
+    private static CameraCalibrator     mCalibrator;
+    private static OnCameraFrameRender  mOnCameraFrameRender;
     private LDWSProcessor        mLDWSProcessor;
 
     private static final int     MODE_LDWS = 0;
@@ -73,12 +75,12 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
         setContentView(R.layout.color_blob_detection_surface_view);
 
-        mOpenCvCameraView = (CameraBridgeViewBase) findViewById(R.id.color_blob_detection_activity_surface_view);
+        mOpenCvCameraView = findViewById(R.id.color_blob_detection_activity_surface_view);
         mOpenCvCameraView.setMaxFrameSize(900,900);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
     }
 
@@ -165,45 +167,65 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                     return super.onOptionsItemSelected(item);
                 }
                 mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
-                new AsyncTask<Void, Void, Void>() {
-                    private ProgressDialog calibrationProgress;
-
-                    @Override
-                    protected void onPreExecute() {
-                        calibrationProgress = new ProgressDialog(MainActivity.this);
-                        calibrationProgress.setTitle(res.getString(R.string.calibrating));
-                        calibrationProgress.setMessage(res.getString(R.string.please_wait));
-                        calibrationProgress.setCancelable(false);
-                        calibrationProgress.setIndeterminate(true);
-                        calibrationProgress.show();
-                    }
-
-                    @Override
-                    protected Void doInBackground(Void... arg0) {
-                        mCalibrator.calibrate();
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void result) {
-                        calibrationProgress.dismiss();
-                        mCalibrator.clearCorners();
-                        mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
-                        String resultMessage = (mCalibrator.isCalibrated()) ?
-                                res.getString(R.string.calibration_successful)  + " " + mCalibrator.getAvgReprojectionError() :
-                                res.getString(R.string.calibration_unsuccessful);
-                        (Toast.makeText(MainActivity.this, resultMessage, Toast.LENGTH_SHORT)).show();
-
-                        if (mCalibrator.isCalibrated()) {
-                            CalibrationResult.save(MainActivity.this,
-                                    mCalibrator.getCameraMatrix(), mCalibrator.getDistortionCoefficients());
-                        }
-                    }
-                }.execute();
+                // start the AsyncTask, passing the Activity context
+                // in to a custom constructor
+                new MyTask(this).execute();
                 return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
+
+    private static class MyTask extends AsyncTask<Void, Void, Void> {
+
+        private WeakReference<MainActivity> activityReference;
+
+        // only retain a weak reference to the activity
+        MyTask(MainActivity context) {
+            activityReference = new WeakReference<>(context);
+        }
+        private ProgressDialog calibrationProgress;
+
+        @Override
+        protected void onPreExecute() {
+            calibrationProgress = new ProgressDialog(activityReference.get());
+            //calibrationProgress.setTitle(res.getString(R.string.calibrating));
+            //calibrationProgress.setMessage(res.getString(R.string.please_wait));
+            // TODO: Don't want to use hardcoded strings. Should be from strings.xml
+            calibrationProgress.setTitle("Calibrating...");
+            calibrationProgress.setMessage("Please wait");
+            calibrationProgress.setCancelable(false);
+            calibrationProgress.setIndeterminate(true);
+            calibrationProgress.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... arg0) {
+            mCalibrator.calibrate();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            calibrationProgress.dismiss();
+            mCalibrator.clearCorners();
+            mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+            //String resultMessage = (mCalibrator.isCalibrated()) ?
+            //        res.getString(R.string.calibration_successful)  + " " + mCalibrator.getAvgReprojectionError() :
+            //        res.getString(R.string.calibration_unsuccessful);
+            // TODO: Don't want to use hardcoded strings. Should be from strings.xml
+            String resultMessage = (mCalibrator.isCalibrated()) ?
+                    "Unsuccessful calibration.\nTry again"  + " " + mCalibrator.getAvgReprojectionError() :
+                    "Successfully calibrated!\nAvg. re-projection error:";
+            Toast.makeText(activityReference.get(), resultMessage, Toast.LENGTH_SHORT).show();
+
+            if (mCalibrator.isCalibrated()) {
+                CalibrationResult.save(activityReference.get(),
+                        mCalibrator.getCameraMatrix(), mCalibrator.getDistortionCoefficients());
+            }
+        }
+    }
+
 
     public void onCameraViewStarted(int width, int height) {
         mLDWSProcessor = new LDWSProcessor();
