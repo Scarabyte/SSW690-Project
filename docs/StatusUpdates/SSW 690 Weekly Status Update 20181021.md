@@ -24,7 +24,11 @@ Goals for Week 8 of class:
 #### Adam:
 
 * _What did I work on?_
+  * Researching and developing 'sky view' transformation
+  * Resolved a compiler warning that 'AsyncTask' should be static to avoid memory leaks
+  * Project management tasks
 * _What did I accomplish?_
+  * After studying it, gained a better understanding of how the transformation works, and created an initial draft to implement it
 
 #### Sapana:
 
@@ -44,20 +48,23 @@ Goals for Week 8 of class:
 ### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
+  * Some tasks may be more difficult than initially expected; need to balance "nice to haves" and "need to haves"
 * _What new opportunities did you discover, if any?_
+  * Team members are working together to complete their assignments; the Google Meet room is always available for live discussions
 
 ### Action Items/Goals for next week:
 
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
-  * Advanced lane detection algorithm and testing framework
+  * Advance lane detection algorithm and testing framework
 
 #### Individual Goals
 
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Complete work on sky view transformation so the subsequent tasks can be started
 
 ##### Sapana:
 
