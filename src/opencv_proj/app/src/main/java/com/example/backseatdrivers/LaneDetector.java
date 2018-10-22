@@ -32,6 +32,7 @@ public class LaneDetector {
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
+        Mat skyTransformHomographyMatrix = new Mat();
 
         /* Undistort the original image and the grayscale image, if calibrated. */
         if (calibrator.isCalibrated()) {
@@ -72,7 +73,6 @@ public class LaneDetector {
                 new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
         );
 
-        SkyTransform skyTransform = new SkyTransform();
         MatOfPoint2f Src = new MatOfPoint2f(
                 new Point(0, 0),
                 new Point(tempImage.width(), 0),
@@ -86,12 +86,9 @@ public class LaneDetector {
                 new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
         );
 
-        skyTransform.m = Imgproc.getPerspectiveTransform(src, dst);
-//        Core.perspectiveTransform(Src, Dst, skyTransform.m);
-//        org.opencv.core.Point[] myPoints = Dst.toArray();
-        Core.perspectiveTransform(Src, Dst, skyTransform.m); // Do we need this line?
+        skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(src, dst);
         // TODO: Would be nice to have the image selectable: normal or sky view
-        Imgproc.warpPerspective(outputImage, outputImage, skyTransform.m, outputImage.size());
+        Imgproc.warpPerspective(outputImage, outputImage, skyTransformHomographyMatrix, outputImage.size());
 
 
         return lanePoints;
