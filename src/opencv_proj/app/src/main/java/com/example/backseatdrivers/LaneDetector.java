@@ -59,37 +59,6 @@ public class LaneDetector {
         }
 
         /* Convert image to sky view */
-//        public static SkyTransform transform(Mat tempImage) {
-//            MatOfPoint2f src = new MatOfPoint2f(
-//                    new Point(0, 0),
-//                    new Point(tempImage.width(), 0),
-//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
-//            );
-//            MatOfPoint2f dst = new MatOfPoint2f(
-//                    new Point(tempImage.width() * 0.45, 0),
-//                    new Point(tempImage.width() * 0.55, 0),
-//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
-//            );
-//
-//            SkyTransform skyTransform = new SkyTransform();
-//            MatOfPoint2f Src = new MatOfPoint2f(
-//                    new Point(0, 0),
-//                    new Point(tempImage.width(), 0),
-//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
-//            );
-//            MatOfPoint2f Dst = new MatOfPoint2f(
-//                    new Point(0, 0),
-//                    new Point(tempImage.width(), 0),
-//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
-//            );
-//
-//            skyTransform.m = Imgproc.getPerspectiveTransform(src, dst);
-//
-//        }
         MatOfPoint2f src = new MatOfPoint2f(
                 new Point(0, 0),
                 new Point(tempImage.width(), 0),
