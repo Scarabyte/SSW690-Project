@@ -8,6 +8,7 @@ package com.example.backseatdrivers;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.core.MatOfPoint;
@@ -56,6 +57,73 @@ public class LaneDetector {
             double[] l = linesHough.get(x, 0);
             Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]), new Scalar(255, 0, 0), 1, Imgproc.LINE_AA, 0);
         }
+
+        /* Convert image to sky view */
+//        public static SkyTransform transform(Mat tempImage) {
+//            MatOfPoint2f src = new MatOfPoint2f(
+//                    new Point(0, 0),
+//                    new Point(tempImage.width(), 0),
+//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+//            );
+//            MatOfPoint2f dst = new MatOfPoint2f(
+//                    new Point(tempImage.width() * 0.45, 0),
+//                    new Point(tempImage.width() * 0.55, 0),
+//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+//            );
+//
+//            SkyTransform skyTransform = new SkyTransform();
+//            MatOfPoint2f Src = new MatOfPoint2f(
+//                    new Point(0, 0),
+//                    new Point(tempImage.width(), 0),
+//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+//            );
+//            MatOfPoint2f Dst = new MatOfPoint2f(
+//                    new Point(0, 0),
+//                    new Point(tempImage.width(), 0),
+//                    new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                    new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+//            );
+//
+//            skyTransform.m = Imgproc.getPerspectiveTransform(src, dst);
+//
+//        }
+        MatOfPoint2f src = new MatOfPoint2f(
+                new Point(0, 0),
+                new Point(tempImage.width(), 0),
+                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+        );
+        MatOfPoint2f dst = new MatOfPoint2f(
+                new Point(tempImage.width() * 0.45, 0),
+                new Point(tempImage.width() * 0.55, 0),
+                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+        );
+
+        SkyTransform skyTransform = new SkyTransform();
+        MatOfPoint2f Src = new MatOfPoint2f(
+                new Point(0, 0),
+                new Point(tempImage.width(), 0),
+                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+        );
+        MatOfPoint2f Dst = new MatOfPoint2f(
+                new Point(0, 0),
+                new Point(tempImage.width(), 0),
+                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+        );
+
+        skyTransform.m = Imgproc.getPerspectiveTransform(src, dst);
+//        Core.perspectiveTransform(Src, Dst, skyTransform.m);
+//        org.opencv.core.Point[] myPoints = Dst.toArray();
+        Core.perspectiveTransform(Src, Dst, skyTransform.m); // Do we need this line?
+        // TODO: Would be nice to have the image selectable: normal or sky view
+        Imgproc.warpPerspective(outputImage, outputImage, skyTransform.m, outputImage.size());
+
 
         return lanePoints;
     }
