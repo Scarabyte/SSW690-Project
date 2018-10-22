@@ -60,31 +60,38 @@ public class LaneDetector {
         }
 
         /* Convert image to sky view */
+        // If the reference point (0, 0) is the top left, the points are at:
+        // (Image.width * 0.45, Image.height * 0.5) - Polygon upper left corner
+        // (Image.width * 0.55, Image.height * 0.5) - Polygon upper right corner
+        // (Image.width, Image.height)              - Polygon lower right corner
+        // (0, Image.height)                        - Polygon lower left corner
+        // I believe you can define the points in any order, as long as you stay consistent.
+        // The homography matrix will be recalculated accordingly.
         MatOfPoint2f src = new MatOfPoint2f(
-                new Point(0, 0),
-                new Point(tempImage.width(), 0),
                 new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
+                new Point(tempImage.width(), tempImage.height()),
+                new Point(0, tempImage.height())
         );
         MatOfPoint2f dst = new MatOfPoint2f(
-                new Point(tempImage.width() * 0.45, 0),
-                new Point(tempImage.width() * 0.55, 0),
                 new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
+                new Point(tempImage.width() * 0.45, tempImage.height()),
+                new Point(tempImage.width() * 0.55, tempImage.height())
         );
 
-        MatOfPoint2f Src = new MatOfPoint2f(
-                new Point(0, 0),
-                new Point(tempImage.width(), 0),
-                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
-        );
-        MatOfPoint2f Dst = new MatOfPoint2f(
-                new Point(0, 0),
-                new Point(tempImage.width(), 0),
-                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
-        );
+//        MatOfPoint2f Src = new MatOfPoint2f(
+//                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
+//                new Point(tempImage.width(), tempImage.height()),
+//                new Point(0, tempImage.height())
+//        );
+//        MatOfPoint2f Dst = new MatOfPoint2f(
+//                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
+//                new Point(tempImage.width(), tempImage.height()),
+//                new Point(0, tempImage.height())
+//        );
 
         skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(src, dst);
         // TODO: Would be nice to have the image selectable: normal or sky view
