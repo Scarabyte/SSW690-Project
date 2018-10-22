@@ -33,7 +33,10 @@ Goals for Week 8 of class:
 #### Sapana:
 
 * _What did I work on?_
+  * Research on how to use displayed stock image to test different functions
+  * Resolved issues with build and Run on my local
 * _What did I accomplish?_
+  * Better Understanding about current toolbar and menu implementation
  
 #### Keith:
 
@@ -44,6 +47,7 @@ Goals for Week 8 of class:
 
 * _What did I work on?_
 * _What did I accomplish?_
+  
 
 ### Issues, Risks, and Opportunities:
 
@@ -69,6 +73,7 @@ Goals for Week 8 of class:
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Verifying single lane/multi lane images using LDWSprocessor.process
 
 ##### Keith:
 
