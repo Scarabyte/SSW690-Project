@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private static final int     MODE_SKYVIEW = 2;
     private int                  mMode = MODE_LDWS;
 
-//    private boolean              mInSkyView = false;
-
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
@@ -175,8 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                     return super.onOptionsItemSelected(item);
                 }
                 mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
-                // start the AsyncTask, passing the Activity context
-                // in to a custom constructor
+                /* Start the AsyncTask, passing the Activity context into a custom constructor */
                 new MyTask(this).execute();
                 return true;
         }
@@ -188,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
         private WeakReference<MainActivity> activityReference;
 
-        // only retain a weak reference to the activity
+        /* Only retain a weak reference to the activity */
         MyTask(MainActivity context) {
             activityReference = new WeakReference<>(context);
         }
@@ -258,13 +255,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         }
         return false; // don't need subsequent touch events
     }
-
-//    public boolean inSkyView() {
-//        if (mMode == MODE_SKYVIEW) { mInSkyView = true; }
-//        else { mInSkyView = false; }
-//
-//        return mInSkyView;
-//    }
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         /* Send the image to the LDWSProcessor to process a travel lane and detect

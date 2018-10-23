@@ -67,12 +67,16 @@ public class LaneDetector {
         // (Image.width, Image.height)              - Polygon lower right corner
         // (0, Image.height)                        - Polygon lower left corner
         // I believe you can define the points in any order, as long as you stay consistent.
-        // The homography matrix will be recalculated accordingly.
+        // The homography matrix will (should?) be recalculated accordingly.
         MatOfPoint2f src = new MatOfPoint2f(
+                new Point(0, 0),
+                new Point(tempImage.width(), 0),
                 new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
-                new Point(tempImage.width(), tempImage.height()),
-                new Point(0, tempImage.height())
+                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5)
+//                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
+//                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
+//                new Point(tempImage.width(), tempImage.height()),
+//                new Point(0, tempImage.height())
         );
         MatOfPoint2f dst = new MatOfPoint2f(
                 new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
@@ -82,7 +86,7 @@ public class LaneDetector {
         );
 
         skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(src, dst);
-        // TODO: Would be nice to have the image selectable: normal or sky view
+        // TODO: Would be nice to have the image selectable: normal or sky view (AB: Done?)
         if (inSkyView == true) {
             Imgproc.warpPerspective(outputImage, outputImage, skyTransformHomographyMatrix, outputImage.size());
         }
