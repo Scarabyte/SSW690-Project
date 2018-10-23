@@ -41,7 +41,12 @@ Goals for Week 8 of class:
 #### Keith:
 
 * _What did I work on?_
+  * Researched sliding window line detection
+  * Sprint tasks
 * _What did I accomplish?_
+  * Completed distortion correction user story
+  * Completed image orientation user story
+  * Learned about Sobel filters and sliding window line detection
 
 #### Rakshith:
 
@@ -78,6 +83,9 @@ Goals for Week 8 of class:
 ##### Keith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Update architecture document to align with latest prototype structure
+  * Implement the sobel filter to prepare for line detection
+  * Implement the sliding window line detection based on histogram of sobel filter output
 
 ##### Rakshith:
 
@@ -86,4 +94,4 @@ Goals for Week 8 of class:
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
-  
+  * Keith is still traveling this week and will be mostly unavailable due to schedule commitments.  
