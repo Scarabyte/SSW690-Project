@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     private static final int     MODE_LDWS = 0;
     private static final int     MODE_CALIBRATION = 1;
+    private static final int     MODE_SKYVIEW = 2;
     private int                  mMode = MODE_LDWS;
+
+//    private boolean              mInSkyView = false;
 
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -131,6 +134,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onOptionsItemSelected(MenuItem item) {
         final Resources res = getResources();
         switch (item.getItemId()) {
+            case R.id.mode_skyview:
+                mMode = MODE_SKYVIEW;
+                item.setChecked(true);
+                mOpenCvCameraView.enableView();
+                return true;
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;
                 item.setChecked(true);
@@ -251,13 +259,24 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         return false; // don't need subsequent touch events
     }
 
+//    public boolean inSkyView() {
+//        if (mMode == MODE_SKYVIEW) { mInSkyView = true; }
+//        else { mInSkyView = false; }
+//
+//        return mInSkyView;
+//    }
+
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         /* Send the image to the LDWSProcessor to process a travel lane and detect
            whether the vehicle is leaving the travel lane. */
         Mat outputImage = inputFrame.rgba();
         if (mMode == MODE_LDWS) {
             outputImage = new Mat();
-            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator);
+            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator, false);
+        }
+        else if (mMode == MODE_SKYVIEW) {
+            outputImage = new Mat();
+            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator, true);
         }
         else if (mMode == MODE_CALIBRATION) {
             outputImage = mOnCameraFrameRender.render(inputFrame);

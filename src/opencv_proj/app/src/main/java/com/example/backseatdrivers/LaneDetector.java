@@ -27,12 +27,13 @@ public class LaneDetector {
         /* Perform initialization here. */
     }
 
-    public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage, CameraCalibrator calibrator) {
+    public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image,
+                                   Mat outputImage, CameraCalibrator calibrator, boolean inSkyView) {
 
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
-        Mat skyTransformHomographyMatrix = new Mat();
+        Mat skyTransformHomographyMatrix;
 
         /* Undistort the original image and the grayscale image, if calibrated. */
         if (calibrator.isCalibrated()) {
@@ -80,22 +81,14 @@ public class LaneDetector {
                 new Point(tempImage.width() * 0.55, tempImage.height())
         );
 
-//        MatOfPoint2f Src = new MatOfPoint2f(
-//                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-//                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
-//                new Point(tempImage.width(), tempImage.height()),
-//                new Point(0, tempImage.height())
-//        );
-//        MatOfPoint2f Dst = new MatOfPoint2f(
-//                new Point(tempImage.width() * 0.45, tempImage.height() * 0.5),
-//                new Point(tempImage.width() * 0.55, tempImage.height() * 0.5),
-//                new Point(tempImage.width(), tempImage.height()),
-//                new Point(0, tempImage.height())
-//        );
-
         skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(src, dst);
         // TODO: Would be nice to have the image selectable: normal or sky view
-        Imgproc.warpPerspective(outputImage, outputImage, skyTransformHomographyMatrix, outputImage.size());
+        if (inSkyView == true) {
+            Imgproc.warpPerspective(outputImage, outputImage, skyTransformHomographyMatrix, outputImage.size());
+        }
+        else {
+            Imgproc.warpPerspective(tempImage, tempImage, skyTransformHomographyMatrix, outputImage.size());
+        }
 
 
         return lanePoints;
