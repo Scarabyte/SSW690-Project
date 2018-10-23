@@ -51,7 +51,9 @@ Goals for Week 8 of class:
 #### Rakshith:
 
 * _What did I work on?_
+  * Researched material to find area of interest
 * _What did I accomplish?_
+  * Put down initial code for area of interest
   
 
 ### Issues, Risks, and Opportunities:
@@ -90,6 +92,8 @@ Goals for Week 8 of class:
 ##### Rakshith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Finish detection of area of interest, since it is a prerequisite for other user stories
+
 
 ### Other Comments:
 
