@@ -25,6 +25,7 @@ import static org.opencv.core.Core.FONT_HERSHEY_SIMPLEX;
 
 public class LaneDetector {
     private static final String TAG = "LaneDetector";
+    private boolean mDoneOnce = false;
 
     public LaneDetector() {
         /* Perform initialization here. */
@@ -36,8 +37,8 @@ public class LaneDetector {
         Point[] dst = new Point[4];
 
         /* Source region is a trapezoid */
-        src[0] = new Point(in.cols()*0.0725, in.rows()*0.45);
-        src[1] = new Point(in.cols()*0.575, in.rows()*0.45);
+        src[0] = new Point(in.cols()*0.4, in.rows()*0.5);
+        src[1] = new Point(in.cols()*0.6, in.rows()*0.5);
         src[2] = new Point(in.cols()-1, in.rows()-1);
         src[3] = new Point(0, in.rows()-1);
 
@@ -57,10 +58,12 @@ public class LaneDetector {
     protected void scanImageForLaneLines(Mat image) {
         // WARNING: This can only operate on a grayscale image!
         double threshold = 100.0;
+        int xStep = 1;
+        int yStep = 10;
         List<Point> rowIntensities = new ArrayList<Point>();
-        for (int y = image.rows()-1; y > 0; y--) {
+        for (int y = image.rows()-1; y > 0; y -= yStep) {
             rowIntensities.clear();
-            for (int x = 0; x < image.cols()-1; x++) {
+            for (int x = 0; x < image.cols()-1; x += xStep) {
                 double[] pixel = image.get(x,y);
                 if (pixel != null) {
                     if (pixel[0] > threshold) {
@@ -70,6 +73,8 @@ public class LaneDetector {
                 }
             }
             Log.d(TAG, "Identified " + rowIntensities.size() + " points of intensity in Row " + y);
+            // Process the intensity points and determine the center of the intensities that are
+            // within the window size.
         }
     }
 
@@ -117,7 +122,11 @@ public class LaneDetector {
             //transformToSkyView(outputImage, outputImage);
             transformToSkyView(gray, tempImage);
             Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 1, 5);
-            scanImageForLaneLines(sobelImage);
+
+            if (!mDoneOnce) {
+                scanImageForLaneLines(sobelImage);
+                mDoneOnce = true;
+            }
 
             sobelImage.copyTo(outputImage);
         }
