@@ -27,23 +27,30 @@ public class LaneDetector {
     }
 
     public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage, CameraCalibrator calibrator) {
+        return detect(image.rgba(), image.gray(), outputImage, calibrator);
+    }
 
+    public List<MatOfPoint> detect(Mat rgba, Mat gray, Mat outputImage, CameraCalibrator calibrator) {
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
+        boolean undistorted = false;
 
         /* Undistort the original image and the grayscale image, if calibrated. */
-        if (calibrator.isCalibrated()) {
-            Imgproc.undistort(image.rgba(), outputImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
-            Imgproc.undistort(image.gray(), tempImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
-            Imgproc.putText(outputImage, "CORRECTED",
-                    new Point(outputImage.width() * 0.6, outputImage.height() * 0.1),
-                    FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 255, 0));
+        if (calibrator != null) {
+            if (calibrator.isCalibrated()) {
+                Imgproc.undistort(rgba, outputImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
+                Imgproc.undistort(gray, tempImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
+                Imgproc.putText(outputImage, "CORRECTED",
+                        new Point(outputImage.width() * 0.6, outputImage.height() * 0.1),
+                        FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 255, 0));
+                undistorted = true;
+            }
         }
-        else {
+        if (!undistorted) {
             /* Use distorted images if not calibrated. */
-            image.rgba().copyTo(outputImage);
-            image.gray().copyTo(tempImage);
+            rgba.copyTo(outputImage);
+            gray.copyTo(tempImage);
         }
 
         /* Process the image and detect a lane. Return the points that identify the lane. */

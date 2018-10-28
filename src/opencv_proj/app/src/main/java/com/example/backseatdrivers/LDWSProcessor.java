@@ -24,6 +24,10 @@ public class LDWSProcessor {
 
     }
 
+    public LaneDetector getLaneDetector() {
+        return mLaneDetector;
+    }
+
     public void process(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage, CameraCalibrator calibrator) {
 
         /* Process an image here. */
