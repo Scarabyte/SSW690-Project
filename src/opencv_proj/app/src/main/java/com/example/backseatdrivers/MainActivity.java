@@ -122,8 +122,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onPrepareOptionsMenu (Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.preview_mode).setEnabled(true);
-        if (!mCalibrator.isCalibrated())
-            menu.findItem(R.id.preview_mode).setEnabled(false);
+        if (mCalibrator != null) {
+            if (!mCalibrator.isCalibrated())
+                menu.findItem(R.id.preview_mode).setEnabled(false);
+        }
         return true;
     }
 
