@@ -60,6 +60,7 @@ public class LaneDetector {
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
+        Mat sobelImage = new Mat();
         boolean undistorted = false;
 
         /* Undistort the original image and the grayscale image, if calibrated. */
@@ -91,7 +92,11 @@ public class LaneDetector {
 
         /* Convert image to sky view */
         if (inSkyView) {
-            transformToSkyView(outputImage, outputImage);
+            //transformToSkyView(outputImage, outputImage);
+            transformToSkyView(gray, tempImage);
+            Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 1, 5);
+
+            sobelImage.copyTo(outputImage);
         }
         else {
             transformToSkyView(tempImage, tempImage);
