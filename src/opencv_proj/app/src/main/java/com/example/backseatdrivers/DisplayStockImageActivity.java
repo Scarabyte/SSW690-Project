@@ -70,10 +70,12 @@ public class DisplayStockImageActivity extends AppCompatActivity {
             case R.id.process_stock_image:
                 Mat newImage = processImage();
                 if (newImage != null) {
-                    Bitmap bmImage = Bitmap.createBitmap(newImage.cols(), newImage.rows(), Bitmap.Config.ARGB_8888);
+                    //Bitmap bmImage = Bitmap.createBitmap(newImage.cols(), newImage.rows(), Bitmap.Config.ARGB_8888);
+                    Bitmap bmImage = Bitmap.createBitmap(newImage.cols(), newImage.rows(), Bitmap.Config.RGB_565);
                     Utils.matToBitmap(newImage, bmImage);
                     ImageView iv = findViewById(R.id.stock_image_view);
                     iv.setImageBitmap(bmImage);
+                    iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 }
                 return true;
         }
