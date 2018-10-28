@@ -1,7 +1,7 @@
-# Assignment Week 8
+# Assignment Week 9
 ## Build, test, document, deploy your project
 
-22 October 2018
+29 October 2018
 
 **Team Members / Honor pledge**
 
@@ -17,8 +17,5 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 # **Response**
 
-### Sprint 3 Week 1
+### Sprint 3 Week 2
 
-In Sprint 3 we're picking up from where we left off after Sprint 2 and continuing to develop the lane detection algorithm. We have identified the next set of tasks needed and assigned them accordingly. We are also continuing to develop the testing framework and carrying out additional research as needed.
-
-After the first week of Sprint 3, development is underway, although as expected most of the changes are not yet ready to go 'live'.

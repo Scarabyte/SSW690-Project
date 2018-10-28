@@ -15,6 +15,7 @@
     <string name="mode">Mode</string>
     <string name="lane_departure">Lane Departure</string>
     <string name="skyview">Sky View</string>
-    <string name="stock_image">Stock Image</string>
+    <string name="stock_image">Stock Image Test</string>
     <string name="loading_stock_image">Loading Stock Image</string>
+    <string name="process_stock_image">Run Test</string>
 </resources>
