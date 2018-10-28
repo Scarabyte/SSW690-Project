@@ -5,6 +5,8 @@ package com.example.backseatdrivers;
    to detect a lane of travel in the supplied image.
  */
 
+import android.util.Log;
+
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -22,6 +24,7 @@ import java.util.List;
 import static org.opencv.core.Core.FONT_HERSHEY_SIMPLEX;
 
 public class LaneDetector {
+    private static final String TAG = "LaneDetector";
 
     public LaneDetector() {
         /* Perform initialization here. */
@@ -49,6 +52,25 @@ public class LaneDetector {
                 new MatOfPoint2f(src[0], src[1], src[2], src[3]),
                 new MatOfPoint2f(dst[0], dst[1], dst[2], dst[3]));
         Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
+    }
+
+    protected void scanImageForLaneLines(Mat image) {
+        // WARNING: This can only operate on a grayscale image!
+        double threshold = 100.0;
+        List<Point> rowIntensities = new ArrayList<Point>();
+        for (int y = image.rows()-1; y > 0; y--) {
+            rowIntensities.clear();
+            for (int x = 0; x < image.cols()-1; x++) {
+                double[] pixel = image.get(x,y);
+                if (pixel != null) {
+                    if (pixel[0] > threshold) {
+                        rowIntensities.add(new Point(x,y));
+//                        Log.d(TAG, "Row " + y + " Col " + x + " intensity value " + image.get(x,y)[0]);
+                    }
+                }
+            }
+            Log.d(TAG, "Identified " + rowIntensities.size() + " points of intensity in Row " + y);
+        }
     }
 
     public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage,
@@ -95,6 +117,7 @@ public class LaneDetector {
             //transformToSkyView(outputImage, outputImage);
             transformToSkyView(gray, tempImage);
             Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 1, 5);
+            scanImageForLaneLines(sobelImage);
 
             sobelImage.copyTo(outputImage);
         }
