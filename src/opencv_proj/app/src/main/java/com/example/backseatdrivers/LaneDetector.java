@@ -33,16 +33,18 @@ public class LaneDetector {
         Point[] dst = new Point[4];
 
         /* Source region is a trapezoid */
-        src[0] = new Point(in.cols()*0.45, in.rows()*0.45);
-        src[1] = new Point(in.cols()*0.55, in.rows()*0.45);
+//        src[0] = new Point(in.cols()*0.45, in.rows()*0.45);
+        src[0] = new Point(in.cols()*0.0725, in.rows()*0.45);
+        src[1] = new Point(in.cols()*0.575, in.rows()*0.45);
         src[2] = new Point(in.cols()-1, in.rows()-1);
         src[3] = new Point(0, in.rows()-1);
 
         /* Destination region is the full image mat */
-        dst[0] = new Point(0, 0);
-        dst[1] = new Point(out.cols()-1, 0);
-        dst[2] = new Point(out.cols()-1, out.rows()-1);
-        dst[3] = new Point(0, out.rows()-1);
+//        dst[0] = new Point(out.cols()*0.45, out.rows()*0.45);
+        dst[0] = new Point(out.cols()*0.0725, out.rows()*0.45);
+        dst[1] = new Point(out.cols()*0.575, out.rows()*0.45);
+        dst[2] = new Point(out.cols()*0.55, out.rows()-1);
+        dst[3] = new Point(out.cols()*0.45, out.rows()-1);
 
         /* Stretch the trapezoid area to the full image mat */
         skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(
