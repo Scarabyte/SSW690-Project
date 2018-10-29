@@ -16,13 +16,17 @@ _One word assessment of how is the team doing relative to the schedule?_
 _One or two sentences describing high level project status and progress._
 
 Goals for Week 9 of class:
+Continue working on lane detection algorithm and testing framework from where we left them after Sprint 2.
 
 ### Last week's activities by team member:
 
 #### Adam:
 
 * _What did I work on?_
+  * Completed sky view task
+  * Reviewed code and continued lane detection research
 * _What did I accomplish?_
+  * Got some screenshots to demo the sky view mode
 
 #### Sapana:
 
@@ -42,6 +46,7 @@ Goals for Week 9 of class:
 ### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
+  * One team member has a lot of business obligations, another has some health-related issues that may limit availability
 * _What new opportunities did you discover, if any?_
 
 ### Action Items/Goals for next week:
@@ -55,6 +60,8 @@ Goals for Week 9 of class:
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Assist Keith if needed for the Fit Curves task
+  * Try to close some additional issues as part of Sprint 4 assignments
 
 ##### Sapana:
 
@@ -71,4 +78,4 @@ Goals for Week 9 of class:
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
-  
+  * The upcoming week is the beginning of Sprint 4 (out of 5). We've made great progress so far, now it's time to start wrapping it up and finishing things off.
