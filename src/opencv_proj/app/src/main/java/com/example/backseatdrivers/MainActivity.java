@@ -66,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
 
+    public LDWSProcessor getLDWSProcessor() {
+        return mLDWSProcessor;
+    }
+
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,8 +127,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onPrepareOptionsMenu (Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.preview_mode).setEnabled(true);
-        if (!mCalibrator.isCalibrated())
-            menu.findItem(R.id.preview_mode).setEnabled(false);
+        if (mCalibrator != null) {
+            if (!mCalibrator.isCalibrated())
+                menu.findItem(R.id.preview_mode).setEnabled(false);
+        }
         return true;
     }
 
