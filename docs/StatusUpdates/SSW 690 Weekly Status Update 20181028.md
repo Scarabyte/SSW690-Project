@@ -44,7 +44,10 @@ Continue working on lane detection algorithm and testing framework from where we
 #### Rakshith:
 
 * _What did I work on?_
+  * Adam incorporated the area of interest into this commits while working on sky view.
+  * Researched articles related to figuring out lane edge
 * _What did I accomplish?_
+  * Did not accomplish completion of sprint 3 goal. Adam stepped in to finish up the story assigned to me
 
 ### Issues, Risks, and Opportunities:
 
@@ -79,7 +82,7 @@ Continue working on lane detection algorithm and testing framework from where we
 ##### Rakshith:
 
 * _What do you plan to work on and accomplish in the next week?_
-
+  * Will start working on the presentation for the end of the semester.
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
