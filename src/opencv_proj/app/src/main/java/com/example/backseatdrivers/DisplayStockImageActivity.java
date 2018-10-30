@@ -75,7 +75,7 @@ public class DisplayStockImageActivity extends AppCompatActivity {
                     Utils.matToBitmap(newImage, bmImage);
                     ImageView iv = findViewById(R.id.stock_image_view);
                     iv.setImageBitmap(bmImage);
-                    iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+                    iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 }
                 return true;
         }
