@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
     private static final int     MODE_LDWS = 0;
     private static final int     MODE_CALIBRATION = 1;
+    private static final int     MODE_SKYVIEW = 2;
     private int                  mMode = MODE_LDWS;
 
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
@@ -131,6 +132,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onOptionsItemSelected(MenuItem item) {
         final Resources res = getResources();
         switch (item.getItemId()) {
+            case R.id.mode_skyview:
+                mMode = MODE_SKYVIEW;
+                item.setChecked(true);
+                mOpenCvCameraView.enableView();
+                return true;
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;
                 item.setChecked(true);
@@ -167,8 +173,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                     return super.onOptionsItemSelected(item);
                 }
                 mOnCameraFrameRender = new OnCameraFrameRender(new PreviewFrameRender());
-                // start the AsyncTask, passing the Activity context
-                // in to a custom constructor
+                /* Start the AsyncTask, passing the Activity context into a custom constructor */
                 new MyTask(this).execute();
                 return true;
         }
@@ -180,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
 
         private WeakReference<MainActivity> activityReference;
 
-        // only retain a weak reference to the activity
+        /* Only retain a weak reference to the activity */
         MyTask(MainActivity context) {
             activityReference = new WeakReference<>(context);
         }
@@ -257,7 +262,11 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         Mat outputImage = inputFrame.rgba();
         if (mMode == MODE_LDWS) {
             outputImage = new Mat();
-            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator);
+            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator, false);
+        }
+        else if (mMode == MODE_SKYVIEW) {
+            outputImage = new Mat();
+            mLDWSProcessor.process(inputFrame, outputImage, mCalibrator, true);
         }
         else if (mMode == MODE_CALIBRATION) {
             outputImage = mOnCameraFrameRender.render(inputFrame);
