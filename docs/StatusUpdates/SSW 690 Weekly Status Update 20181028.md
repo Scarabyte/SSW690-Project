@@ -31,8 +31,11 @@ Continue working on lane detection algorithm and testing framework from where we
 #### Sapana:
 
 * _What did I work on?_
+  * With Keith's help finished task 57 for testing
 * _What did I accomplish?_
- 
+  * Test of LDWSProcessor (lane detection) with stock image. Need some more work in next Sprint.
+  * Understood how the Android ImageView class works
+  
 #### Keith:
 
 * _What did I work on?_
@@ -66,6 +69,8 @@ Continue working on lane detection algorithm and testing framework from where we
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Reaserch and fix color space issue from yellow to blue when image is processed
+  * Continue testing with images which has white dotted center and side lines  
 
 ##### Keith:
 
