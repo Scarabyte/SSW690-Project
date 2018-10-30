@@ -19,3 +19,6 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 ### Sprint 3 Week 2
 
+At the conclusion of Sprint 3, we implemented the Sky View transformation and started working on the next step in the lane detection algorithm, fitting curves to the detected lines.
+
+We also improved the testing framework, which will allow us to lead selected stock images for testing purposes (so no need to physically take the app out to a road!), and we started discussing the final presentation (based on feedback from the professor, we're looking at how to market our app to a non-technical customer as well as a technically-minded one).
