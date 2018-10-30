@@ -39,7 +39,11 @@ Continue working on lane detection algorithm and testing framework from where we
 #### Keith:
 
 * _What did I work on?_
+  * Testing task
+  * Fit Curves task
 * _What did I accomplish?_
+  * Architected the ability to perform a self test on a stock image. This involved creating another Activity with an ImageView widget, bound to a menu item available in the toolbar. The stock image is loaded from a resource file with the application, sent to the LDWS Processor to run our algorithms and processing, then the processed image is displayed on screen.
+  * Began, but did not finish, the Fit Curves task. Implemented a Sobel filter to isolate the lane markings. Begin the development of a sliding window lane detection algorithm that finds the peaks of the intensities of the images and establishes a series of points that identify the middle of the lane markings. This will then be used as input to a curve fitting algorithm.
 
 #### Rakshith:
 
