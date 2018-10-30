@@ -82,6 +82,8 @@ Continue working on lane detection algorithm and testing framework from where we
 ##### Keith:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Complete the Fit Curves task and begin the polygon display task, which will display the lane area on the screen in real time.
+  * Assist with the end-of-semester presentation.
 
 ##### Rakshith:
 
