@@ -53,25 +53,31 @@ public class LaneDetector {
         Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
     }
 
-    public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image,
-                                   Mat outputImage, CameraCalibrator calibrator, boolean inSkyView) {
+    public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage, CameraCalibrator calibrator, boolean inSkyView) {
+        return detect(image.rgba(), image.gray(), outputImage, calibrator, inSkyView);
+    }
 
+    public List<MatOfPoint> detect(Mat rgba, Mat gray, Mat outputImage, CameraCalibrator calibrator, boolean inSkyView) {
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
+        boolean undistorted = false;
 
         /* Undistort the original image and the grayscale image, if calibrated. */
-        if (calibrator.isCalibrated()) {
-            Imgproc.undistort(image.rgba(), outputImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
-            Imgproc.undistort(image.gray(), tempImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
-            Imgproc.putText(outputImage, "CORRECTED",
-                    new Point(outputImage.width() * 0.6, outputImage.height() * 0.1),
-                    FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 255, 0));
+        if (calibrator != null) {
+            if (calibrator.isCalibrated()) {
+                Imgproc.undistort(rgba, outputImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
+                Imgproc.undistort(gray, tempImage, calibrator.getCameraMatrix(), calibrator.getDistortionCoefficients());
+                Imgproc.putText(outputImage, "CORRECTED",
+                        new Point(outputImage.width() * 0.6, outputImage.height() * 0.1),
+                        FONT_HERSHEY_SIMPLEX, 1.0, new Scalar(255, 255, 0));
+                undistorted = true;
+            }
         }
-        else {
+        if (!undistorted) {
             /* Use distorted images if not calibrated. */
-            image.rgba().copyTo(outputImage);
-            image.gray().copyTo(tempImage);
+            rgba.copyTo(outputImage);
+            gray.copyTo(tempImage);
         }
 
         /* Process the image and detect a lane. Return the points that identify the lane. */
@@ -80,8 +86,7 @@ public class LaneDetector {
         Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 100, 10);
         for (int x = 0; x < linesHough.rows(); x++) {
             double[] l = linesHough.get(x, 0);
-            Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]),
-                    new Scalar(255, 0, 0), 1, Imgproc.LINE_AA, 0);
+            Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]), new Scalar(255, 0, 0), 1, Imgproc.LINE_AA, 0);
         }
 
         /* Convert image to sky view */
