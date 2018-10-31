@@ -45,7 +45,7 @@ public class DisplayStockImageActivity extends AppCompatActivity {
             Imgproc.cvtColor(cvImage, cvRgba, Imgproc.COLOR_RGB2RGBA);
             Imgproc.cvtColor(cvImage, cvGray, Imgproc.COLOR_RGB2GRAY);
             LDWSProcessor ldws = new LDWSProcessor();
-            ldws.getLaneDetector().detect(cvRgba, cvGray, outputImage, null);
+            ldws.getLaneDetector().detect(cvRgba, cvGray, outputImage, null, false);
         }
         return outputImage;
     }
@@ -81,6 +81,4 @@ public class DisplayStockImageActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }
