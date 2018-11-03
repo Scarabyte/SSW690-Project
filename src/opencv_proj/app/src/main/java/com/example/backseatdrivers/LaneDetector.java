@@ -26,6 +26,7 @@ import static org.opencv.core.Core.FONT_HERSHEY_SIMPLEX;
 public class LaneDetector {
     private static final String TAG = "LaneDetector";
     private boolean mDoneOnce = false;
+    private boolean mScan = false;
 
     public LaneDetector() {
         /* Perform initialization here. */
@@ -53,6 +54,100 @@ public class LaneDetector {
                 new MatOfPoint2f(src[0], src[1], src[2], src[3]),
                 new MatOfPoint2f(dst[0], dst[1], dst[2], dst[3]));
         Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
+    }
+
+    private Point findLaneLine(Mat in, int y, boolean left) {
+        int x1, x2, x, start, stop, minX, maxX;
+        double[] point;
+        double threshold = 200.0;
+        boolean found = false;
+        if (left) {
+            start = 0;
+            stop = in.width() / 2;
+        }
+        else {
+            start = in.width() / 2;
+            stop = in.width() - 1;
+        }
+        x1 = minX = start-1;
+        x2 = maxX = stop+1;
+        // Find the left-most pixel.
+        for (x = start; x < stop && x1 == minX; x++) {
+            point = in.get(y,x);
+            if (point != null) {
+                if (point[0] > threshold) {
+                    x1 = x;
+                }
+            }
+        }
+        if (x1 >= 0) {
+            // Find the right-most pixel.
+            for (x = stop; x > x1 && x > start && x2 == maxX; x--) {
+                point = in.get(y,x);
+                if (point != null) {
+                    if (point[0] > threshold) {
+                        x2 = x;
+                        found = true;
+                    }
+                }
+            }
+        }
+/*        String msg = "Y("+y+")";
+        for (x=0; x<in.width()-1; x++) {
+            if (in.get(x,y) != null) {
+                if (in.get(y,x)[0] > 200.0) {
+                    msg += "X";
+                }
+                else {
+                    msg += "-";
+                }
+            }
+            else {
+                msg += "0";
+            }
+        }
+        Log.d(TAG,msg);
+*/        if (!found) return null;
+        return new Point(x1,x2);
+    }
+
+    private void findLaneLines(Mat in, Mat out) {
+        int lx1, lx2, rx1, rx2, midL, midR;
+        int windowWidth = 50;
+        Scalar color = new Scalar(255, 0, 255); // Magenta
+        Scalar marker = new Scalar(0, 255, 0); // Green
+
+        for (int y=in.height()-1; y >= 0; y-=10) {
+            // Start at the right of the left bounding box and scan to the
+            // end of the left bounding box.
+            Point lineL = findLaneLine(in, y, true);
+            if (lineL != null) {
+                midL = ((int) lineL.x + (((int) lineL.y - (int) lineL.x) / 2));
+                lx1 = (int) lineL.x - (windowWidth) / 2;
+                if (lx1 < 0) lx1 = 0;
+                lx2 = (int) lineL.y + (windowWidth) / 2;
+                if (lx2 > (in.width() / 2) - 1) lx2 = (in.width() / 2) - 1;
+                Imgproc.line(out, new Point(lx1,y), new Point(lx2,y), color);
+                Imgproc.drawMarker(out, new Point(midL,y), marker, Imgproc.MARKER_DIAMOND, 6, 3);
+            }
+
+            // Start at the left of the right bounding box and scan to the
+            // end of the right bounding box.
+            Point lineR = findLaneLine(in, y, false);
+            if (lineR != null) {
+                midR = ((int) lineR.x + (((int) lineR.y - (int) lineR.x) / 2));
+                rx1 = (int) lineR.x - (windowWidth) / 2;
+                if (rx1 < (in.width() / 2 + 1)) rx1 = in.width() / 2 + 1;
+                rx2 = (int) lineR.y + (windowWidth) / 2;
+                if (rx2 > in.width() - 1) rx2 = in.width() - 1;
+                Imgproc.line(out, new Point(rx1,y), new Point(rx2,y), color);
+                Imgproc.drawMarker(out, new Point(midR,y), marker, Imgproc.MARKER_DIAMOND, 6, 3);
+            }
+        }
+    }
+
+    public void doit() {
+        mScan = true;
     }
 
     public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage,
@@ -100,11 +195,11 @@ public class LaneDetector {
             //transformToSkyView(outputImage, outputImage);
             transformToSkyView(gray, tempImage);
             Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
-//            Imgproc.threshold(sobelImage,scanned,100,255,Imgproc.THRESH_BINARY);
-//            Imgproc.adaptiveThreshold(sobelImage, scanned, 255,
-//                    Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 11, 6);
-            Imgproc.threshold(sobelImage, scanned, 0, 255, Imgproc.THRESH_OTSU);
-            scanned.copyTo(outputImage);
+            Imgproc.threshold(sobelImage, scanned, 37.5, 255, Imgproc.THRESH_BINARY);
+            if (mScan) {
+                findLaneLines(scanned, tempImage);
+            }
+            tempImage.copyTo(outputImage);
         }
         else {
             transformToSkyView(tempImage, tempImage);
