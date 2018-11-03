@@ -157,7 +157,7 @@ public class LaneDetector {
         Scalar color = new Scalar(0, 255, 0); // Green
         List<Point> markersL = new ArrayList<>();
         List<Point> markersR = new ArrayList<>();
-        List<Point> markers;
+        List<Point> markers = new ArrayList<>();
 
         for (int y=in.height()-1; y >= 0; y-=10) {
             lineL = findLaneLine(in, y, true, lineL);
@@ -171,13 +171,24 @@ public class LaneDetector {
                 markersR.add(new Point(mid,y));
             }
         }
-        markers = filterMarkers(markersL);
-        for (int m = 0; m < markers.size(); m++) {
-            Imgproc.drawMarker(out, markers.get(m), color, Imgproc.MARKER_DIAMOND, 4, 2);
+        markersL = filterMarkers(markersL);
+        for (int m = 0; m < markersL.size(); m++) {
+            markers.add(markersL.get(m));
+            Imgproc.drawMarker(out, markersL.get(m), color, Imgproc.MARKER_DIAMOND, 4, 2);
         }
-        markers = filterMarkers(markersR);
-        for (int m = 0; m < markers.size(); m++) {
-            Imgproc.drawMarker(out, markers.get(m), color, Imgproc.MARKER_DIAMOND, 4,2 );
+        markersR = filterMarkers(markersR);
+        for (int m = markersR.size()-1; m >= 0; m--) {
+            markers.add(markersR.get(m));
+            Imgproc.drawMarker(out, markersR.get(m), color, Imgproc.MARKER_DIAMOND, 4,2 );
+        }
+        if (!markers.isEmpty()) {
+            Point[] polyPoints = new Point[markers.size()];
+            for (int m = 0; m < markers.size(); m++) {
+                polyPoints[m] = markers.get(m);
+            }
+            List<MatOfPoint> mop = new ArrayList<>();
+            mop.add(new MatOfPoint(polyPoints));
+            Imgproc.fillPoly(out, mop, new Scalar(255, 255, 255));
         }
     }
 
