@@ -55,29 +55,6 @@ public class LaneDetector {
         Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
     }
 
-    protected void scanImageForLaneLines(Mat image) {
-        // WARNING: This can only operate on a grayscale image!
-        double threshold = 100.0;
-        int xStep = 1;
-        int yStep = 10;
-        List<Point> rowIntensities = new ArrayList<Point>();
-        for (int y = image.rows()-1; y > 0; y -= yStep) {
-            rowIntensities.clear();
-            for (int x = 0; x < image.cols()-1; x += xStep) {
-                double[] pixel = image.get(x,y);
-                if (pixel != null) {
-                    if (pixel[0] > threshold) {
-                        rowIntensities.add(new Point(x,y));
-//                        Log.d(TAG, "Row " + y + " Col " + x + " intensity value " + image.get(x,y)[0]);
-                    }
-                }
-            }
-            Log.d(TAG, "Identified " + rowIntensities.size() + " points of intensity in Row " + y);
-            // Process the intensity points and determine the center of the intensities that are
-            // within the window size.
-        }
-    }
-
     public List<MatOfPoint> detect(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage,
                                    CameraCalibrator calibrator, boolean inSkyView) {
         return detect(image.rgba(), image.gray(), outputImage, calibrator, inSkyView);
@@ -88,6 +65,7 @@ public class LaneDetector {
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
         Mat sobelImage = new Mat();
+        Mat scanned = new Mat();
         boolean undistorted = false;
 
         /* Undistort the original image and the grayscale image, if calibrated. */
@@ -121,22 +99,9 @@ public class LaneDetector {
         if (inSkyView) {
             //transformToSkyView(outputImage, outputImage);
             transformToSkyView(gray, tempImage);
-            Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 1, 5);
-
-            if (!mDoneOnce) {
-                scanImageForLaneLines(sobelImage);
-                mDoneOnce = true;
-            }
-
-            sobelImage.copyTo(outputImage);
-        }
-        else {
-            transformToSkyView(tempImage, tempImage);
-        }
-
-        /* Convert image to sky view */
-        if (inSkyView) {
-            transformToSkyView(outputImage, outputImage);
+            Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
+            Imgproc.threshold(sobelImage,scanned,100,255,Imgproc.THRESH_BINARY);
+            scanned.copyTo(outputImage);
         }
         else {
             transformToSkyView(tempImage, tempImage);
