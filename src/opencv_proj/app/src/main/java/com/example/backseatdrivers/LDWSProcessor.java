@@ -39,10 +39,6 @@ public class LDWSProcessor {
 
     }
 
-    public void doit() {
-        mLaneDetector.doit();
-    }
-
     private boolean check_lane_departure(List<MatOfPoint> lanePoints) {
 
         /* Determine if we're departing the lane. Return true if departing. */

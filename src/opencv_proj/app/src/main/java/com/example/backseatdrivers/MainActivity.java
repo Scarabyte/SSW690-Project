@@ -259,9 +259,6 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
         if (mMode == MODE_CALIBRATION) {
             mCalibrator.addCorners();
         }
-        if (mMode == MODE_SKYVIEW) {
-            mLDWSProcessor.doit();
-        }
         return false; // don't need subsequent touch events
     }
 
