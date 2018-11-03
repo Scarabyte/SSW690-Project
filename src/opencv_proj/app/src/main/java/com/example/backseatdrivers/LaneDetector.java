@@ -36,16 +36,16 @@ public class LaneDetector {
         Point[] dst = new Point[4];
 
         /* Source region is a trapezoid */
-        src[0] = new Point(in.cols()*0.4, in.rows()*0.5);
-        src[1] = new Point(in.cols()*0.6, in.rows()*0.5);
-        src[2] = new Point(in.cols()-1, in.rows()-1);
-        src[3] = new Point(0, in.rows()-1);
+        src[0] = new Point(in.cols()*0.45, in.rows()*0.50);
+        src[1] = new Point(in.cols()*0.55, in.rows()*0.50);
+        src[2] = new Point(in.cols()*0.90, in.rows()*0.95);
+        src[3] = new Point(in.cols()*0.10, in.rows()*0.95);
 
         /* Destination region is the full image mat */
-        dst[0] = new Point(0,0);
-        dst[1] = new Point(out.cols()-1, 0);
-        dst[2] = new Point(out.cols()-1, out.rows()-1);
-        dst[3] = new Point(0, out.rows()-1);
+        dst[0] = new Point(out.cols()*0.3, 0);
+        dst[1] = new Point(out.cols()*0.7, 0);
+        dst[2] = new Point(out.cols()*0.7, out.rows()-1);
+        dst[3] = new Point(out.cols()*0.3, out.rows()-1);
 
         /* Stretch the trapezoid area to the full image mat */
         skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(
@@ -55,24 +55,26 @@ public class LaneDetector {
     }
 
     private Point findLaneLine(Mat in, int y, boolean left, Point previous) {
-        int x1, x2, x, start, stop, dx1, dx2;
+        int x1, x2, x, start, stop, dx1, dx2, step;
         double[] point;
         double iThreshold = 200.0;
         int dThreshold = 30;
         int wThreshold = 3;
         boolean found = false;
         if (left) {
-            start = 0;
-            stop = in.width() / 2;
+            start = in.width() / 2;
+            stop = 0;
+            step = -1;
         }
         else {
             start = in.width() / 2;
             stop = in.width() - 1;
+            step = 1;
         }
-        x1 = start-1;
-        x2 = stop+1;
-        // Find the left-most pixel.
-        for (x = start; x < stop; x++) {
+        x1 = start - step;
+        x2 = stop + step;
+        // Find the first pixel transition from zero to one.
+        for (x = start; x != stop; x += step) {
             point = in.get(y,x);
             if (point != null) {
                 if (point[0] > iThreshold) {
@@ -81,9 +83,9 @@ public class LaneDetector {
                 }
             }
         }
-        if (x1 >= start) {
-            // Find the right-most pixel.
-            for (x = x1 + 1; x < stop; x++) {
+        if (x1 != start-1) {
+            // Find the pixel transition from one to zero.
+            for (x = x1 + step; x != stop; x += step) {
                 point = in.get(y, x);
                 if (point != null) {
                     if (point[0] < iThreshold) {
@@ -107,33 +109,75 @@ public class LaneDetector {
         }
 
         // Discard points that are too narrow.
-        if ( (x2-x1) < wThreshold)
+        if ( (left && (x1-x2) < wThreshold) || (!left && (x2-x1) < wThreshold))
             return null;
 
         // Return a found point.
+        if (left) {
+            int temp = x2;
+            x2 = x1;
+            x1 = temp;
+        }
         return new Point(x1,x2);
     }
 
+    private List<Point> filterMarkers(List<Point> markers) {
+        int sumDx = 0;
+        int avgDx;
+        int dx;
+        int lastX;
+        List<Point> goodMarkers = new ArrayList<>();
+        if (markers.size() > 0) {
+            for (int m = 1; m < markers.size(); m++) {
+                sumDx += Math.abs(markers.get(m).x - markers.get(m - 1).x);
+            }
+            avgDx = (sumDx / markers.size()) * 3;
+            lastX = (int)markers.get(0).x;
+            for (int m = 1; m < markers.size(); m++) {
+                dx = Math.abs(((int)markers.get(m).x) - lastX);
+                if (dx < avgDx) {
+                    if (goodMarkers.isEmpty()) {
+                        goodMarkers.add(markers.get(m - 1));
+                    }
+                    goodMarkers.add(markers.get(m));
+                    lastX = (int)markers.get(m).x;
+                }
+                if (goodMarkers.isEmpty()) {
+                    lastX = (int)markers.get(m).x;
+                }
+            }
+        }
+        return goodMarkers;
+    }
+
     private void findLaneLines(Mat in, Mat out) {
-        //int lx1, lx2, rx1, rx2;
-        int midL, midR;
-        //int windowWidth = 50;
+        int mid;
         Point lineL = null;
         Point lineR = null;
-        //Scalar color = new Scalar(255, 0, 255); // Magenta
-        Scalar marker = new Scalar(0, 255, 0); // Green
+        Scalar color = new Scalar(0, 255, 0); // Green
+        List<Point> markersL = new ArrayList<>();
+        List<Point> markersR = new ArrayList<>();
+        List<Point> markers;
 
         for (int y=in.height()-1; y >= 0; y-=10) {
             lineL = findLaneLine(in, y, true, lineL);
             if (lineL != null) {
-                midL = ((int) lineL.x + (((int) lineL.y - (int) lineL.x) / 2));
-                Imgproc.drawMarker(out, new Point(midL,y), marker, Imgproc.MARKER_DIAMOND, 4, 2);
+                mid = ((int) lineL.x + (((int) lineL.y - (int) lineL.x) / 2));
+                markersL.add(new Point(mid,y));
             }
             lineR = findLaneLine(in, y, false, lineR);
             if (lineR != null) {
-                midR = ((int) lineR.x + (((int) lineR.y - (int) lineR.x) / 2));
-                Imgproc.drawMarker(out, new Point(midR,y), marker, Imgproc.MARKER_DIAMOND, 4,2 );
+                mid = ((int) lineR.x + (((int) lineR.y - (int) lineR.x) / 2));
+                markersR.add(new Point(mid,y));
             }
+        }
+        markers = filterMarkers(markersL);
+        for (int m = 0; m < markers.size(); m++) {
+            Imgproc.drawMarker(out, markers.get(m), color, Imgproc.MARKER_DIAMOND, 4, 2);
+        }
+        markers = filterMarkers(markersR);
+        for (int m = 0; m < markers.size(); m++) {
+            Imgproc.drawMarker(out, markers.get(m), color, Imgproc.MARKER_DIAMOND, 4,2 );
         }
     }
 
@@ -168,7 +212,7 @@ public class LaneDetector {
         }
 
         /* Process the image and detect a lane. Return the points that identify the lane. */
-        Imgproc.GaussianBlur(tempImage, tempImage, new Size(5,5), 3, 3);
+/*        Imgproc.GaussianBlur(tempImage, tempImage, new Size(5,5), 3, 3);
         Imgproc.Canny(tempImage, tempImage, 10, 100);
         Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 100, 10);
         for (int x = 0; x < linesHough.rows(); x++) {
@@ -176,12 +220,11 @@ public class LaneDetector {
             Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]),
                     new Scalar(255, 0, 0), 1, Imgproc.LINE_AA, 0);
         }
-
+*/
         /* Convert image to sky view */
         transformToSkyView(gray, tempImage);
         Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
         Imgproc.threshold(sobelImage, scanned, 37.5, 255, Imgproc.THRESH_BINARY);
-//        Imgproc.threshold(sobelImage, scanned, 0, 255, Imgproc.THRESH_OTSU);
         findLaneLines(scanned, tempImage);
         tempImage.copyTo(outputImage);
 
