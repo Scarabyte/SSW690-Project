@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.opencv.core.Core.FONT_HERSHEY_SIMPLEX;
+import static org.opencv.core.Core.addWeighted;
 
 public class LaneDetector {
     private static final String TAG = "LaneDetector";
@@ -30,27 +31,45 @@ public class LaneDetector {
         /* Perform initialization here. */
     }
 
-    private void transformToSkyView(Mat in, Mat out) {
-        Mat skyTransformHomographyMatrix;
+    private void transformPoints(int x, int y, MatOfPoint2f srcPts, MatOfPoint2f dstPts) {
         Point[] src = new Point[4];
         Point[] dst = new Point[4];
 
         /* Source region is a trapezoid */
-        src[0] = new Point(in.cols()*0.45, in.rows()*0.50);
-        src[1] = new Point(in.cols()*0.55, in.rows()*0.50);
-        src[2] = new Point(in.cols()*0.90, in.rows()*0.95);
-        src[3] = new Point(in.cols()*0.10, in.rows()*0.95);
+        src[0] = new Point(x*0.45, y*0.50);
+        src[1] = new Point(x*0.55, y*0.50);
+        src[2] = new Point(x*0.90, y*0.95);
+        src[3] = new Point(x*0.10, y*0.95);
 
         /* Destination region is the full image mat */
-        dst[0] = new Point(out.cols()*0.3, 0);
-        dst[1] = new Point(out.cols()*0.7, 0);
-        dst[2] = new Point(out.cols()*0.7, out.rows()-1);
-        dst[3] = new Point(out.cols()*0.3, out.rows()-1);
+        dst[0] = new Point(x*0.3, 0);
+        dst[1] = new Point(x*0.7, 0);
+        dst[2] = new Point(x*0.7, y-1);
+        dst[3] = new Point(x*0.3, y-1);
+
+        srcPts.fromArray(src);
+        dstPts.fromArray(dst);
+    }
+
+    private void transformToSkyView(Mat in, Mat out) {
+        Mat skyTransformHomographyMatrix;
+        MatOfPoint2f srcPts = new MatOfPoint2f();
+        MatOfPoint2f dstPts = new MatOfPoint2f();
 
         /* Stretch the trapezoid area to the full image mat */
-        skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(
-                new MatOfPoint2f(src[0], src[1], src[2], src[3]),
-                new MatOfPoint2f(dst[0], dst[1], dst[2], dst[3]));
+        transformPoints(in.cols(), in.rows(), srcPts, dstPts);
+        skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(srcPts, dstPts);
+        Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
+    }
+
+    private void transformToNormalView(Mat in, Mat out) {
+        Mat skyTransformHomographyMatrix;
+        MatOfPoint2f srcPts = new MatOfPoint2f();
+        MatOfPoint2f dstPts = new MatOfPoint2f();
+
+        /* Stretch the trapezoid area to the full image mat */
+        transformPoints(in.cols(), in.rows(), dstPts, srcPts);
+        skyTransformHomographyMatrix = Imgproc.getPerspectiveTransform(srcPts, dstPts);
         Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
     }
 
@@ -188,7 +207,7 @@ public class LaneDetector {
             }
             List<MatOfPoint> mop = new ArrayList<>();
             mop.add(new MatOfPoint(polyPoints));
-            Imgproc.fillPoly(out, mop, new Scalar(255, 255, 255));
+            Imgproc.fillPoly(out, mop, new Scalar(192, 192, 192));
         }
     }
 
@@ -201,6 +220,7 @@ public class LaneDetector {
         List<MatOfPoint> lanePoints = new ArrayList<MatOfPoint>();
         Mat linesHough = new Mat();
         Mat tempImage = new Mat();
+        Mat birdImage = new Mat();
         Mat sobelImage = new Mat();
         Mat scanned = new Mat();
         boolean undistorted = false;
@@ -234,10 +254,12 @@ public class LaneDetector {
 */
         /* Convert image to sky view */
         transformToSkyView(gray, tempImage);
+        transformToSkyView(rgba, birdImage);
         Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
         Imgproc.threshold(sobelImage, scanned, 37.5, 255, Imgproc.THRESH_BINARY);
-        findLaneLines(scanned, tempImage);
-        tempImage.copyTo(outputImage);
+        findLaneLines(scanned, birdImage);
+        transformToNormalView(birdImage,tempImage);
+        Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
 
         return lanePoints;
     }
