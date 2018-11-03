@@ -134,6 +134,14 @@ public class LaneDetector {
             transformToSkyView(tempImage, tempImage);
         }
 
+        /* Convert image to sky view */
+        if (inSkyView) {
+            transformToSkyView(outputImage, outputImage);
+        }
+        else {
+            transformToSkyView(tempImage, tempImage);
+        }
+
         return lanePoints;
     }
 }
