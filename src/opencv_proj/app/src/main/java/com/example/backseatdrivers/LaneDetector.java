@@ -100,7 +100,10 @@ public class LaneDetector {
             //transformToSkyView(outputImage, outputImage);
             transformToSkyView(gray, tempImage);
             Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
-            Imgproc.threshold(sobelImage,scanned,100,255,Imgproc.THRESH_BINARY);
+//            Imgproc.threshold(sobelImage,scanned,100,255,Imgproc.THRESH_BINARY);
+//            Imgproc.adaptiveThreshold(sobelImage, scanned, 255,
+//                    Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY, 11, 6);
+            Imgproc.threshold(sobelImage, scanned, 0, 255, Imgproc.THRESH_OTSU);
             scanned.copyTo(outputImage);
         }
         else {
