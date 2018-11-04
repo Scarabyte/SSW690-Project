@@ -36,10 +36,10 @@ public class LaneDetector {
         Point[] dst = new Point[4];
 
         /* Source region is a trapezoid */
-        src[0] = new Point(x*0.45, y*0.50);
-        src[1] = new Point(x*0.55, y*0.50);
-        src[2] = new Point(x*0.90, y*0.95);
-        src[3] = new Point(x*0.10, y*0.95);
+        src[0] = new Point(x*0.46, y*0.55);
+        src[1] = new Point(x*0.54, y*0.55);
+        src[2] = new Point(x*0.70, y-1);
+        src[3] = new Point(x*0.30, y-1);
 
         /* Destination region is the full image mat */
         dst[0] = new Point(x*0.3, 0);
@@ -173,7 +173,7 @@ public class LaneDetector {
         int mid;
         Point lineL = null;
         Point lineR = null;
-        Scalar color = new Scalar(0, 255, 0); // Green
+        Scalar color = new Scalar(255, 0, 255); // Magenta
         List<Point> markersL = new ArrayList<>();
         List<Point> markersR = new ArrayList<>();
         List<Point> markers = new ArrayList<>();
@@ -193,12 +193,12 @@ public class LaneDetector {
         markersL = filterMarkers(markersL);
         for (int m = 0; m < markersL.size(); m++) {
             markers.add(markersL.get(m));
-            Imgproc.drawMarker(out, markersL.get(m), color, Imgproc.MARKER_DIAMOND, 4, 2);
+            Imgproc.drawMarker(out, markersL.get(m), color, Imgproc.MARKER_DIAMOND, 6, 3);
         }
         markersR = filterMarkers(markersR);
         for (int m = markersR.size()-1; m >= 0; m--) {
             markers.add(markersR.get(m));
-            Imgproc.drawMarker(out, markersR.get(m), color, Imgproc.MARKER_DIAMOND, 4,2 );
+            Imgproc.drawMarker(out, markersR.get(m), color, Imgproc.MARKER_DIAMOND, 6,3 );
         }
         if (!markers.isEmpty()) {
             Point[] polyPoints = new Point[markers.size()];
@@ -207,7 +207,7 @@ public class LaneDetector {
             }
             List<MatOfPoint> mop = new ArrayList<>();
             mop.add(new MatOfPoint(polyPoints));
-            Imgproc.fillPoly(out, mop, new Scalar(192, 192, 192));
+            Imgproc.fillPoly(out, mop, new Scalar(32, 128, 32));
         }
     }
 
