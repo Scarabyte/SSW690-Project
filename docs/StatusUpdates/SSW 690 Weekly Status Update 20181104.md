@@ -33,7 +33,12 @@ Complete on lane detection algorithm and testing framework from where we left th
 #### Keith:
 
 * _What did I work on?_
+  * Lane recognition
 * _What did I accomplish?_
+  * Utilized sobel filter, thresholding and a new algorithm to detect the extents of the lanes.
+  * Added a polygon shape to the image based on lane extent points.
+  * Reversed the bird's eye transformation back to normal view.
+  * Combined the lane image with the original image for a composite view.
 
 #### Rakshith:
 
@@ -72,4 +77,5 @@ Complete on lane detection algorithm and testing framework from where we left th
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
+  * Keith is traveling yet again (traveled six of the last seven weeks - ugh!). Will miss the Tuesday and Thursday meetings due to being in transit. Will continue to communicate via email and WhatsApp chat app.
 
