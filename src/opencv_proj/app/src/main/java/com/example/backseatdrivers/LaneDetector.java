@@ -244,8 +244,8 @@ public class LaneDetector {
 
         /* Process the image and detect a lane. Return the points that identify the lane. */
 /*        Imgproc.GaussianBlur(tempImage, tempImage, new Size(5,5), 3, 3);
-        Imgproc.Canny(tempImage, tempImage, 10, 100);
-        Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 100, 10);
+        Imgproc.Canny(tempImage, tempImage, 35, 135);
+        Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 85, 25);
         for (int x = 0; x < linesHough.rows(); x++) {
             double[] l = linesHough.get(x, 0);
             Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]),
