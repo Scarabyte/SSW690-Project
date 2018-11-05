@@ -23,7 +23,10 @@ Complete on lane detection algorithm and testing framework from where we left th
 #### Adam:
 
 * _What did I work on?_
+  * Adjusting parameters to improve dashed lane detection
 * _What did I accomplish?_
+  * Demoed sky view for professor during class meeting
+  * Closed out Sprint 3 tasks
 
 #### Sapana:
 
@@ -48,6 +51,7 @@ Complete on lane detection algorithm and testing framework from where we left th
 ### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
+  * Work and health issues limit the availability of some team members
 * _What new opportunities did you discover, if any?_
 
 ### Action Items/Goals for next week:
@@ -55,12 +59,14 @@ Complete on lane detection algorithm and testing framework from where we left th
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
+  * Continue to improve lane detection - Identify Road Features epic (Issue #17) is nearly complete
 
 #### Individual Goals
 
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Assist with issue closures and end-of-semester presentation as needed
 
 ##### Sapana:
 
