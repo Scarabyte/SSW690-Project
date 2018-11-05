@@ -19,3 +19,4 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 ### Sprint 4 Week 1
 
+After the first week of Sprint 4, we have an improved lane detection method with an overlay to show the lane boundaries; the project is starting to look like some of the sample videos we watched. For the upcoming week, we'll continue to refine the algorithm.
