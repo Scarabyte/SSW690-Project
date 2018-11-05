@@ -28,8 +28,8 @@ public class LDWSProcessor {
         return mLaneDetector;
     }
 
-    public void process(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage, CameraCalibrator calibrator, boolean inSkyView) {
-
+    public void process(CameraBridgeViewBase.CvCameraViewFrame image, Mat outputImage,
+                CameraCalibrator calibrator, boolean inSkyView) {
         /* Process an image here. */
         List<MatOfPoint> lanePoints = mLaneDetector.detect(image, outputImage, calibrator, inSkyView);
         if (check_lane_departure(lanePoints)) {
