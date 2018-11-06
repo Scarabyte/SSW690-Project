@@ -2,7 +2,7 @@
 
 ### Team : _Back Seat Drivers_
 
-### Week Ending: 11/04/18 (Sun) – Week 10 of class
+### Week Ending: 11/11/18 (Sun) – Week 11 of class
 
 ### Project Status: (Green, yellow, red)
 
@@ -15,18 +15,15 @@ _One word assessment of how is the team doing relative to the schedule?_
 
 _One or two sentences describing high level project status and progress._
 
-Goals for Week 10 of class:
-Complete on lane detection algorithm and testing framework from where we left them after Sprint 3.
+Goals for Week 11 of class:
+Continue to refine lane detection algorithm and testing framework.
 
 ### Last week's activities by team member:
 
 #### Adam:
 
 * _What did I work on?_
-  * Adjusting parameters to improve dashed lane detection
 * _What did I accomplish?_
-  * Demoed sky view for professor during class meeting
-  * Closed out Sprint 3 tasks
 
 #### Sapana:
 
@@ -36,12 +33,7 @@ Complete on lane detection algorithm and testing framework from where we left th
 #### Keith:
 
 * _What did I work on?_
-  * Lane recognition
 * _What did I accomplish?_
-  * Utilized sobel filter, thresholding and a new algorithm to detect the extents of the lanes.
-  * Added a polygon shape to the image based on lane extent points.
-  * Reversed the bird's eye transformation back to normal view.
-  * Combined the lane image with the original image for a composite view.
 
 #### Rakshith:
 
@@ -51,7 +43,6 @@ Complete on lane detection algorithm and testing framework from where we left th
 ### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
-  * Work and health issues limit the availability of some team members
 * _What new opportunities did you discover, if any?_
 
 ### Action Items/Goals for next week:
@@ -59,14 +50,12 @@ Complete on lane detection algorithm and testing framework from where we left th
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
-  * Continue to improve lane detection - Identify Road Features epic (Issue #17) is nearly complete
 
 #### Individual Goals
 
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
-  * Assist with issue closures and end-of-semester presentation as needed
 
 ##### Sapana:
 
@@ -83,5 +72,4 @@ Complete on lane detection algorithm and testing framework from where we left th
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
-  * Keith is traveling yet again (traveled six of the last seven weeks - ugh!). Will miss the Tuesday and Thursday meetings due to being in transit. Will continue to communicate via email and WhatsApp chat app.
 
