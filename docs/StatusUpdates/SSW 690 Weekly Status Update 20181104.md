@@ -31,7 +31,9 @@ Complete on lane detection algorithm and testing framework from where we left th
 #### Sapana:
 
 * _What did I work on?_
+  * Testing 
 * _What did I accomplish?_
+  * Verified lane detection code using different images
   
 #### Keith:
 
@@ -71,6 +73,8 @@ Complete on lane detection algorithm and testing framework from where we left th
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * If new code merged to master, can start with more testing
+  * Work on final presentation
 
 ##### Keith:
 
