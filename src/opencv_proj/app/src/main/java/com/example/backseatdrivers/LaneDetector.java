@@ -7,6 +7,9 @@ package com.example.backseatdrivers;
 
 import android.util.Log;
 
+import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
+import org.apache.commons.math3.fitting.PolynomialCurveFitter;
+import org.apache.commons.math3.fitting.WeightedObservedPoints;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -190,18 +193,41 @@ public class LaneDetector {
                 markersR.add(new Point(mid,y));
             }
         }
+        WeightedObservedPoints obsL = new WeightedObservedPoints();
+        WeightedObservedPoints obsR = new WeightedObservedPoints();
+        PolynomialCurveFitter fitter = PolynomialCurveFitter.create(3);
         markersL = filterMarkers(markersL);
-        for (int m = 0; m < markersL.size(); m++) {
-            markers.add(markersL.get(m));
-            Imgproc.drawMarker(out, markersL.get(m), color, Imgproc.MARKER_DIAMOND, 6, 3);
+        if (!markersL.isEmpty()) {
+            for (int m = 0; m < markersL.size(); m++) {
+                Imgproc.drawMarker(out, markersL.get(m), color, Imgproc.MARKER_DIAMOND, 6, 3);
+                obsL.add(markersL.get(m).x, markersL.get(m).y);
+            }
+            double coeffL[] = fitter.fit(obsL.toList());
+            for (int c = 0; c < coeffL.length; c++) {
+                Log.d(TAG, "Coefficient L#" + c + ": " + coeffL[c]);
+            }
+            PolynomialFunction fL = new PolynomialFunction(coeffL);
+            for (int x = 0; x < out.width()/2; x++) {
+                markers.add(new Point(x, fL.value(x)));
+            }
         }
         markersR = filterMarkers(markersR);
-        for (int m = markersR.size()-1; m >= 0; m--) {
-            markers.add(markersR.get(m));
-            Imgproc.drawMarker(out, markersR.get(m), color, Imgproc.MARKER_DIAMOND, 6,3 );
+        if (!markersR.isEmpty()) {
+            for (int m = 0; m < markersR.size(); m++) {
+                Imgproc.drawMarker(out, markersR.get(m), color, Imgproc.MARKER_DIAMOND, 6, 3);
+                obsR.add(markersR.get(m).x, markersR.get(m).y);
+            }
+            double coeffR[] = fitter.fit(obsR.toList());
+            for (int c = 0; c < coeffR.length; c++) {
+                Log.d(TAG, "Coefficient R#" + c + ": " + coeffR[c]);
+            }
+            PolynomialFunction fR = new PolynomialFunction(coeffR);
+            for (int x = out.width()/2; x < out.width(); x++) {
+                markers.add(new Point(x, fR.value(x)));
+            }
         }
         if (!markers.isEmpty()) {
-            Point[] polyPoints = new Point[markers.size()];
+          Point[] polyPoints = new Point[markers.size()];
             for (int m = 0; m < markers.size(); m++) {
                 polyPoints[m] = markers.get(m);
             }
