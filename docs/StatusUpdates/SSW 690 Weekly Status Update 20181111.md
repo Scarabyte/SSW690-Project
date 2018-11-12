@@ -23,7 +23,11 @@ Continue to refine lane detection algorithm and testing framework.
 #### Adam:
 
 * _What did I work on?_
+  * Cleaned up previous completed work (merged and removed branches no longer needed)
+  * Reviewed current work
+  * Helped with research for upcoming updates
 * _What did I accomplish?_
+  * Maintained project - current state still looks good for completing our commitments
 
 #### Sapana:
 
@@ -50,6 +54,8 @@ Continue to refine lane detection algorithm and testing framework.
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
+  * Continue (and complete?) lane detection algorithm, start on final features such as notification system
+  * Continue work on final presentation
 
 #### Individual Goals
 
