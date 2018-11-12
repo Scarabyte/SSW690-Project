@@ -19,3 +19,5 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 ### Sprint 4 Week 2
 
+At the conclusion of Sprint 4, the lane detection algorithm is nearly complete - seems just a few more refinements are needed, then we can turn our attention to the final components such as the notification system.
+We have also started working on the final presentation; some slides are already in place, and we are looking at options for showing a demo video.
