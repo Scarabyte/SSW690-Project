@@ -32,7 +32,10 @@ Continue to refine lane detection algorithm and testing framework.
 #### Sapana:
 
 * _What did I work on?_
+  * Documented test observations using different stock images
+  * Updated Final Presentation for few slides 
 * _What did I accomplish?_
+  * Start to the Final Presentation 
   
 #### Keith:
 
@@ -66,6 +69,8 @@ Continue to refine lane detection algorithm and testing framework.
 ##### Sapana:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Revise Final Presentation 
+  * Sprint 5 work items
 
 ##### Keith:
 
