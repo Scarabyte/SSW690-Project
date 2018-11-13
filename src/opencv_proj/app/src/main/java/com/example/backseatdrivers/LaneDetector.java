@@ -15,6 +15,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint2f;
 import org.opencv.core.Point;
+import org.opencv.core.Point3;
 import org.opencv.core.Scalar;
 import org.opencv.core.MatOfPoint;
 import org.opencv.imgproc.Imgproc;
@@ -41,8 +42,8 @@ public class LaneDetector {
         /* Source region is a trapezoid */
         src[0] = new Point(x*0.46, y*0.55);
         src[1] = new Point(x*0.54, y*0.55);
-        src[2] = new Point(x*0.70, y-1);
-        src[3] = new Point(x*0.30, y-1);
+        src[2] = new Point(x*0.70, y*0.90);
+        src[3] = new Point(x*0.30, y*0.90);
 
         /* Destination region is the full image mat */
         dst[0] = new Point(x*0.3, 0);
@@ -76,7 +77,7 @@ public class LaneDetector {
         Imgproc.warpPerspective(in, out, skyTransformHomographyMatrix, out.size());
     }
 
-    private Point findLaneLine(Mat in, int y, boolean left, Point previous) {
+    private LaneMarker findLaneLine(Mat in, int y, boolean left, LaneMarker previous) {
         int x1, x2, x, start, stop, dx1, dx2, step;
         double[] point;
         double iThreshold = 200.0;
@@ -127,12 +128,12 @@ public class LaneDetector {
             dx1 = x1 - (int) previous.x;
             dx2 = x2 - (int) previous.y;
             if (dx1 > dThreshold || dx1 < -dThreshold || dx2 > dThreshold || dx2 < -dThreshold)
-                return null;
+                return new LaneMarker(x1, x2, false, 1.0);
         }
 
         // Discard points that are too narrow.
         if ( (left && (x1-x2) < wThreshold) || (!left && (x2-x1) < wThreshold))
-            return null;
+            return new LaneMarker(x1, x2, false, 1.0);
 
         // Return a found point.
         if (left) {
@@ -140,100 +141,235 @@ public class LaneDetector {
             x2 = x1;
             x1 = temp;
         }
-        return new Point(x1,x2);
+        return new LaneMarker(x1,x2,true, 0.0);
     }
 
-    private List<Point> filterMarkers(List<Point> markers) {
+    private List<LaneMarker> filterMarkersBySlope(List<LaneMarker> markers) {
+        List<LaneMarker> allMarkers = new ArrayList<>();
+        double avgSlope = 0.0;
+        double slope = 0.0;
+        double sumSlope = 0.0;
+        int slopeCount = 0;
+        LaneMarker lastValid = null;
+        double x1, y1, x2, y2;
+
+        if (markers.size() > 0) {
+
+            // Calculate the average slope of all the valid markers in the set.
+            for (int m = 1; m < markers.size(); m++) {
+                if (markers.get(m-1).v) {
+                    lastValid = markers.get(m-1);
+                }
+                if (lastValid != null && markers.get(m).v) {
+                    x1 = lastValid.x;
+                    y1 = lastValid.y;
+                    x2 = markers.get(m).x;
+                    y2 = markers.get(m).y;
+
+                    slope = Math.abs((y2 - y1) / (x2 - x1));
+                    sumSlope += slope;
+
+                    if (slopeCount == 0) {
+                        slopeCount += 2; // Capture first two points
+                    } else {
+                        slopeCount++; // Capture next good point.
+                    }
+                }
+            }
+            avgSlope = sumSlope / slopeCount;
+
+            // Invalidate those markers that have a slope higher than the average.
+            lastValid = null;
+            allMarkers.add(markers.get(0));
+            for (int m = 1; m < markers.size(); m++) {
+                if (markers.get(m-1).v) {
+                    lastValid = markers.get(m-1);
+                }
+                if (lastValid != null && markers.get(m).v) {
+                    x1 = lastValid.x;
+                    y1 = lastValid.y;
+                    x2 = markers.get(m).x;
+                    y2 = markers.get(m).y;
+
+                    slope = Math.abs((y2 - y1) / (x2 - x1));
+
+                    if (Math.abs(slope-avgSlope) < 1.0) {
+                        allMarkers.add(markers.get(m));
+                    }
+                    else {
+                        allMarkers.add(new LaneMarker(markers.get(m).x, markers.get(m).y, false, 1.0));
+                    }
+                }
+                else {
+                    allMarkers.add(markers.get(m));
+                }
+            }
+
+        }
+
+        return allMarkers;
+    }
+
+    private List<LaneMarker> filterMarkersByDistance(List<LaneMarker> markers) {
         int sumDx = 0;
         int avgDx;
         int dx;
         int lastX;
-        List<Point> goodMarkers = new ArrayList<>();
+        List<LaneMarker> goodMarkers = new ArrayList<>();
+        List<LaneMarker> allMarkers = new ArrayList<>();
         if (markers.size() > 0) {
             for (int m = 1; m < markers.size(); m++) {
                 sumDx += Math.abs(markers.get(m).x - markers.get(m - 1).x);
             }
-            avgDx = (sumDx / markers.size()) * 3;
+            avgDx = (sumDx / markers.size()) * 1;
             lastX = (int)markers.get(0).x;
             for (int m = 1; m < markers.size(); m++) {
                 dx = Math.abs(((int)markers.get(m).x) - lastX);
+//                dx = Math.abs(((int)markers.get(m).x) - (int)markers.get(m-1).x);
                 if (dx < avgDx) {
                     if (goodMarkers.isEmpty()) {
                         goodMarkers.add(markers.get(m - 1));
                     }
                     goodMarkers.add(markers.get(m));
+                    allMarkers.add(new LaneMarker(markers.get(m).x, markers.get(m).y, true, 1.0));
                     lastX = (int)markers.get(m).x;
+                }
+                else {
+                    allMarkers.add(new LaneMarker(markers.get(m).x, markers.get(m).y, false, 1.0));
                 }
                 if (goodMarkers.isEmpty()) {
                     lastX = (int)markers.get(m).x;
                 }
             }
         }
-        return goodMarkers;
+        return allMarkers;
+    }
+
+    private List<LaneMarker> weighMarkers(List<LaneMarker> markers) {
+        // Weight is based on the horizontal and vertical distance from the previous point.
+        // All points are considered.
+        List<LaneMarker> allMarkers = new ArrayList<>();
+        for (int m = 1; m < markers.size(); m++) {
+            LaneMarker m1 = markers.get(m-1);
+            LaneMarker m2 = markers.get(m);
+            double dx = Math.abs(m1.x - m2.x);
+            double dy = Math.abs(m1.y - m2.y);
+            double weight = 1 / (dx+dy);
+            if (allMarkers.isEmpty()) {
+                allMarkers.add(new LaneMarker(m1.x, m1.y, m1.v, weight));
+            }
+            allMarkers.add(new LaneMarker(m2.x, m2.y, m2.v, weight));
+        }
+        return allMarkers;
     }
 
     private void findLaneLines(Mat in, Mat out) {
         int mid;
-        Point lineL = null;
-        Point lineR = null;
-        Scalar color = new Scalar(255, 0, 255); // Magenta
-        List<Point> markersL = new ArrayList<>();
-        List<Point> markersR = new ArrayList<>();
-        List<Point> markers = new ArrayList<>();
+        LaneMarker lineL = null;
+        LaneMarker lineR = null;
+        Scalar colorL1 = new Scalar(255, 0, 255); // Magenta
+        Scalar colorR1 = new Scalar(255, 255, 0); // Yellow
+        Scalar colorL2 = new Scalar(0, 0, 255); // Blue
+        Scalar colorR2 = new Scalar(255, 0, 0); // Red
+        Scalar gray = new Scalar(64,64,64);
+        List<LaneMarker> markersL = new ArrayList<>();
+        List<LaneMarker> markersR = new ArrayList<>();
+        List<LaneMarker> markers = new ArrayList<>();
 
         for (int y=in.height()-1; y >= 0; y-=10) {
             lineL = findLaneLine(in, y, true, lineL);
             if (lineL != null) {
                 mid = ((int) lineL.x + (((int) lineL.y - (int) lineL.x) / 2));
-                markersL.add(new Point(mid,y));
+                markersL.add(new LaneMarker(mid,y,true,1.0));
             }
             lineR = findLaneLine(in, y, false, lineR);
             if (lineR != null) {
                 mid = ((int) lineR.x + (((int) lineR.y - (int) lineR.x) / 2));
-                markersR.add(new Point(mid,y));
+                markersR.add(new LaneMarker(mid,y,true,1.0));
             }
         }
+
+        // Fit curves to the detected lane points.
         WeightedObservedPoints obsL = new WeightedObservedPoints();
         WeightedObservedPoints obsR = new WeightedObservedPoints();
-        PolynomialCurveFitter fitter = PolynomialCurveFitter.create(3);
-        markersL = filterMarkers(markersL);
+        PolynomialCurveFitter fitterL = PolynomialCurveFitter.create(2);
+        PolynomialCurveFitter fitterR = PolynomialCurveFitter.create(2);
+        markersL = filterMarkersByDistance(markersL);
+//        markersL = filterMarkersBySlope(markersL);
+        markersL = weighMarkers(markersL);
+        int countL = 0;
         if (!markersL.isEmpty()) {
             for (int m = 0; m < markersL.size(); m++) {
-                Imgproc.drawMarker(out, markersL.get(m), color, Imgproc.MARKER_DIAMOND, 6, 3);
-                obsL.add(markersL.get(m).x, markersL.get(m).y);
+                if (markersL.get(m).v) {
+                    Imgproc.drawMarker(out, markersL.get(m), colorL1, Imgproc.MARKER_DIAMOND, 6, 3);
+                    obsL.add(markersL.get(m).w, markersL.get(m).y, markersL.get(m).x);
+                    countL++;
+                }
+                else {
+                    Imgproc.drawMarker(out, markersL.get(m), gray, Imgproc.MARKER_DIAMOND, 6, 3);
+                }
             }
-            double coeffL[] = fitter.fit(obsL.toList());
-            for (int c = 0; c < coeffL.length; c++) {
-                Log.d(TAG, "Coefficient L#" + c + ": " + coeffL[c]);
-            }
-            PolynomialFunction fL = new PolynomialFunction(coeffL);
-            for (int x = 0; x < out.width()/2; x++) {
-                markers.add(new Point(x, fL.value(x)));
+            if (countL > 0) {
+                double coeffL[] = fitterL.fit(obsL.toList());
+                String coords = "L:";
+                for (int c = 0; c < coeffL.length; c++) {
+                    Log.d(TAG, "Coefficient L#" + c + ": " + coeffL[c]);
+                }
+                PolynomialFunction fL = new PolynomialFunction(coeffL);
+                for (int x = 0; x < out.width()/2; x += 17) {
+                    double y = fL.value(x);
+                    if ((int) y >= 0 && (int) y < out.height()) {
+                        markers.add(new LaneMarker(y, x, true,1.0));
+                        coords += "("+(int)x+","+(int)y+")";
+                        Imgproc.drawMarker(out, new Point(y, x), colorL2, Imgproc.MARKER_SQUARE, 4, 2);
+                    }
+                }
+                Log.d(TAG, coords);
             }
         }
-        markersR = filterMarkers(markersR);
+        markersR = filterMarkersByDistance(markersR);
+//        markersR = filterMarkersBySlope(markersR);
+        markersR = weighMarkers(markersR);
+        int countR = 0;
         if (!markersR.isEmpty()) {
             for (int m = 0; m < markersR.size(); m++) {
-                Imgproc.drawMarker(out, markersR.get(m), color, Imgproc.MARKER_DIAMOND, 6, 3);
-                obsR.add(markersR.get(m).x, markersR.get(m).y);
+                if (markersR.get(m).v) {
+                    Imgproc.drawMarker(out, markersR.get(m), colorR1, Imgproc.MARKER_DIAMOND, 6, 3);
+                }
+                else {
+                    Imgproc.drawMarker(out, markersR.get(m), gray, Imgproc.MARKER_DIAMOND, 6, 3);
+                }
+                obsR.add(markersR.get(m).w, markersR.get(m).y, markersR.get(m).x);
+                countR++;
             }
-            double coeffR[] = fitter.fit(obsR.toList());
-            for (int c = 0; c < coeffR.length; c++) {
-                Log.d(TAG, "Coefficient R#" + c + ": " + coeffR[c]);
-            }
-            PolynomialFunction fR = new PolynomialFunction(coeffR);
-            for (int x = out.width()/2; x < out.width(); x++) {
-                markers.add(new Point(x, fR.value(x)));
+            if (countR > 0) {
+                double coeffR[] = fitterR.fit(obsR.toList());
+                String coords = "R:";
+                for (int c = 0; c < coeffR.length; c++) {
+                    Log.d(TAG, "Coefficient R#" + c + ": " + coeffR[c]);
+                }
+                PolynomialFunction fR = new PolynomialFunction(coeffR);
+                for (int y = out.height()-1; y > 0; y -= 17) {
+                    double x = fR.value(y);
+                    if ((int) x >= 0 && (int) x < out.width()) {
+                        markers.add(new LaneMarker(x, y, true,1.0));
+                        Imgproc.drawMarker(out, new Point(x, y), colorR2, Imgproc.MARKER_SQUARE, 4, 2);
+                    }
+                    coords += "("+(int)x+","+(int)y+")";
+                }
+                Log.d(TAG, coords);
             }
         }
+
+        // Display a polygon on the image to highlight the travel lane.
         if (!markers.isEmpty()) {
-          Point[] polyPoints = new Point[markers.size()];
+            Point[] polyPoints = new Point[markers.size()];
             for (int m = 0; m < markers.size(); m++) {
                 polyPoints[m] = markers.get(m);
             }
             List<MatOfPoint> mop = new ArrayList<>();
             mop.add(new MatOfPoint(polyPoints));
-            Imgproc.fillPoly(out, mop, new Scalar(32, 128, 32));
+//            Imgproc.fillPoly(out, mop, new Scalar(32, 128, 32));
         }
     }
 
@@ -284,8 +420,9 @@ public class LaneDetector {
         Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
         Imgproc.threshold(sobelImage, scanned, 37.5, 255, Imgproc.THRESH_BINARY);
         findLaneLines(scanned, birdImage);
-        transformToNormalView(birdImage,tempImage);
-        Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
+        birdImage.copyTo(outputImage);
+//        transformToNormalView(birdImage,tempImage);
+//        Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
 
         return lanePoints;
     }

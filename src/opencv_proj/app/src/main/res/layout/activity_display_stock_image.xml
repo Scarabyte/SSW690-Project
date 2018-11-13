@@ -35,6 +35,6 @@
             android:layout_weight="1"
             android:contentDescription="@string/stock_image"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/single_lane_3" />
+            app:srcCompat="@drawable/test01" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

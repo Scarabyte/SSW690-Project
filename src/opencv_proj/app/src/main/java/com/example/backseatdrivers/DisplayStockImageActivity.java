@@ -33,7 +33,7 @@ public class DisplayStockImageActivity extends AppCompatActivity {
         Mat cvGray = null;
         Mat outputImage = null;
         try {
-            cvImage = Utils.loadResource(this, R.drawable.single_lane_3);
+            cvImage = Utils.loadResource(this, R.drawable.test01);
         }
         catch (IOException e) {
             Log.e(TAG, e.getMessage());
