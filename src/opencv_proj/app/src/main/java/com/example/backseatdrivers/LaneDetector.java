@@ -31,19 +31,28 @@ import static org.opencv.core.Core.addWeighted;
 public class LaneDetector {
     private static final String TAG = "LaneDetector";
 
+    private Point[] mROI = new Point[4];
+
     public LaneDetector() {
         /* Perform initialization here. */
+        SetROI(46, 50, 54, 50, 70, 95, 30, 95);
+    }
+
+    public void SetROI(int ulx, int uly, int urx, int ury, int lrx, int lry, int llx, int lly) {
+        mROI[0] = new Point(ulx/100.0, uly/100.0);
+        mROI[1] = new Point(urx/100.0, ury/100.0);
+        mROI[2] = new Point(lrx/100.0, lry/100.0);
+        mROI[3] = new Point(llx/100.0, lly/100.0);
     }
 
     private void transformPoints(int x, int y, MatOfPoint2f srcPts, MatOfPoint2f dstPts) {
         Point[] src = new Point[4];
         Point[] dst = new Point[4];
 
-        /* Source region is a trapezoid */
-        src[0] = new Point(x*0.46, y*0.55);
-        src[1] = new Point(x*0.54, y*0.55);
-        src[2] = new Point(x*0.70, y*0.90);
-        src[3] = new Point(x*0.30, y*0.90);
+        src[0] = new Point(x*mROI[0].x, y*mROI[0].y);
+        src[1] = new Point(x*mROI[1].x, y*mROI[1].y);
+        src[2] = new Point(x*mROI[2].x, y*mROI[2].y);
+        src[3] = new Point(x*mROI[3].x, y*mROI[3].y);
 
         /* Destination region is the full image mat */
         dst[0] = new Point(x*0.3, 0);
@@ -316,13 +325,13 @@ public class LaneDetector {
                     Log.d(TAG, "Coefficient L#" + c + ": " + coeffL[c]);
                 }
                 PolynomialFunction fL = new PolynomialFunction(coeffL);
-                for (int x = 0; x < out.width()/2; x += 17) {
-                    double y = fL.value(x);
-                    if ((int) y >= 0 && (int) y < out.height()) {
-                        markers.add(new LaneMarker(y, x, true,1.0));
-                        coords += "("+(int)x+","+(int)y+")";
-                        Imgproc.drawMarker(out, new Point(y, x), colorL2, Imgproc.MARKER_SQUARE, 4, 2);
+                for (int y = out.height()-1; y > out.height()/5; y -= 17) {
+                    double x = fL.value(y);
+                    if ((int) x >= 0 && (int) x < out.width()/2) {
+                        markers.add(new LaneMarker(x, y, true,1.0));
+                        Imgproc.drawMarker(out, new Point(x, y), colorL2, Imgproc.MARKER_SQUARE, 4, 2);
                     }
+                    coords += "("+(int)x+","+(int)y+")";
                 }
                 Log.d(TAG, coords);
             }
@@ -349,9 +358,9 @@ public class LaneDetector {
                     Log.d(TAG, "Coefficient R#" + c + ": " + coeffR[c]);
                 }
                 PolynomialFunction fR = new PolynomialFunction(coeffR);
-                for (int y = out.height()-1; y > 0; y -= 17) {
+                for (int y = out.height()/5; y < out.height(); y += 17) {
                     double x = fR.value(y);
-                    if ((int) x >= 0 && (int) x < out.width()) {
+                    if ((int) x >= out.width()/2 && (int) x < out.width()) {
                         markers.add(new LaneMarker(x, y, true,1.0));
                         Imgproc.drawMarker(out, new Point(x, y), colorR2, Imgproc.MARKER_SQUARE, 4, 2);
                     }
@@ -369,7 +378,7 @@ public class LaneDetector {
             }
             List<MatOfPoint> mop = new ArrayList<>();
             mop.add(new MatOfPoint(polyPoints));
-//            Imgproc.fillPoly(out, mop, new Scalar(32, 128, 32));
+            Imgproc.fillPoly(out, mop, new Scalar(128, 32, 128));
         }
     }
 
@@ -420,9 +429,9 @@ public class LaneDetector {
         Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
         Imgproc.threshold(sobelImage, scanned, 37.5, 255, Imgproc.THRESH_BINARY);
         findLaneLines(scanned, birdImage);
-        birdImage.copyTo(outputImage);
-//        transformToNormalView(birdImage,tempImage);
-//        Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
+//        birdImage.copyTo(outputImage);
+        transformToNormalView(birdImage,tempImage);
+        Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
 
         return lanePoints;
     }
