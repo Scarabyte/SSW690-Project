@@ -31,6 +31,13 @@ import static org.opencv.core.Core.addWeighted;
 public class LaneDetector {
     private static final String TAG = "LaneDetector";
 
+    public static final int SHOW_FINAL = 0;
+    public static final int SHOW_SOBEL = 1;
+    public static final int SHOW_THRESHOLD = 2;
+    public static final int SHOW_SKY_VIEW = 3;
+
+    private int mViewToShow = SHOW_FINAL;
+
     private Point[] mROI = new Point[4];
     private Point[] mDST = new Point[4];
 
@@ -38,6 +45,10 @@ public class LaneDetector {
         /* Perform initialization here. */
         SetROI(46, 65, 54, 65, 70, 95, 30, 95);
         SetDST(30, 0, 70, 0, 70, 100, 30, 100);
+    }
+
+    public void SetViewToShow(int viewCode) {
+        mViewToShow = viewCode;
     }
 
     public void SetROI(int ulx, int uly, int urx, int ury, int lrx, int lry, int llx, int lly) {
@@ -248,7 +259,6 @@ public class LaneDetector {
             lastX = (int)markers.get(0).x;
             for (int m = 1; m < markers.size(); m++) {
                 dx = Math.abs(((int)markers.get(m).x) - lastX);
-//                dx = Math.abs(((int)markers.get(m).x) - (int)markers.get(m-1).x);
                 if (dx < avgDx) {
                     if (goodMarkers.isEmpty()) {
                         goodMarkers.add(markers.get(m - 1));
@@ -318,7 +328,6 @@ public class LaneDetector {
         PolynomialCurveFitter fitterL = PolynomialCurveFitter.create(2);
         PolynomialCurveFitter fitterR = PolynomialCurveFitter.create(2);
         markersL = filterMarkersByDistance(markersL);
-//        markersL = filterMarkersBySlope(markersL);
         markersL = weighMarkers(markersL);
         int countL = 0;
         if (!markersL.isEmpty()) {
@@ -351,7 +360,6 @@ public class LaneDetector {
             }
         }
         markersR = filterMarkersByDistance(markersR);
-//        markersR = filterMarkersBySlope(markersR);
         markersR = weighMarkers(markersR);
         int countR = 0;
         if (!markersR.isEmpty()) {
@@ -427,23 +435,32 @@ public class LaneDetector {
             gray.copyTo(tempImage);
         }
 
-        /* Process the image and detect a lane. Return the points that identify the lane. */
-/*        Imgproc.GaussianBlur(tempImage, tempImage, new Size(5,5), 3, 3);
-        Imgproc.Canny(tempImage, tempImage, 35, 135);
-        Imgproc.HoughLinesP(tempImage, linesHough, 1, Math.PI / 180, 5, 85, 25);
-        for (int x = 0; x < linesHough.rows(); x++) {
-            double[] l = linesHough.get(x, 0);
-            Imgproc.line(outputImage, new Point(l[0], l[1]), new Point(l[2], l[3]),
-                    new Scalar(255, 0, 0), 1, Imgproc.LINE_AA, 0);
-        }
-*/
         /* Convert image to sky view */
         transformToSkyView(gray, tempImage);
         transformToSkyView(rgba, birdImage);
+
+        /* Run a Sobel filter to find the edges in the image. */
         Imgproc.Sobel(tempImage, sobelImage, tempImage.depth(), 1, 0, 3, 1);
+        if (mViewToShow == SHOW_SOBEL) {
+            sobelImage.copyTo(outputImage);
+            return lanePoints;
+        }
+
+        /* Perform a binary threshold to filter out soft edges. */
         Imgproc.threshold(sobelImage, scanned, 37.5, 255, Imgproc.THRESH_BINARY);
+        if (mViewToShow == SHOW_THRESHOLD) {
+            scanned.copyTo(outputImage);
+            return lanePoints;
+        }
+
+        /* Detect the lane lines and paint the results. */
         findLaneLines(scanned, birdImage);
-//        birdImage.copyTo(outputImage);
+        if (mViewToShow == SHOW_SKY_VIEW) {
+            birdImage.copyTo(outputImage);
+            return lanePoints;
+        }
+
+        /* Switch back to normal view and combine the processed image with the original. */
         transformToNormalView(birdImage,tempImage);
         Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
 
