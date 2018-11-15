@@ -138,10 +138,21 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onOptionsItemSelected(MenuItem item) {
         final Resources res = getResources();
         switch (item.getItemId()) {
-            case R.id.mode_skyview:
-                mMode = MODE_SKYVIEW;
+            case R.id.m_view_final:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_FINAL);
                 item.setChecked(true);
-                mOpenCvCameraView.enableView();
+                return true;
+            case R.id.m_view_sobel:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SOBEL);
+                item.setChecked(true);
+                return true;
+            case R.id.m_view_threshold:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_THRESHOLD);
+                item.setChecked(true);
+                return true;
+            case R.id.m_view_skyview:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SKY_VIEW);
+                item.setChecked(true);
                 return true;
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;

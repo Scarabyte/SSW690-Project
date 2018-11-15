@@ -8,10 +8,6 @@
         <menu >
             <group android:checkableBehavior="single" >
                 <item
-                    android:id="@+id/m_view_final"
-                    android:checked="true"
-                    android:title="@string/view_final" />
-                <item
                     android:id="@+id/m_view_sobel"
                     android:title="@string/view_sobel" />
                 <item
@@ -20,6 +16,10 @@
                 <item
                     android:id="@+id/m_view_skyview"
                     android:title="@string/view_skyview" />
+                <item
+                    android:id="@+id/m_view_final"
+                    android:checked="true"
+                    android:title="@string/view_final" />
             </group>
         </menu>
     </item>
@@ -35,9 +35,6 @@
                 <item
                     android:id="@+id/mode_calibration"
                     android:title="@string/calibration" />
-                <item
-                    android:id="@+id/mode_skyview"
-                    android:title="@string/skyview" />
             </group>
         </menu>
     </item>
