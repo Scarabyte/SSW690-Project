@@ -305,7 +305,11 @@ public class LaneDetector {
         Scalar colorR1 = new Scalar(255, 255, 0); // Yellow
         Scalar colorL2 = new Scalar(0, 0, 255); // Blue
         Scalar colorR2 = new Scalar(255, 0, 0); // Red
-        Scalar gray = new Scalar(64,64,64);
+        Scalar gray = new Scalar(63,63,63);
+        Scalar green = new Scalar(31, 255, 31);
+        Scalar red = new Scalar(255, 31, 31);
+        Scalar blue = new Scalar(31, 31, 255);
+        Scalar laneColor = gray;
         List<LaneMarker> markersL = new ArrayList<>();
         List<LaneMarker> markersR = new ArrayList<>();
         List<LaneMarker> markers = new ArrayList<>();
@@ -399,6 +403,26 @@ public class LaneDetector {
             }
         }
 
+        // Display the vehicle position and the center of the lane.
+        Point vehicle = new Point(out.width()/2, out.height()-1);
+        if (lane.xL != null && lane.xR != null) {
+            Point middle = new Point(lane.xL.x + ((lane.xR.x-lane.xL.x)/2.0), out.height()-11);
+
+            /* Calculate the percent from middle. */
+            /* 0.0% is exactly in the middle. */
+            /* -100.0% is all the way to the left. */
+            /* +100.0% is all the way to the right. */
+            double percentPerPixel = 200.0 / out.width();
+            lane.percentFromCenter = (middle.x - vehicle.x) * percentPerPixel;
+
+            /* If the vehicle is more than 10% from the center of the lane, set */
+            /* the color of the lane polygon to red. Otherwise it's green.      */
+            laneColor = green;
+            if (lane.percentFromCenter > 10.0 || lane.percentFromCenter < -10.0) {
+                laneColor = red;
+            }
+        }
+
         // Display a polygon on the image to highlight the travel lane.
         if (!markers.isEmpty()) {
             Point[] polyPoints = new Point[markers.size()];
@@ -407,23 +431,14 @@ public class LaneDetector {
             }
             List<MatOfPoint> mop = new ArrayList<>();
             mop.add(new MatOfPoint(polyPoints));
-            Imgproc.fillPoly(out, mop, new Scalar(128, 32, 128));
+            Imgproc.fillPoly(out, mop, laneColor);
         }
 
-        // Display the vehicle position and the center of the lane.
-        Scalar red = new Scalar(255, 0, 0);
-        Point vehicle = new Point(out.width()/2, out.height()-1);
-        Imgproc.drawMarker(out, vehicle, red, Imgproc.MARKER_TRIANGLE_UP, 10, 2);
+        // Draw the vehicle and lane position indicators.
+        Imgproc.drawMarker(out, vehicle, blue, Imgproc.MARKER_TRIANGLE_UP, 10, 2);
         if (lane.xL != null && lane.xR != null) {
-            Point middle = new Point(lane.xL.x + ((lane.xR.x-lane.xL.x)/2.0), out.height()-11);
-            Imgproc.drawMarker(out, middle, red, Imgproc.MARKER_TRIANGLE_DOWN, 10, 2);
-
-            /* Calculate the percent from middle. */
-            /* 0.0% is exactly in the middle. */
-            /* -100.0% is all the way to the left. */
-            /* +100.0% is all the way to the right. */
-            double percentPerPixel = 200.0 / out.width();
-            lane.percentFromCenter = (middle.x - vehicle.x) * percentPerPixel;
+            Point middle = new Point(lane.xL.x + ((lane.xR.x - lane.xL.x) / 2.0), out.height() - 11);
+            Imgproc.drawMarker(out, middle, blue, Imgproc.MARKER_TRIANGLE_DOWN, 10, 2);
         }
     }
 
@@ -494,7 +509,7 @@ public class LaneDetector {
         String percentString = String.format("%+02.1f%%", theLane.percentFromCenter);
         Imgproc.putText(outputImage, percentString,
                 new Point(outputImage.width() * 0.45, outputImage.height() * 0.85),
-                FONT_HERSHEY_COMPLEX, 0.8, new Scalar(255, 0, 0));
+                FONT_HERSHEY_COMPLEX, 0.8, new Scalar(31, 31, 255));
 
         return lanePoints;
     }
