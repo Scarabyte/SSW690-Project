@@ -25,6 +25,7 @@ import org.opencv.core.Size;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.opencv.core.Core.FONT_HERSHEY_COMPLEX;
 import static org.opencv.core.Core.FONT_HERSHEY_SIMPLEX;
 import static org.opencv.core.Core.addWeighted;
 
@@ -296,7 +297,7 @@ public class LaneDetector {
         return allMarkers;
     }
 
-    private void findLaneLines(Mat in, Mat out) {
+    private void findLaneLines(Mat in, Mat out, Lane lane) {
         int mid;
         LaneMarker lineL = null;
         LaneMarker lineR = null;
@@ -308,6 +309,7 @@ public class LaneDetector {
         List<LaneMarker> markersL = new ArrayList<>();
         List<LaneMarker> markersR = new ArrayList<>();
         List<LaneMarker> markers = new ArrayList<>();
+        List<LaneMarker> markersTemp = new ArrayList<>();
 
         for (int y=in.height()-1; y >= 0; y-=10) {
             lineL = findLaneLine(in, y, true, lineL);
@@ -357,6 +359,7 @@ public class LaneDetector {
                     coords += "("+(int)x+","+(int)y+")";
                 }
                 Log.d(TAG, coords);
+                lane.xL = new Point(fL.value(out.height()-10), out.height()-10);
             }
         }
         markersR = filterMarkersByDistance(markersR);
@@ -380,15 +383,19 @@ public class LaneDetector {
                     Log.d(TAG, "Coefficient R#" + c + ": " + coeffR[c]);
                 }
                 PolynomialFunction fR = new PolynomialFunction(coeffR);
-                for (int y = out.height()/5; y < out.height(); y += 17) {
+                for (int y = out.height()-1; y > out.height()/5; y -= 17) {
                     double x = fR.value(y);
                     if ((int) x >= out.width()/2 && (int) x < out.width()) {
-                        markers.add(new LaneMarker(x, y, true,1.0));
+                        markersTemp.add(new LaneMarker(x, y, true, 1.0));
                         Imgproc.drawMarker(out, new Point(x, y), colorR2, Imgproc.MARKER_SQUARE, 4, 2);
                     }
                     coords += "("+(int)x+","+(int)y+")";
                 }
                 Log.d(TAG, coords);
+                for (int m = markersTemp.size()-1; m >= 0; m--){
+                    markers.add(markersTemp.get(m));
+                }
+                lane.xR = new Point(fR.value(out.height()-10), out.height()-10);
             }
         }
 
@@ -401,6 +408,22 @@ public class LaneDetector {
             List<MatOfPoint> mop = new ArrayList<>();
             mop.add(new MatOfPoint(polyPoints));
             Imgproc.fillPoly(out, mop, new Scalar(128, 32, 128));
+        }
+
+        // Display the vehicle position and the center of the lane.
+        Scalar red = new Scalar(255, 0, 0);
+        Point vehicle = new Point(out.width()/2, out.height()-1);
+        Imgproc.drawMarker(out, vehicle, red, Imgproc.MARKER_TRIANGLE_UP, 10, 2);
+        if (lane.xL != null && lane.xR != null) {
+            Point middle = new Point(lane.xL.x + ((lane.xR.x-lane.xL.x)/2.0), out.height()-11);
+            Imgproc.drawMarker(out, middle, red, Imgproc.MARKER_TRIANGLE_DOWN, 10, 2);
+
+            /* Calculate the percent from middle. */
+            /* 0.0% is exactly in the middle. */
+            /* -100.0% is all the way to the left. */
+            /* +100.0% is all the way to the right. */
+            double percentPerPixel = 200.0 / out.width();
+            lane.percentFromCenter = (middle.x - vehicle.x) * percentPerPixel;
         }
     }
 
@@ -417,6 +440,7 @@ public class LaneDetector {
         Mat sobelImage = new Mat();
         Mat scanned = new Mat();
         boolean undistorted = false;
+        Lane theLane = new Lane();
 
         /* Undistort the original image and the grayscale image, if calibrated. */
         if (calibrator != null) {
@@ -454,15 +478,23 @@ public class LaneDetector {
         }
 
         /* Detect the lane lines and paint the results. */
-        findLaneLines(scanned, birdImage);
+        findLaneLines(scanned, birdImage, theLane);
         if (mViewToShow == SHOW_SKY_VIEW) {
             birdImage.copyTo(outputImage);
             return lanePoints;
         }
 
-        /* Switch back to normal view and combine the processed image with the original. */
+        /* Switch back to normal view. */
         transformToNormalView(birdImage,tempImage);
+
+        /* Combine the processed image with the original. */
         Core.addWeighted(tempImage,0.5, rgba, 0.5, 0.0, outputImage);
+
+        /* Display the vehicle position data. */
+        String percentString = String.format("%+02.1f%%", theLane.percentFromCenter);
+        Imgproc.putText(outputImage, percentString,
+                new Point(outputImage.width() * 0.45, outputImage.height() * 0.85),
+                FONT_HERSHEY_COMPLEX, 0.8, new Scalar(255, 0, 0));
 
         return lanePoints;
     }
