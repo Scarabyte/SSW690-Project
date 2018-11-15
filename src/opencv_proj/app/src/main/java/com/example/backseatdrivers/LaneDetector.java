@@ -413,7 +413,7 @@ public class LaneDetector {
             /* -100.0% is all the way to the left. */
             /* +100.0% is all the way to the right. */
             double percentPerPixel = 200.0 / out.width();
-            lane.percentFromCenter = (middle.x - vehicle.x) * percentPerPixel;
+            lane.percentFromCenter = (vehicle.x - middle.x) * percentPerPixel;
 
             /* If the vehicle is more than 10% from the center of the lane, set */
             /* the color of the lane polygon to red. Otherwise it's green.      */
