@@ -32,10 +32,12 @@ public class LaneDetector {
     private static final String TAG = "LaneDetector";
 
     private Point[] mROI = new Point[4];
+    private Point[] mDST = new Point[4];
 
     public LaneDetector() {
         /* Perform initialization here. */
-        SetROI(46, 50, 54, 50, 70, 95, 30, 95);
+        SetROI(46, 65, 54, 65, 70, 95, 30, 95);
+        SetDST(30, 0, 70, 0, 70, 100, 30, 100);
     }
 
     public void SetROI(int ulx, int uly, int urx, int ury, int lrx, int lry, int llx, int lly) {
@@ -45,20 +47,32 @@ public class LaneDetector {
         mROI[3] = new Point(llx/100.0, lly/100.0);
     }
 
+    public void SetDST(int ulx, int uly, int urx, int ury, int lrx, int lry, int llx, int lly) {
+        mDST[0] = new Point(ulx/100.0, uly/100.0);
+        mDST[1] = new Point(urx/100.0, ury/100.0);
+        mDST[2] = new Point(lrx/100.0, lry/100.0);
+        mDST[3] = new Point(llx/100.0, lly/100.0);
+    }
+
+    private double bound(double extent, double value) {
+        if (value < 0.0) return 0.0;
+        if (value > extent) return extent;
+        return value;
+    }
+
     private void transformPoints(int x, int y, MatOfPoint2f srcPts, MatOfPoint2f dstPts) {
         Point[] src = new Point[4];
         Point[] dst = new Point[4];
 
-        src[0] = new Point(x*mROI[0].x, y*mROI[0].y);
-        src[1] = new Point(x*mROI[1].x, y*mROI[1].y);
-        src[2] = new Point(x*mROI[2].x, y*mROI[2].y);
-        src[3] = new Point(x*mROI[3].x, y*mROI[3].y);
+        src[0] = new Point(bound(x, x*mROI[0].x), bound(y, y*mROI[0].y));
+        src[1] = new Point(bound(x, x*mROI[1].x), bound(y, y*mROI[1].y));
+        src[2] = new Point(bound(x, x*mROI[2].x), bound(y, y*mROI[2].y));
+        src[3] = new Point(bound(x, x*mROI[3].x), bound(y, y*mROI[3].y));
 
-        /* Destination region is the full image mat */
-        dst[0] = new Point(x*0.3, 0);
-        dst[1] = new Point(x*0.7, 0);
-        dst[2] = new Point(x*0.7, y-1);
-        dst[3] = new Point(x*0.3, y-1);
+        dst[0] = new Point(bound(x, x*mDST[0].x), bound(y, y*mDST[0].y));
+        dst[1] = new Point(bound(x, x*mDST[1].x), bound(y, y*mDST[1].y));
+        dst[2] = new Point(bound(x, x*mDST[2].x), bound(y, y*mDST[2].y));
+        dst[3] = new Point(bound(x, x*mDST[3].x), bound(y, y*mDST[3].y));
 
         srcPts.fromArray(src);
         dstPts.fromArray(dst);
