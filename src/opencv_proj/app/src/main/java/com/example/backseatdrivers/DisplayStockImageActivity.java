@@ -2,6 +2,7 @@ package com.example.backseatdrivers;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -75,8 +76,10 @@ public class DisplayStockImageActivity extends AppCompatActivity {
                     Utils.matToBitmap(newImage, bmImage);
                     ImageView iv = findViewById(R.id.stock_image_view);
                     iv.setImageBitmap(bmImage);
-                    iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                    iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 }
+                MediaPlayer warn = MediaPlayer.create(this, R.raw.depart);
+                warn.start();
                 return true;
         }
         return super.onOptionsItemSelected(item);
