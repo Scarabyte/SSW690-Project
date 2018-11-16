@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private static OnCameraFrameRender  mOnCameraFrameRender;
     private LDWSProcessor        mLDWSProcessor;
     private MediaPlayer mMediaPlayer = null;
+    private boolean mPlaySounds = true;
 
     private static final int     MODE_LDWS = 0;
     private static final int     MODE_CALIBRATION = 1;
@@ -155,6 +156,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
             case R.id.m_view_skyview:
                 mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SKY_VIEW);
                 item.setChecked(true);
+                return true;
+            case R.id.m_play_sounds:
+                if (mPlaySounds) {
+                    mPlaySounds = false;
+                } else {
+                    mPlaySounds = true;
+                }
+                mLDWSProcessor.getLaneDetector().SetAudioOn(mPlaySounds);
+                item.setChecked(mPlaySounds);
                 return true;
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;

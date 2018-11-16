@@ -41,6 +41,7 @@ public class LaneDetector {
     private int mViewToShow = SHOW_FINAL;
     private MediaPlayer mMediaPlayer = null;
     private Lane mPreviousLane = null;
+    private boolean mAudioOn = true;
 
     private Point[] mROI = new Point[4];
     private Point[] mDST = new Point[4];
@@ -57,6 +58,10 @@ public class LaneDetector {
 
     public void SetMediaPlayer(MediaPlayer p) {
         mMediaPlayer = p;
+    }
+
+    public void SetAudioOn(boolean state) {
+        mAudioOn = state;
     }
 
     public void SetROI(int ulx, int uly, int urx, int ury, int lrx, int lry, int llx, int lly) {
@@ -429,7 +434,7 @@ public class LaneDetector {
                 laneColor = red;
 
                 // Play a warning sound if departing.
-                if (previousLane != null && mMediaPlayer != null) {
+                if (previousLane != null && mMediaPlayer != null && mAudioOn) {
                     if (previousLane.percentFromCenter >= -10.0 && previousLane.percentFromCenter <= 10.0) {
                         mMediaPlayer.start();
                     }
