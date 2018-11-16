@@ -11,6 +11,7 @@ import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private static CameraCalibrator     mCalibrator;
     private static OnCameraFrameRender  mOnCameraFrameRender;
     private LDWSProcessor        mLDWSProcessor;
+    private MediaPlayer mMediaPlayer = null;
+    private boolean mPlaySounds = true;
 
     private static final int     MODE_LDWS = 0;
     private static final int     MODE_CALIBRATION = 1;
@@ -154,6 +157,15 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SKY_VIEW);
                 item.setChecked(true);
                 return true;
+            case R.id.m_play_sounds:
+                if (mPlaySounds) {
+                    mPlaySounds = false;
+                } else {
+                    mPlaySounds = true;
+                }
+                mLDWSProcessor.getLaneDetector().SetAudioOn(mPlaySounds);
+                item.setChecked(mPlaySounds);
+                return true;
             case R.id.mode_calibration:
                 mMode = MODE_CALIBRATION;
                 item.setChecked(true);
@@ -259,6 +271,10 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 mCalibrator.setCalibrated();
             }
             mOnCameraFrameRender = new OnCameraFrameRender(new CalibrationFrameRender(mCalibrator));
+        }
+        if (mMediaPlayer == null) {
+            mMediaPlayer = MediaPlayer.create(this, R.raw.depart);
+            mLDWSProcessor.getLaneDetector().SetMediaPlayer(mMediaPlayer);
         }
     }
 

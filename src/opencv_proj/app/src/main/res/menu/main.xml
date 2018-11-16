@@ -39,6 +39,13 @@
         </menu>
     </item>
     <item
+        android:id="@+id/m_play_sounds"
+        android:checkable="true"
+        android:checked="true"
+        android:title="@string/play_sounds"
+        app:actionLayout="@layout/switch_item"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/stock_image"
         android:title="@string/stock_image" />
     <item

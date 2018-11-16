@@ -5,6 +5,7 @@ package com.example.backseatdrivers;
    to detect a lane of travel in the supplied image.
  */
 
+import android.media.MediaPlayer;
 import android.util.Log;
 
 import org.apache.commons.math3.analysis.polynomials.PolynomialFunction;
@@ -38,6 +39,9 @@ public class LaneDetector {
     public static final int SHOW_SKY_VIEW = 3;
 
     private int mViewToShow = SHOW_FINAL;
+    private MediaPlayer mMediaPlayer = null;
+    private Lane mPreviousLane = null;
+    private boolean mAudioOn = true;
 
     private Point[] mROI = new Point[4];
     private Point[] mDST = new Point[4];
@@ -50,6 +54,14 @@ public class LaneDetector {
 
     public void SetViewToShow(int viewCode) {
         mViewToShow = viewCode;
+    }
+
+    public void SetMediaPlayer(MediaPlayer p) {
+        mMediaPlayer = p;
+    }
+
+    public void SetAudioOn(boolean state) {
+        mAudioOn = state;
     }
 
     public void SetROI(int ulx, int uly, int urx, int ury, int lrx, int lry, int llx, int lly) {
@@ -297,7 +309,7 @@ public class LaneDetector {
         return allMarkers;
     }
 
-    private void findLaneLines(Mat in, Mat out, Lane lane) {
+    private void findLaneLines(Mat in, Mat out, Lane lane, Lane previousLane) {
         int mid;
         LaneMarker lineL = null;
         LaneMarker lineR = null;
@@ -420,6 +432,13 @@ public class LaneDetector {
             laneColor = green;
             if (lane.percentFromCenter > 10.0 || lane.percentFromCenter < -10.0) {
                 laneColor = red;
+
+                // Play a warning sound if departing.
+                if (previousLane != null && mMediaPlayer != null && mAudioOn) {
+                    if (previousLane.percentFromCenter >= -10.0 && previousLane.percentFromCenter <= 10.0) {
+                        mMediaPlayer.start();
+                    }
+                }
             }
         }
 
@@ -493,7 +512,8 @@ public class LaneDetector {
         }
 
         /* Detect the lane lines and paint the results. */
-        findLaneLines(scanned, birdImage, theLane);
+        findLaneLines(scanned, birdImage, theLane, mPreviousLane);
+        mPreviousLane = theLane;
         if (mViewToShow == SHOW_SKY_VIEW) {
             birdImage.copyTo(outputImage);
             return lanePoints;

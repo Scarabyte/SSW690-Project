@@ -23,4 +23,5 @@
     <string name="view_threshold">2) Threshold Output</string>
     <string name="view_skyview">3) Sky View Output</string>
     <string name="view_final">4) Final Output</string>
+    <string name="play_sounds">Play Sounds</string>
 </resources>
