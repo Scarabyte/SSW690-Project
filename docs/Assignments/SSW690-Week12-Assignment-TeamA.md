@@ -19,3 +19,4 @@ Each team will meet weekly with faculty to discuss current status, issues, and c
 
 ### Sprint 5 Week 1
 
+At the mid-point of Sprint 5, we've added the lane position notification (so the user knows where they are in relation to the lane markers), which was one of the last things left from our initial commitment at the beginning of the semester. There are still some refinements and improvements needed before the app would be ready for release to the general public (in particular, it seemed to have some difficulty with some of our test images), but in terms of the "proof of concept" prototype app that we set out to create, at this stage we have a fully working app that does perform the functions we had planned.
