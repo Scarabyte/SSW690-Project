@@ -23,7 +23,11 @@ Complete app development (issues for Sprint 5 to be discussed) and work on final
 #### Adam:
 
 * _What did I work on?_
+  * Final presentation
+  * Reviewing and merging updates from Sprint 5 tasks
 * _What did I accomplish?_
+  * Finalized app development
+  * Added commentary for final presentation
 
 #### Sapana:
 
@@ -43,6 +47,7 @@ Complete app development (issues for Sprint 5 to be discussed) and work on final
 ### Issues, Risks, and Opportunities:
 
 * _What problems did you encounter and what impact might those have on meeting the project schedule?_
+  * We need to find a solution to record our final presentation commentary, since the logistics of a remote team make it difficult to do this 'live' (we will probably use PowerPoint's built-in recording feature)
 * _What new opportunities did you discover, if any?_
 
 ### Action Items/Goals for next week:
@@ -50,7 +55,7 @@ Complete app development (issues for Sprint 5 to be discussed) and work on final
 #### Team Goals for next week:
 
 * _Where do we want the project to be next week?_
-  * Continue (and complete?) lane detection algorithm, start on final features such as notification system
+  * Complete any final refinements for the app
   * Continue work on final presentation
 
 #### Individual Goals
@@ -58,6 +63,8 @@ Complete app development (issues for Sprint 5 to be discussed) and work on final
 ##### Adam:
 
 * _What do you plan to work on and accomplish in the next week?_
+  * Complete my parts of the final presentation
+  * Review and merge any last app updates, if applicable
 
 ##### Sapana:
 
@@ -74,3 +81,4 @@ Complete app development (issues for Sprint 5 to be discussed) and work on final
 ### Other Comments:
 
 * _Any other relevant information to help us to manage the project and keep our customer informed and happy._
+  * App is very close to its final form; at the end of the semester we're just about right where we planned to be.
