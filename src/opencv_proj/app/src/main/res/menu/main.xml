@@ -8,16 +8,37 @@
         <menu >
             <group android:checkableBehavior="single" >
                 <item
-                    android:id="@+id/m_view_sobel"
-                    android:title="@string/view_sobel" />
+                    android:id="@+id/view_undistorted"
+                    android:title="@string/view_undistorted" />
                 <item
-                    android:id="@+id/m_view_threshold"
-                    android:title="@string/view_threshold" />
+                    android:id="@+id/view_grayscale"
+                    android:title="@string/view_grayscale" />
                 <item
-                    android:id="@+id/m_view_skyview"
+                    android:id="@+id/view_skyview"
                     android:title="@string/view_skyview" />
                 <item
-                    android:id="@+id/m_view_final"
+                    android:id="@+id/view_sobel"
+                    android:title="@string/view_sobel" />
+                <item
+                    android:id="@+id/view_threshold"
+                    android:title="@string/view_threshold" />
+                <item
+                    android:id="@+id/view_lane_markers"
+                    android:title="@string/view_lane_markers" />
+                <item
+                    android:id="@+id/view_polynomial"
+                    android:title="@string/view_polynomial" />
+                <item
+                    android:id="@+id/view_position"
+                    android:title="@string/view_position" />
+                <item
+                    android:id="@+id/view_polygon"
+                    android:title="@string/view_polygon" />
+                <item
+                    android:id="@+id/view_normal"
+                    android:title="@string/view_normal" />
+                <item
+                    android:id="@+id/view_final"
                     android:checked="true"
                     android:title="@string/view_final" />
             </group>

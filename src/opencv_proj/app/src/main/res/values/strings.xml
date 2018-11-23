@@ -19,9 +19,16 @@
     <string name="loading_stock_image">Loading Stock Image</string>
     <string name="process_stock_image">Run Test</string>
     <string name="image_to_view">Image to View</string>
-    <string name="view_sobel">1) Sobel Output</string>
-    <string name="view_threshold">2) Threshold Output</string>
-    <string name="view_skyview">3) Sky View Output</string>
-    <string name="view_final">4) Final Output</string>
+    <string name="view_undistorted">1) Undistorted</string>
+    <string name="view_grayscale">2) Grayscale</string>
+    <string name="view_skyview">3) Sky View</string>
+    <string name="view_sobel">4) Sobel Output</string>
+    <string name="view_threshold">5) Threshold Output</string>
+    <string name="view_lane_markers">6) Lane Markers</string>
+    <string name="view_polynomial">7) Polynomial Curve</string>
+    <string name="view_position">8) Position</string>
+    <string name="view_polygon">9) Polygon</string>
+    <string name="view_normal">10) Normal View</string>
+    <string name="view_final">11) Final Output</string>
     <string name="play_sounds">Play Sounds</string>
 </resources>

@@ -141,20 +141,48 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     public boolean onOptionsItemSelected(MenuItem item) {
         final Resources res = getResources();
         switch (item.getItemId()) {
-            case R.id.m_view_final:
-                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_FINAL);
+            case R.id.view_undistorted:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_UNDISTORTED);
                 item.setChecked(true);
                 return true;
-            case R.id.m_view_sobel:
+            case R.id.view_grayscale:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_GRAYSCALE);
+                item.setChecked(true);
+                return true;
+            case R.id.view_skyview:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SKY_VIEW);
+                item.setChecked(true);
+                return true;
+            case R.id.view_sobel:
                 mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SOBEL);
                 item.setChecked(true);
                 return true;
-            case R.id.m_view_threshold:
+            case R.id.view_threshold:
                 mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_THRESHOLD);
                 item.setChecked(true);
                 return true;
-            case R.id.m_view_skyview:
-                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SKY_VIEW);
+            case R.id.view_lane_markers:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_LANE_MARKERS);
+                item.setChecked(true);
+                return true;
+            case R.id.view_polynomial:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_POLYNOMIAL);
+                item.setChecked(true);
+                return true;
+            case R.id.view_position:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_POSITION);
+                item.setChecked(true);
+                return true;
+            case R.id.view_polygon:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_POLYGON);
+                item.setChecked(true);
+                return true;
+            case R.id.view_normal:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_NORMAL_VIEW);
+                item.setChecked(true);
+                return true;
+            case R.id.view_final:
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_FINAL);
                 item.setChecked(true);
                 return true;
             case R.id.m_play_sounds:

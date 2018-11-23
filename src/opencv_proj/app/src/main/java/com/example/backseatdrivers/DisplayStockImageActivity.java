@@ -1,6 +1,5 @@
 package com.example.backseatdrivers;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +17,8 @@ import org.opencv.imgproc.Imgproc;
 import java.io.IOException;
 
 public class DisplayStockImageActivity extends AppCompatActivity {
-    private static final String TAG = "DisplayStockImageActivi";
+    private static final String TAG = "DisplayStockImageActivity";
+    private LDWSProcessor mLDWS = new LDWSProcessor();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,7 @@ public class DisplayStockImageActivity extends AppCompatActivity {
             cvGray = new Mat();
             Imgproc.cvtColor(cvImage, cvRgba, Imgproc.COLOR_RGB2RGBA);
             Imgproc.cvtColor(cvImage, cvGray, Imgproc.COLOR_RGB2GRAY);
-            LDWSProcessor ldws = new LDWSProcessor();
-            ldws.getLaneDetector().detect(cvRgba, cvGray, outputImage, null, false);
+            mLDWS.getLaneDetector().detect(cvRgba, cvGray, outputImage, null, false);
         }
         return outputImage;
     }
@@ -66,22 +65,51 @@ public class DisplayStockImageActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        final Resources res = getResources();
         switch (item.getItemId()) {
-            case R.id.process_stock_image:
-                Mat newImage = processImage();
-                if (newImage != null) {
-                    //Bitmap bmImage = Bitmap.createBitmap(newImage.cols(), newImage.rows(), Bitmap.Config.ARGB_8888);
-                    Bitmap bmImage = Bitmap.createBitmap(newImage.cols(), newImage.rows(), Bitmap.Config.RGB_565);
-                    Utils.matToBitmap(newImage, bmImage);
-                    ImageView iv = findViewById(R.id.stock_image_view);
-                    iv.setImageBitmap(bmImage);
-                    iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                }
-                MediaPlayer warn = MediaPlayer.create(this, R.raw.depart);
-                warn.start();
-                return true;
+            case R.id.view_undistorted:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_UNDISTORTED);
+                break;
+            case R.id.view_grayscale:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_GRAYSCALE);
+                break;
+            case R.id.view_skyview:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SKY_VIEW);
+                break;
+            case R.id.view_sobel:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_SOBEL);
+                break;
+            case R.id.view_threshold:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_THRESHOLD);
+                break;
+            case R.id.view_lane_markers:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_LANE_MARKERS);
+                break;
+            case R.id.view_polynomial:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_POLYNOMIAL);
+                break;
+            case R.id.view_position:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_POSITION);
+                break;
+            case R.id.view_polygon:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_POLYGON);
+                break;
+            case R.id.view_normal:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_NORMAL_VIEW);
+                break;
+            case R.id.view_final:
+                mLDWS.getLaneDetector().SetViewToShow(LaneDetector.SHOW_FINAL);
+                break;
         }
-        return super.onOptionsItemSelected(item);
+        Mat newImage = processImage();
+        if (newImage != null) {
+            Bitmap bmImage = Bitmap.createBitmap(newImage.cols(), newImage.rows(), Bitmap.Config.RGB_565);
+            Utils.matToBitmap(newImage, bmImage);
+            ImageView iv = findViewById(R.id.stock_image_view);
+            iv.setImageBitmap(bmImage);
+            iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }
+        MediaPlayer warn = MediaPlayer.create(this, R.raw.depart);
+        warn.start();
+        return true;
     }
 }
