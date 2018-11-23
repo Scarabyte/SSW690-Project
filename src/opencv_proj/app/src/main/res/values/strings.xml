@@ -31,4 +31,5 @@
     <string name="view_normal">10) Normal View</string>
     <string name="view_final">11) Final Output</string>
     <string name="play_sounds">Play Sounds</string>
+    <string name="pipeline_demo">Pipeline Demo</string>
 </resources>

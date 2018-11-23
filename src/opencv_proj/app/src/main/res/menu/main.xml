@@ -54,6 +54,9 @@
                     android:checked="true"
                     android:title="@string/lane_departure" />
                 <item
+                    android:id="@+id/mode_pipeline_demo"
+                    android:title="@string/pipeline_demo" />
+                <item
                     android:id="@+id/mode_calibration"
                     android:title="@string/calibration" />
             </group>

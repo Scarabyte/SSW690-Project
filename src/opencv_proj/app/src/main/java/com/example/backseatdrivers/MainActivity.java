@@ -14,6 +14,7 @@ import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
     private static final int     MODE_CALIBRATION = 1;
     private static final int     MODE_SKYVIEW = 2;
     private int                  mMode = MODE_LDWS;
+    private int                  mView = LaneDetector.SHOW_FINAL;
 
     private BaseLoaderCallback   mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
@@ -203,6 +205,25 @@ public class MainActivity extends AppCompatActivity implements OnTouchListener, 
                 mMode = MODE_LDWS;
                 item.setChecked(true);
                 mOpenCvCameraView.enableView();
+                return true;
+            case R.id.mode_pipeline_demo:
+                mMode = MODE_LDWS;
+                item.setChecked(true);
+                mOpenCvCameraView.enableView();
+                mLDWSProcessor.getLaneDetector().SetViewToShow(LaneDetector.SHOW_UNDISTORTED);
+                new CountDownTimer(60000, 5000) {
+                    private int currentView = 1;
+                    public void onTick(long millisUntilFinished) {
+                        if (currentView > 10) currentView = 0;
+                        mLDWSProcessor.getLaneDetector().SetViewToShow(currentView);
+                        Log.d(TAG, "TIMER: Viewing mode " + currentView);
+                        if (currentView > 0) currentView++;
+                    }
+                    public void onFinish() {
+                        mLDWSProcessor.getLaneDetector().SetViewToShow(currentView);
+                        Log.d(TAG, "TIMER: finished.");
+                    }
+                }.start();
                 return true;
             case R.id.stock_image:
                 item.setChecked(true);
